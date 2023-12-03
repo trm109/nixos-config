@@ -13,6 +13,9 @@
   # Hyprland
   programs.hyprland.enable = true;
   
+  # Fish
+  programs.fish.enable = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -65,6 +68,7 @@
       chromium
       kitty
     ];
+    shell = pkgs.fish;
   };
 
   # List packages installed in system profile. To search, run:
