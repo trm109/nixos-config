@@ -15,6 +15,17 @@
   
   # Fish
   programs.fish.enable = true;
+  
+  # Docker
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ "saik" ];
+  virtualisation.docker.storageDriver = "btrfs";
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+  #hardware.pulseaudio.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -54,8 +65,18 @@
   services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # sound.enable = true;
+  # hardware.pulseaudio.enable = true;
+  # rtkit is optional but recommended
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    jack.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
@@ -70,7 +91,8 @@
     ];
     shell = pkgs.fish;
   };
-
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -78,16 +100,46 @@
     git
     neovim
     tree
+    wget
+    discord
+    docker-compose
+    dbeaver
+    sequeler
 
     swww
     wofi
     waybar
     mako
     wl-clipboard
+    swaylock
+    slurp
+    grim
 
     fish
 
+    bat
+    btop
+    neofetch
+    libreoffice
+
     gh
+
+    comic-mono
+
+    pavucontrol
+
+    llvm_12
+    jdk21
+
+    nodejs_21
+
+    brightnessctl
+    asusctl
+  ];
+
+  # Fonts
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
