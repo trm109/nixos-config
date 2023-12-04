@@ -114,6 +114,7 @@
     swaylock
     slurp
     grim
+    libnotify
 
     fish
 
@@ -121,6 +122,8 @@
     btop
     neofetch
     libreoffice
+    spotify
+    godot_4
 
     gh
 
@@ -154,6 +157,11 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  # Enable Supergfxctl
+  services.supergfxd.enable = true;
+  # Enable asusd
+  services.asusd.enable = true;
+  services.asusd.enableUserService = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
