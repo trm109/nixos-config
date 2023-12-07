@@ -115,6 +115,8 @@
     slurp
     grim
     libnotify
+    zip
+    unzip
 
     fish
 
@@ -124,10 +126,11 @@
     libreoffice
     spotify
     godot_4
+    zoom-us
+    krita
+    xfce.thunar
 
     gh
-
-    comic-mono
 
     pavucontrol
 
@@ -141,9 +144,19 @@
   ];
 
   # Fonts
-  fonts.packages = with pkgs; [
+  fonts = {
+  enableDefaultFonts = true;
+  packages = with pkgs; [ 
+    comic-mono
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
+
+  fontconfig = {
+    defaultFonts = {
+      monospace = [ "Comic Mono" "FiraCode" "DroidSansMono" ];
+    };
+  };
+};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
