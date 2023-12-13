@@ -15,18 +15,23 @@
   outputs = { self, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true; 
+        };
+      };
     in
     {
-    
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs;};
+      nixosConfigurations = {
+        default = nixpkgs.lib.nixosSystem {
+          specialArgs = {inherit inputs system;};
           modules = [ 
             ./hosts/default/configuration.nix
             ./users/saik.nix
             inputs.home-manager.nixosModules.default
           ];
         };
-
+      };
     };
 }

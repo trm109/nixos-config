@@ -9,16 +9,7 @@
     [ 
       ./hardware-configuration.nix
       ../../modules/home-manager/cups.nix
-      inputs.home-manager.nixosModules.default
     ];
-  
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "saik" = import ./home.nix;
-    };
-  };
-
 
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
