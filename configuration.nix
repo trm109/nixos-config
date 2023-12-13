@@ -6,10 +6,14 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       ./hardware-configuration.nix
+      ./cups.nix
     ];
   
+  # Enable Flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Hyprland
   programs.hyprland.enable = true;
   
@@ -31,7 +35,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "saik-nix"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -54,7 +58,8 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-
+  # Enable Swaylock
+  security.pam.services = { swaylock = { }; };
   
 
   # Configure keymap in X11
@@ -62,7 +67,7 @@
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  #services.printing.enable = true;
 
   # Enable sound.
   # sound.enable = true;
@@ -77,6 +82,7 @@
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
   };
+  services.pipewire.wireplumber.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
@@ -86,11 +92,58 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
+
+      # Desktop Environment Related Packages
+      swww
+      wofi
+      waybar
+      mako
+      wl-clipboard
+      swaylock
+      slurp
+      grim
+      libnotify
+      brightnessctl
+      asusctl
+      xdg-desktop-portal-hyprland
+
+      # Desktop Apps
+      discord
       chromium
       kitty
+      firefox
+      mpv-unwrapped
+      spotify
+      zoom-us
+      xfce.thunar
+      pavucontrol
+
+
+      # Development (CLI)
+      fish
+      docker-compose
+      llvm_12
+      jdk21
+      nodejs_21
+      postgresql_jit
+      gh
+
+      # Development (GUI)
+      dbeaver
+      sequeler
+      obs-studio
+      libreoffice
+      krita
+      godot_4
+
+      # Tools (CLI)
+      bat
+      btop
+      neofetch
     ];
     shell = pkgs.fish;
   };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
@@ -101,51 +154,28 @@
     neovim
     tree
     wget
-    discord
-    docker-compose
-    dbeaver
-    sequeler
 
-    swww
-    wofi
-    waybar
-    mako
-    wl-clipboard
-    swaylock
-    slurp
-    grim
-    libnotify
     zip
     unzip
-
-    fish
-
-    bat
-    btop
-    neofetch
-    libreoffice
-    spotify
-    godot_4
-    zoom-us
-    krita
-    xfce.thunar
-
-    gh
-
-    pavucontrol
-
-    llvm_12
-    jdk21
-
-    nodejs_21
-
-    brightnessctl
-    asusctl
   ];
 
+  nixpkgs.overlays = [
+    (self: super:
+    {
+   zoomUsFixed = pkgs.zoom-us.overrideAttrs (old: {
+      postFixup = old.postFixup + ''
+        wrapProgram $out/bin/zoom-us --unset XDG_SESSION_TYPE
+      '';});
+   zoom = pkgs.zoom-us.overrideAttrs (old: {
+      postFixup = old.postFixup + ''
+        wrapProgram $out/bin/zoom --unset XDG_SESSION_TYPE
+      '';});
+      }
+      )
+  ];
   # Fonts
   fonts = {
-  enableDefaultFonts = true;
+  enableDefaultPackages = true;
   packages = with pkgs; [ 
     comic-mono
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
