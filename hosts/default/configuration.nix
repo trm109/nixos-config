@@ -65,6 +65,7 @@
     zoom-us
     xfce.thunar
     pavucontrol
+    microsoft-edge
 
 
     # Development (CLI)
