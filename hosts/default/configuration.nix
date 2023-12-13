@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ../../modules/cups.nix # Enable Printing
       ../../modules/audio.nix # Enable Audio
+      ../../modules/bluetooth.nix # Enable Bluetooth
     ];
 
   # Enable Flakes
@@ -41,12 +42,6 @@
   # Docker
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "btrfs";
-
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
-  #hardware.pulseaudio.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
