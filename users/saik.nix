@@ -10,7 +10,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      "saik" = import ./home.nix;
+      "saik" = import ../hosts/default/home.nix;
     };
   };
 
