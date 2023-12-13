@@ -102,106 +102,104 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # Desktop Environment Related Packages
+    swww
+    wofi
+    waybar
+    mako
+    wl-clipboard
+    swaylock
+    slurp
+    grim
+    libnotify
+    brightnessctl
+    asusctl
+    xdg-desktop-portal-hyprland
+
+     # Desktop Apps
+    discord
+    chromium
+    kitty
+    firefox
+    mpv-unwrapped
+    spotify
+    zoom-us
+    xfce.thunar
+    pavucontrol
+
+
+    # Development (CLI)
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     neovim
     tree
     wget
-
+    fish
+    docker-compose
+    llvm_12
+    jdk21
+    nodejs_21
+    postgresql_jit
+    gh
+    cmake
+    clangStdenv
     zip
     unzip
 
-    # Desktop Environment Related Packages
-      swww
-      wofi
-      waybar
-      mako
-      wl-clipboard
-      swaylock
-      slurp
-      grim
-      libnotify
-      brightnessctl
-      asusctl
-      xdg-desktop-portal-hyprland
+# Development (GUI)
+    dbeaver
+    sequeler
+    obs-studio
+    libreoffice
+    krita
+    godot_4
 
-      # Desktop Apps
-      discord
-      chromium
-      kitty
-      firefox
-      mpv-unwrapped
-      spotify
-      zoom-us
-      xfce.thunar
-      pavucontrol
-
-
-      # Development (CLI)
-      fish
-      docker-compose
-      llvm_12
-      jdk21
-      nodejs_21
-      postgresql_jit
-      gh
-      cmake
-      clangStdenv
-
-      # Development (GUI)
-      dbeaver
-      sequeler
-      obs-studio
-      libreoffice
-      krita
-      godot_4
-
-      # Tools (CLI)
-      bat
-      btop
-      neofetch
+# Tools (CLI)
+    bat
+    btop
+    neofetch
   ];
 
   nixpkgs.overlays = [
     (self: super:
-    {
-   zoomUsFixed = pkgs.zoom-us.overrideAttrs (old: {
-      postFixup = old.postFixup + ''
-        wrapProgram $out/bin/zoom-us --unset XDG_SESSION_TYPE
-      '';});
-   zoom = pkgs.zoom-us.overrideAttrs (old: {
-      postFixup = old.postFixup + ''
-        wrapProgram $out/bin/zoom --unset XDG_SESSION_TYPE
-      '';});
-      }
-      )
+     {
+     zoomUsFixed = pkgs.zoom-us.overrideAttrs (old: {
+         postFixup = old.postFixup + ''
+         wrapProgram $out/bin/zoom-us --unset XDG_SESSION_TYPE
+         '';});
+     zoom = pkgs.zoom-us.overrideAttrs (old: {
+         postFixup = old.postFixup + ''
+         wrapProgram $out/bin/zoom --unset XDG_SESSION_TYPE
+         '';});
+     }
+    )
   ];
-  # Fonts
+# Fonts
   fonts = {
-  enableDefaultPackages = true;
-  packages = with pkgs; [ 
-    comic-mono
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
-  ];
+    enableDefaultPackages = true;
+    packages = with pkgs; [ 
+      comic-mono
+      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+    ];
 
-  fontconfig = {
-    defaultFonts = {
-      monospace = [ "Comic Mono" "FiraCode" "DroidSansMono" ];
+    fontconfig = {
+      defaultFonts = {
+        monospace = [ "Comic Mono" "FiraCode" "DroidSansMono" ];
+      };
     };
   };
-};
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
+# Some programs need SUID wrappers, can be configured further or are
+# started in user sessions.
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
+# List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
+# Enable the OpenSSH daemon.
   services.openssh.enable = true;
   # Enable Supergfxctl
   services.supergfxd.enable = true;
