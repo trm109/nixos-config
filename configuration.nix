@@ -16,8 +16,8 @@
     specialArgs = { inherit inputs; };
     users = {
       "saik" = import ./home.nix;
-    }
-  }
+    };
+  };
 
 
   # Enable Flakes
