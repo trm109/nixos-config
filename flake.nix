@@ -12,7 +12,7 @@
 
   outputs = { self, nixpkgs, ... }@inputs:
     let
-      system = "x86_64-linux";
+      system = "saik-nix";
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
