@@ -5,6 +5,30 @@
   # manage.
   home.username = "saik";
   home.homeDirectory = "/home/saik";
+  
+
+  # setting git.
+  programs.git = {
+    enable = true;
+    user.name = "trm109";
+    user.email = "trm109@case.edu";
+  };
+
+  # gtk
+  #  programs.gtk = {
+  #    enable = true;
+  #    theme.name = "Adwaita";
+  #    iconTheme.name = "Adwaita";
+  #    cursorTheme.name = "Adwaita";
+  #  };
+
+  # mime types
+  xdg.mimeApps.defaultApplications = {
+    "text/plain" = [ "nvim.desktop" ];
+    "application/pdf" = [ "chromium.desktop" ];
+    "image/*" = [ "chromium.desktop" ];
+    "video/*" = [ "mpv.desktop" ];
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -64,6 +88,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    TESTING = "testing";
   };
 
   # Let Home Manager install and manage itself.
