@@ -10,8 +10,8 @@
   # setting git.
   programs.git = {
     enable = true;
-    user.name = "trm109";
-    user.email = "trm109@case.edu";
+    userName = "trm109";
+    userEmail = "trm109@case.edu";
   };
 
   # gtk
