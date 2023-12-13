@@ -8,7 +8,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ./cups.nix
+      ../../modules/home-manager/cups.nix
       inputs.home-manager.nixosModules.default
     ];
   
