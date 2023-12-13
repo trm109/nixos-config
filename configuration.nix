@@ -9,6 +9,7 @@
     [ 
       ./hardware-configuration.nix
       ./cups.nix
+      inputs.home-manager.nixosModules.default
     ];
   
   # Enable Flakes
