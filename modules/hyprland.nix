@@ -39,8 +39,12 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  # Enable Swaylock
+  security.pam.services = { swaylock = { }; };
+
   # Enable Supergfxctl
   services.supergfxd.enable = true;
+
   # Enable asusd
   services.asusd.enable = true;
   services.asusd.enableUserService = true;

@@ -11,31 +11,13 @@
       ../../modules/cups.nix # Enable Printing
       ../../modules/audio.nix # Enable Audio
       ../../modules/bluetooth.nix # Enable Bluetooth
+      ../../modules/hyprland.nix # Enable Hyprland
+      ../../modules/network.nix # Enable Networking
     ];
 
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Hyprland
-  programs.hyprland = {
-    enable = true;
-    enableNvidiaPatches = true;
-    xwayland.enable = true;
-  };
-  environment.sessionVariables = {
-    # Prevents cursors from becoming invisible
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint to election apps to use wayland
-    NIXOS_OZONE_WL = "1";
-  };
-  hardware = {
-    opengl.enable = true;
-    nvidia.modesetting.enable = true;
-  };
-
-  xdg.portal.enable = true;
-  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-  
   # Fish
   programs.fish.enable = true;
   
@@ -46,11 +28,6 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "saik-nix"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -67,39 +44,15 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Enable Swaylock
-  security.pam.services = { swaylock = { }; };
-  
-
-  # Configure keymap in X11
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # Desktop Environment Related Packages
-    swww
-    wofi
-    waybar
-    mako
-    wl-clipboard
-    swaylock
-    slurp
-    grim
-    libnotify
-    brightnessctl
-    asusctl
 
      # Desktop Apps
     discord
@@ -182,21 +135,6 @@
     enableSSHSupport = true;
   };
 
-# List services that you want to enable:
-
-# Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  # Enable Supergfxctl
-  services.supergfxd.enable = true;
-  # Enable asusd
-  services.asusd.enable = true;
-  services.asusd.enableUserService = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
