@@ -25,11 +25,11 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     # Hint to election apps to use wayland
     NIXOS_OZONE_WL = "1";
-  }
+  };
   hardware = {
     opengl.enable = true;
     nvidia.modesetting.enable = true;
-  }
+  };
   
   # Fish
   programs.fish.enable = true;
