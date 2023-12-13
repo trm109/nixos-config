@@ -23,6 +23,7 @@
           specialArgs = {inherit inputs;};
           modules = [ 
             ./hosts/default/configuration.nix
+            ./users/saik.nix
             inputs.home-manager.nixosModules.default
           ];
         };

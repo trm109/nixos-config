@@ -31,7 +31,6 @@
   
   # Docker
   virtualisation.docker.enable = true;
-  users.extraGroups.docker.members = [ "saik" ];
   virtualisation.docker.storageDriver = "btrfs";
 
   # Bluetooth
@@ -168,6 +167,56 @@
 
     zip
     unzip
+
+    # Desktop Environment Related Packages
+      swww
+      wofi
+      waybar
+      mako
+      wl-clipboard
+      swaylock
+      slurp
+      grim
+      libnotify
+      brightnessctl
+      asusctl
+      xdg-desktop-portal-hyprland
+
+      # Desktop Apps
+      discord
+      chromium
+      kitty
+      firefox
+      mpv-unwrapped
+      spotify
+      zoom-us
+      xfce.thunar
+      pavucontrol
+
+
+      # Development (CLI)
+      fish
+      docker-compose
+      llvm_12
+      jdk21
+      nodejs_21
+      postgresql_jit
+      gh
+      cmake
+      clangStdenv
+
+      # Development (GUI)
+      dbeaver
+      sequeler
+      obs-studio
+      libreoffice
+      krita
+      godot_4
+
+      # Tools (CLI)
+      bat
+      btop
+      neofetch
   ];
 
   nixpkgs.overlays = [
