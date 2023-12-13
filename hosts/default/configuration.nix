@@ -13,6 +13,7 @@
       ../../modules/bluetooth.nix # Enable Bluetooth
       ../../modules/hyprland.nix # Enable Hyprland
       ../../modules/network.nix # Enable Networking
+      ../../modules/asus.nix # Enable Asus Specifics
     ];
 
   # Enable Flakes
@@ -127,13 +128,6 @@
     };
   };
 
-# Some programs need SUID wrappers, can be configured further or are
-# started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
 
   # Copy the NixOS configuration file and link it from the resulting system

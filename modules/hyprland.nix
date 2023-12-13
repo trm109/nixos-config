@@ -1,4 +1,6 @@
 # modules/hyprland.nix
+{ config, pkgs, ... }:
+
 {
   # Hyprland
   programs.hyprland = {
@@ -42,10 +44,4 @@
   # Enable Swaylock
   security.pam.services = { swaylock = { }; };
 
-  # Enable Supergfxctl
-  services.supergfxd.enable = true;
-
-  # Enable asusd
-  services.asusd.enable = true;
-  services.asusd.enableUserService = true;
 }
