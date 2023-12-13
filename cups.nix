@@ -15,9 +15,9 @@
     ensurePrinters = [
       {
       	name = "UTech_Printer";
-	location = "CARE_Center";
-	deviceUri = "lpd://129.22.99.235/queue";
-	model = "drv:///sample.drv/generic.ppd";
+        location = "CARE_Center";
+        deviceUri = "lpd://129.22.99.235/queue";
+        model = "drv:///sample.drv/generic.ppd";
       }
     ];
   };
