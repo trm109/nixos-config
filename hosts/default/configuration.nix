@@ -137,6 +137,7 @@
       postgresql_jit
       gh
       cmake
+      clangStdenv
 
       # Development (GUI)
       dbeaver
