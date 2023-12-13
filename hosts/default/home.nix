@@ -15,12 +15,12 @@
   };
 
   # gtk
-  programs.gtk = {
-    enable = true;
-    theme.name = "Adwaita";
-    iconTheme.name = "Adwaita";
-    cursorTheme.name = "Adwaita";
-  };
+  #  programs.gtk = {
+  #    enable = true;
+  #    theme.name = "Adwaita";
+  #    iconTheme.name = "Adwaita";
+  #    cursorTheme.name = "Adwaita";
+  #  };
 
   # mime types
   xdg.mimeApps.defaultApplications = {
