@@ -127,6 +127,7 @@
       nodejs_21
       postgresql_jit
       gh
+      cmake
 
       # Development (GUI)
       dbeaver
