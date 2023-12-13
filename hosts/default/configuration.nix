@@ -96,63 +96,6 @@
   services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.saik = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-
-      # Desktop Environment Related Packages
-      swww
-      wofi
-      waybar
-      mako
-      wl-clipboard
-      swaylock
-      slurp
-      grim
-      libnotify
-      brightnessctl
-      asusctl
-      xdg-desktop-portal-hyprland
-
-      # Desktop Apps
-      discord
-      chromium
-      kitty
-      firefox
-      mpv-unwrapped
-      spotify
-      zoom-us
-      xfce.thunar
-      pavucontrol
-
-
-      # Development (CLI)
-      fish
-      docker-compose
-      llvm_12
-      jdk21
-      nodejs_21
-      postgresql_jit
-      gh
-      cmake
-      clangStdenv
-
-      # Development (GUI)
-      dbeaver
-      sequeler
-      obs-studio
-      libreoffice
-      krita
-      godot_4
-
-      # Tools (CLI)
-      bat
-      btop
-      neofetch
-    ];
-    shell = pkgs.fish;
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
