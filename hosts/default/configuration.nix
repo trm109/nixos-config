@@ -8,7 +8,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ../../modules/home-manager/cups.nix
+      ../../modules/cups.nix
     ];
 
   # Enable Flakes
@@ -17,7 +17,7 @@
   # Hyprland
   programs.hyprland = {
     enable = true;
-    nvidiaPatches = true;
+    enableNvidiaPatches = true;
     xwayland.enable = true;
   };
   environment.sessionVariables = {
@@ -30,6 +30,9 @@
     opengl.enable = true;
     nvidia.modesetting.enable = true;
   };
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   
   # Fish
   programs.fish.enable = true;
@@ -119,7 +122,6 @@
     libnotify
     brightnessctl
     asusctl
-    xdg-desktop-portal-hyprland
 
      # Desktop Apps
     discord
