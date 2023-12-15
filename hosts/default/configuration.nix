@@ -66,6 +66,7 @@
     xfce.thunar
     pavucontrol
     microsoft-edge
+    minecraft
 
 
     # Development (CLI)
