@@ -74,7 +74,7 @@
     xfce.thunar
     pavucontrol
     microsoft-edge
-    prismlauncher-unwrapped
+    (prismlauncher.override { jdks = [ jdk8 jdk17]; })
     #virtualbox
     #virtualboxWithExtpack
 
