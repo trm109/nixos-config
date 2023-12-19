@@ -74,7 +74,7 @@
     xfce.thunar
     pavucontrol
     microsoft-edge
-    minecraft
+    prismlauncher-unwrapped
     #virtualbox
     #virtualboxWithExtpack
 
