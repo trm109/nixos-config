@@ -88,6 +88,7 @@
     docker-compose
     llvm_12
     jdk21
+    jdk17
     nodejs_21
     postgresql_jit
     gh
