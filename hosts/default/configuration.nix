@@ -95,6 +95,7 @@
     clangStdenv
     zip
     unzip
+    awscli2
 
 # Development (GUI)
     dbeaver
@@ -109,6 +110,7 @@
     bat
     btop
     neofetch
+
   ];
 
   nixpkgs.overlays = [
