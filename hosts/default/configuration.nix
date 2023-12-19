@@ -96,6 +96,7 @@
     zip
     unzip
     awscli2
+    nodePackages.aws-cdk
 
 # Development (GUI)
     dbeaver
