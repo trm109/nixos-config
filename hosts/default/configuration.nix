@@ -16,6 +16,14 @@
       ../../modules/asus.nix # Enable Asus Specifics
     ];
 
+  # Enable virtualization
+  #virtualisation.virtualbox.host.enable = true;
+  #virtualisation.virtualbox.guest.enable = true;
+  #virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
+
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -68,7 +76,7 @@
     microsoft-edge
     minecraft
     #virtualbox
-    virtualboxWithExtpack
+    #virtualboxWithExtpack
 
     # Development (CLI)
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -95,6 +103,7 @@
     libreoffice
     krita
     godot_4
+    popsicle
 
 # Tools (CLI)
     bat
