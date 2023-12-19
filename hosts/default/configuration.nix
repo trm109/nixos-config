@@ -103,7 +103,7 @@
     libreoffice
     krita
     godot_4
-    etcher
+    unetbootin
 
 # Tools (CLI)
     bat
