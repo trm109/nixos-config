@@ -98,6 +98,7 @@
     unzip
     awscli2
     nodePackages.aws-cdk
+    android-tools
 
 # Development (GUI)
     dbeaver
