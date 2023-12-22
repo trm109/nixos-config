@@ -115,6 +115,11 @@
     btop
     neofetch
 
+
+# Gaming
+    mangohud
+    gamemode
+    protonup-qt
   ];
 
   nixpkgs.overlays = [
