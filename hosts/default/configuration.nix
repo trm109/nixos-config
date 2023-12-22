@@ -23,7 +23,8 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-
+  # Enable steam
+  programs.steam.enable = true;
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
