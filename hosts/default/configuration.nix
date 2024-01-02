@@ -117,6 +117,7 @@
 
 
 # Gaming
+    steam
     mangohud
     gamemode
     protonup-qt
