@@ -110,6 +110,7 @@
     krita
     godot_4
     unetbootin
+    protonvpn-gui
 
 # Tools (CLI)
     bat
