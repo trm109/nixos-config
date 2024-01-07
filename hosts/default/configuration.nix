@@ -76,6 +76,7 @@
     pavucontrol
     microsoft-edge
     (prismlauncher.override { jdks = [ jdk8 jdk17]; })
+    stremio
     #virtualbox
     #virtualboxWithExtpack
 
