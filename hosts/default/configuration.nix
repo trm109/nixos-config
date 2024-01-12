@@ -80,6 +80,7 @@
     speedcrunch
     inkscape
     pstoedit
+    ghostscript
 
     #virtualbox
     #virtualboxWithExtpack
