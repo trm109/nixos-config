@@ -78,7 +78,7 @@
     (prismlauncher.override { jdks = [ jdk8 jdk17]; })
     stremio
     speedcrunch
-    inkscape
+    inkscape-with-extensions
     pstoedit
     ghostscript
 
