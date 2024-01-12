@@ -79,6 +79,8 @@
     stremio
     speedcrunch
     inkscape
+    blender
+
     #virtualbox
     #virtualboxWithExtpack
 
