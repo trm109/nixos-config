@@ -150,6 +150,7 @@
     packages = with pkgs; [ 
       comic-mono
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+      (google-fonts.override { fonts = ["Noticia"]; })
     ];
 
     fontconfig = {
