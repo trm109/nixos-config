@@ -121,6 +121,7 @@
     bat
     btop
     neofetch
+    hyprpicker
 
 
 # Gaming
