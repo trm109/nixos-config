@@ -77,6 +77,7 @@
     microsoft-edge
     (prismlauncher.override { jdks = [ jdk8 jdk17]; })
     stremio
+    speedcrunch
     #virtualbox
     #virtualboxWithExtpack
 
