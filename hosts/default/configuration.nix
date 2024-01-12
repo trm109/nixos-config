@@ -79,6 +79,7 @@
     stremio
     speedcrunch
     inkscape
+    pstoedit
 
     #virtualbox
     #virtualboxWithExtpack
