@@ -212,11 +212,11 @@ in
 
     # Maintained fork of the fastest Neovim colorizer
     # https://github.com/NvChad/nvim-colorizer.lua
-    nvim-colorizer
+    nvim-colorizer-lua
 
     # Git integration for buffers
     # https://github.com/lewis6991/gitsigns.nvim
-    gitsigns
+    gitsigns-nvim
 
     # autopairs for neovim written by lua
     # https://github.com/windwp/nvim-autopairs
