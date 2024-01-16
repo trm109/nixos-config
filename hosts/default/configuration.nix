@@ -126,7 +126,9 @@
     btop
     neofetch
     hyprpicker
-
+    libclang
+    stylua
+    deno
 
 # Gaming
     steam
