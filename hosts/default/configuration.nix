@@ -118,7 +118,6 @@
     krita
     godot_4
     unetbootin
-    protonvpn-gui
 
 # Tools (CLI)
     bat
@@ -129,12 +128,12 @@
     stylua
     deno
     libgcc
+    protonvpn-cli
 
 # Gaming
     steam
     mangohud
     gamemode
-    protonup-qt
   ];
 
   nixpkgs.overlays = [
