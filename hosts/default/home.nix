@@ -204,7 +204,7 @@
 	    ]));
 	    config = toLuaFile ./nvim/plugins/treesitter.lua;
 	}
-    ]
+    ];
   };
 
 
