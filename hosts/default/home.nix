@@ -108,7 +108,7 @@
 
     # Add in lua configs
     extraLuaConfig = ''
-	${builtins.readFile ./nvim/options.lua}
+	${builtins.readFile ./neovim/options.lua}
     '';
     # extraLuaConfig = ''
     # ${builtins.readFile ./nvim/options.lua}
@@ -124,7 +124,7 @@
 	nvim-lspconfig
 	{
 	    plugin = nvim-lspconfig;
-	    config = toLuaFile ./nvim/plugins/lsp.lua;
+	    config = toLuaFile ./neovim/plugins/lsp.lua;
 	}
 	
 	#⚡ Smart and Powerful commenting plugin for neovim ⚡
@@ -150,14 +150,14 @@
 	# https://github.com/hrsh7th/nvim-cmp
 	{
 	    plugin = nvim-cmp;
-	    config = toLuaFile ./nvim/plugins/cmp.lua;
+	    config = toLuaFile ./neovim/plugins/cmp.lua;
 	}
 	
 	# telescope.nvim is a highly extendable fuzzy finder over lists. Built on the latest awesome features from neovim core. Telescope is centered around modularity, allowing for easy customization.
 	# https://github.com/nvim-telescope/telescope.nvim
 	{
 	    plugin = telescope-nvim;
-	    config = toLuaFile ./nvim/plugins/telescope.lua;
+	    config = toLuaFile ./neovim/plugins/telescope.lua;
 	}
 
 	# fzf-native is a c port of fzf. It only covers the algorithm and implements few functions to support calculating the score.
@@ -202,7 +202,7 @@
 	        p.tree-sitter-python
 	        p.tree-sitter-nix
 	    ]));
-	    config = toLuaFile ./nvim/plugins/treesitter.lua;
+	    config = toLuaFile ./neovim/plugins/treesitter.lua;
 	}
     ];
   };
