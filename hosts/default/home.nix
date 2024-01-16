@@ -3,16 +3,16 @@
 {
 # Home Manager needs a bit of information about you and the paths it should
 # manage.
-    home.username = "saik";
-    home.homeDirectory = "/home/saik";
+home.username = "saik";
+home.homeDirectory = "/home/saik";
 
 
 # setting git.
-    programs.git = {
-	enable = true;
-	userName = "trm109";
-	userEmail = "trm109@case.edu";
-    };
+programs.git = {
+  enable = true;
+  userName = "trm109";
+  userEmail = "trm109@case.edu";
+};
 
 # gtk
 #  programs.gtk = {
@@ -23,12 +23,12 @@
 #  };
 
 # mime types
-    xdg.mimeApps.defaultApplications = {
-	"text/plain" = [ "nvim.desktop" ];
-	"application/pdf" = [ "chromium.desktop" ];
-	"image/*" = [ "chromium.desktop" ];
-	"video/*" = [ "mpv.desktop" ];
-    };
+xdg.mimeApps.defaultApplications = {
+  "text/plain" = [ "nvim.desktop" ];
+  "application/pdf" = [ "chromium.desktop" ];
+  "image/*" = [ "chromium.desktop" ];
+  "video/*" = [ "mpv.desktop" ];
+};
 
 # This value determines the Home Manager release that your configuration is
 # compatible with. This helps avoid breakage when a new Home Manager release
@@ -37,11 +37,11 @@
 # You should not change this value, even if you update Home Manager. If you do
 # want to update the value, then make sure to first check the Home Manager
 # release notes.
-    home.stateVersion = "23.11"; # Please read the comment before changing.
+home.stateVersion = "23.11"; # Please read the comment before changing.
 
 # The home.packages option allows you to install Nix packages into your
 # environment.
-	home.packages = [
+home.packages = [
 # # Adds the 'hello' command to your environment. It prints a friendly
 # # "Hello, world!" when run.
 # pkgs.hello
@@ -58,11 +58,11 @@
 # (pkgs.writeShellScriptBin "my-hello" ''
 #   echo "Hello, ${config.home.username}!"
 # '')
-	];
+    ];
 
 # Home Manager is pretty good at managing dotfiles. The primary way to manage
 # plain files is through 'home.file'.
-    home.file = {
+home.file = {
 # # Building this configuration will create a copy of 'dotfiles/screenrc' in
 # # the Nix store. Activating the configuration will then make '~/.screenrc' a
 # # symlink to the Nix store copy.
@@ -86,18 +86,18 @@
 #
 #  /etc/profiles/per-user/saik/etc/profile.d/hm-session-vars.sh
 #
-    home.sessionVariables = {
+home.sessionVariables = {
 # EDITOR = "emacs";
-	TESTING = "testing";
+TESTING = "testing";
     };
 
 #Neovim
-    programs.neovim = 
-	let 
-	toLua = str: "lua << EOF\n${str}\nEOF\n";
-    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-	in 
-	{
+programs.neovim = 
+let 
+  toLua = str: "lua << EOF\n${str}\nEOF\n";
+  toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+in 
+  {
 # Enable
     enable = true;
 
@@ -105,7 +105,11 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-    
+
+    # Other configs
+    withPython3 = true;
+    defaultEditor = true;
+
     # Add in extra packages requirede for plugins
     extraPackages = with pkgs; [
       lua-language-server
@@ -128,7 +132,6 @@
     plugins = with pkgs.vimPlugins; [
 	# Quickstart configs for Nvim LSP
 	# https://github.co../../modules/home-manager/neovim/nvim-lspconfig
-	nvim-lspconfig
 	{
 	    plugin = nvim-lspconfig;
 	    config = toLuaFile ../../modules/home-manager/neovim/plugins/lsp.lua;
@@ -198,7 +201,27 @@
 	# Vim configuration files for Nix http://nixos.org/nix
 	# https://github.com/LnL7/vim-nix
 	vim-nix
-	
+
+    # A file explorer tree for neovim written in lua
+    # https://github.com/nvim-tree/nvim-tree.lua
+    nvim-tree
+
+    # 💥 Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing.
+    # https://github.com/folke/which-key.nvim
+    which-key
+
+    # Maintained fork of the fastest Neovim colorizer
+    # https://github.com/NvChad/nvim-colorizer.lua
+    nvim-colorizer
+
+    # Git integration for buffers
+    # https://github.com/lewis6991/gitsigns.nvim
+    gitsigns
+
+    # autopairs for neovim written by lua
+    # https://github.com/windwp/nvim-autopairs
+    nvim-autopairs
+
 	# Tree sitter plugins
 	{
 	    plugin = (nvim-treesitter.withPlugins (p: [
