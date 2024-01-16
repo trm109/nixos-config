@@ -204,7 +204,7 @@ in
 
     # A file explorer tree for neovim written in lua
     # https://github.com/nvim-tree/nvim-tree.lua
-    #nvim-tree
+    nvim-tree-lua
 
     # 💥 Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing.
     # https://github.com/folke/which-key.nvim
