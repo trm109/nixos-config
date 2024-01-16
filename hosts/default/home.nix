@@ -208,7 +208,7 @@ in
 
     # 💥 Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing.
     # https://github.com/folke/which-key.nvim
-    which-key
+    which-key-nvim
 
     # Maintained fork of the fastest Neovim colorizer
     # https://github.com/NvChad/nvim-colorizer.lua
