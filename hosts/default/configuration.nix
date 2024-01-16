@@ -129,6 +129,7 @@
     libclang
     stylua
     deno
+    libgcc
 
 # Gaming
     steam
