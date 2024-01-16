@@ -105,6 +105,13 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+    
+    # Add in extra packages requirede for plugins
+    extraPackages = with pkgs; [
+      lua-language-server
+      rnix-lsp
+      wl-clipboard
+    ];
 
     # Add in lua configs
     extraLuaConfig = ''
