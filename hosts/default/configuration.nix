@@ -64,7 +64,11 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
-     # Desktop Apps
+    # Plugins
+    networkmanagerapplet
+    networkmanager-openvpn
+
+    # Desktop Apps
     discord
     chromium
     kitty
