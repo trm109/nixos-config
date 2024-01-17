@@ -115,6 +115,7 @@
     android-tools
     python3
     rustup
+    gcc
 
 # Development (GUI)
     dbeaver
