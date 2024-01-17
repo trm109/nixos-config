@@ -121,7 +121,7 @@
     libreoffice
     krita
     godot_4
-    etcher
+    ventoy-full
 
 # Tools (CLI)
     bat
