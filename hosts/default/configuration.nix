@@ -117,7 +117,7 @@
     libreoffice
     krita
     godot_4
-    unetbootin
+    popsicle
 
 # Tools (CLI)
     bat
