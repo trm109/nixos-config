@@ -60,6 +60,7 @@ require("Comment").setup({
 -- Language Servers
 local lspconfig = require('lspconfig')
 -- Mason
+require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
         "lua_ls", 
