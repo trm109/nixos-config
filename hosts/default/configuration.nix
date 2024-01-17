@@ -121,6 +121,7 @@
     libreoffice
     krita
     godot_4
+    etcher
 
 # Tools (CLI)
     bat
