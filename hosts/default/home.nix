@@ -135,9 +135,6 @@ in
     {
       plugin = lazy-nvim;
       config = ''
-      performance = {
-        reset_packpath = false,
-      }
       '';
     }
 
