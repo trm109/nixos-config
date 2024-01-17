@@ -121,6 +121,7 @@ in
       php82Packages.composer
       julia_18
       python311Packages.pip
+      php
     ];
 
     # Add in lua configs
