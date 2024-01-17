@@ -241,7 +241,7 @@ in
     #        ]));
     #        config = toLuaFile ../../modules/home-manager/neovim/plugins/treesitter.lua;
     #    }
-    #];
+    ];
   };
 
 
