@@ -27,6 +27,7 @@ require("lazy").setup({
 	'NvChad/nvim-colorizer.lua',
 	'lewis6991/gitsigns.nvim',
 	'windwp/nvim-autopairs',
+	"williamboman/mason.nvim",
 })
 
 -- Gruvbox
@@ -55,5 +56,6 @@ require("Comment").setup({
 -- [count]gbc
 
 
--- neodev
+-- Language Servers
 local lspconfig = require('lspconfig')
+
