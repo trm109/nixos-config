@@ -36,6 +36,7 @@ require("lazy").setup({
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
 	{'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+	"luukvbaal/statuscol.nvim",
 })
 
 -- Gruvbox
@@ -123,7 +124,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 --   callback = function(ev)
 --     -- Enable completion triggered by <c-x><c-o>
 --     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
--- 
+-- ripgrep
 --     -- Buffer local mappings.
 --     -- See `:help vim.lsp.*` for documentation on any of the below functions
 --     local opts = { buffer = ev.buf }
