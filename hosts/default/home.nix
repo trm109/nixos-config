@@ -132,10 +132,10 @@ in
     plugins = with pkgs.vimPlugins; [
     # 💤 A modern plugin manager for Neovim
     # https://github.com/folke/lazy.nvim
-    #{
-    #  plugin = lazy-nvim;
-    #  config = toLuaFile ../../modules/home-manager/neovim/plugins/lazy.lua;
-    #}
+    {
+      plugin = lazy-nvim;
+      config = toLuaFile ../../modules/home-manager/neovim/plugins/lazy.lua;
+    }
 
     #    # Quickstart configs for Nvim LSP
     #    # https://github.co../../modules/home-manager/neovim/nvim-lspconfig
