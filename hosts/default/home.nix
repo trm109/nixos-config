@@ -117,6 +117,10 @@ in
       wl-clipboard
       go
       nodePackages.pyright
+      luajitPackages.luarocks
+      php82Packages.composer
+      julia_18
+      python311Packages.pip
     ];
 
     # Add in lua configs
