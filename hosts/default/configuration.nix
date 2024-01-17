@@ -113,6 +113,7 @@
     awscli2
     nodePackages.aws-cdk
     android-tools
+    python3
 
 # Development (GUI)
     dbeaver
