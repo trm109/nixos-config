@@ -134,8 +134,7 @@ in
     # https://github.com/folke/lazy.nvim
     {
       plugin = lazy-nvim;
-      config = ''
-      '';
+      config = toLuaFile ../../modules/home-manager/neovim/plugins/lazy.lua;
     }
 
 	# Quickstart configs for Nvim LSP
