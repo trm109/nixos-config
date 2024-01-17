@@ -11,7 +11,10 @@ require("lazy").setup({
 	    "hrsh7th/nvim-cmp",
 	    lazy = false,
 	},
-	"nvim-telescope/telescope.nvim",
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = { 'nvim-lua/plenary.nvim' }
+	},
 	{ 
 		'nvim-telescope/telescope-fzf-native.nvim', 
 		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
@@ -113,7 +116,6 @@ vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 -- vim.api.nvim_create_autocmd('LspAttach', {
@@ -175,3 +177,10 @@ require("mason-lspconfig").setup({
 		lsp_zero.default_setup,
 	},
 })
+
+-- Telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
