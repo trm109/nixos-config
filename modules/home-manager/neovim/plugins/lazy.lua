@@ -1,7 +1,10 @@
 require("lazy").setup({
 	"tpope/vim-ragtag",
 	"neovim/nvim-lspconfig",
-	"numToStr/Comment.nvim", -- lazy = false?
+	{
+		"numToStr/Comment.nvim",
+		lazy = false,
+	},
 	"ellisonleao/gruvbox.nvim",
 	"folke/neodev.nvim",
 	"hrsh7th/nvim-cmp",
@@ -40,5 +43,13 @@ require("gruvbox").setup({
 		folds = true,
 	},
 })
-
 vim.cmd("colorscheme gruvbox")
+
+-- Comment
+require("Comment").setup({
+	padding = true,
+})
+-- gcc (toggles current line using linewise comment)
+-- gbc (toggles current line using blockwise comment)
+-- [count]gcc
+-- [count]gbc
