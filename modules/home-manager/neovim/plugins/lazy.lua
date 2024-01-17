@@ -53,3 +53,7 @@ require("Comment").setup({
 -- gbc (toggles current line using blockwise comment)
 -- [count]gcc
 -- [count]gbc
+
+
+-- neodev
+local lspconfig = require('lspconfig')
