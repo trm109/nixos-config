@@ -10,7 +10,7 @@ require("lazy").setup({
 	{
 	    "hrsh7th/nvim-cmp",
 	    lazy = false,
-	}
+	},
 	"nvim-telescope/telescope.nvim",
 	{ 
 		'nvim-telescope/telescope-fzf-native.nvim', 
