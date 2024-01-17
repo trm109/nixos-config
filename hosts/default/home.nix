@@ -123,6 +123,7 @@ in
       julia_18
       python311Packages.pip
       php
+      ripgrep
     ];
 
     # Add in lua configs
