@@ -115,6 +115,7 @@ in
       lua-language-server
       rnix-lsp
       wl-clipboard
+      go
     ];
 
     # Add in lua configs

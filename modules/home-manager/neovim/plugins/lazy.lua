@@ -28,6 +28,7 @@ require("lazy").setup({
 	'lewis6991/gitsigns.nvim',
 	'windwp/nvim-autopairs',
 	"williamboman/mason.nvim",
+	"williamboman/mason-lspconfig.nvim",
 })
 
 -- Gruvbox
@@ -58,4 +59,17 @@ require("Comment").setup({
 
 -- Language Servers
 local lspconfig = require('lspconfig')
-
+-- Mason
+require("mason-lspconfig").setup({
+    ensure_installed = {
+        "lua_ls", 
+        "clangd",
+        "marksman",
+        "nil_ls",
+        "jedi_language_server",
+        "svelte",
+        "taplo",
+        "yamlls",
+        "bashls",
+    },
+})
