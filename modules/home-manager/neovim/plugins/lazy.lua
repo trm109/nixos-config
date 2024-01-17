@@ -7,7 +7,10 @@ require("lazy").setup({
 	},
 	"ellisonleao/gruvbox.nvim",
 	"folke/neodev.nvim",
-	"hrsh7th/nvim-cmp",
+	{
+	    "hrsh7th/nvim-cmp",
+	    lazy = false,
+	}
 	"nvim-telescope/telescope.nvim",
 	{ 
 		'nvim-telescope/telescope-fzf-native.nvim', 
