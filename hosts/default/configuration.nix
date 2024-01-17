@@ -60,6 +60,10 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-19.1.9"
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -117,7 +121,6 @@
     libreoffice
     krita
     godot_4
-    etcher
 
 # Tools (CLI)
     bat
