@@ -20,6 +20,6 @@ require("lazy").setup({
 	'nvim-tree/nvim-tree',
 	'folke/which-key',
 	'NvChad/nvim-colorizer',
-	'lewis6991/gitsigns',
+	'lewis6991/gitsigns.nvim',
 	'windwp/nvim-autopairs',
 })
