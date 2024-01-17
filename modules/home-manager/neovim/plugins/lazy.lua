@@ -6,11 +6,16 @@ require("lazy").setup({
 	"folke/neodev.nvim",
 	"hrsh7th/nvim-cmp",
 	"nvim-telescope/telescope.nvim",
-	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+	{ 
+		'nvim-telescope/telescope-fzf-native.nvim', 
+		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
+	},
 	"saadparwaiz1/cmp_luasnip",
 	"hrsh7th/cmp-nvim-lsp",
 	"L3MON4D3/LuaSnip",
-	{ "rafamadriz/friendly-snippets" },
+	{ 
+		"rafamadriz/friendly-snippets"
+	},
 	'nvim-lualine/lualine.nvim',
 	'nvim-tree/nvim-web-devicons',
 	'LnL7/vim-nix',
@@ -20,3 +25,14 @@ require("lazy").setup({
 	'lewis6991/gitsigns.nvim',
 	'windwp/nvim-autopairs',
 })
+
+-- Gruvbox
+require("gruvbox").setup({
+	terminal_colors = true,
+	undercurl = true,
+	underline = true,
+	bold = true,
+	italic = true,
+})
+
+vim.cmd("colorscheme gruvbox")
