@@ -117,7 +117,7 @@
     libreoffice
     krita
     godot_4
-    popsicle
+    etcher
 
 # Tools (CLI)
     bat
