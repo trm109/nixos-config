@@ -116,6 +116,7 @@ in
       rnix-lsp
       wl-clipboard
       go
+      nodePackages.pyright
     ];
 
     # Add in lua configs
