@@ -17,9 +17,9 @@ require("lazy").setup({
 	'nvim-lualine/lualine.nvim',
 	'nvim-tree/nvim-web-devicons',
 	'LnL7/vim-nix',
-	'nvim-tree/nvim-tree',
-	'folke/which-key',
-	'NvChad/nvim-colorizer',
+	'nvim-tree/nvim-tree.lua',
+	'folke/which-key.nvim',
+	'NvChad/nvim-colorizer.lua',
 	'lewis6991/gitsigns.nvim',
 	'windwp/nvim-autopairs',
 })
