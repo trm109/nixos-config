@@ -130,6 +130,17 @@ in
     # '';
 
     plugins = with pkgs.vimPlugins; [
+    # 💤 A modern plugin manager for Neovim
+    # https://github.com/folke/lazy.nvim
+    {
+      plugin = lazy-nvim;
+      config = ''
+      performance = {
+        reset_packpath = false,
+      }
+      '';
+    }
+
 	# Quickstart configs for Nvim LSP
 	# https://github.co../../modules/home-manager/neovim/nvim-lspconfig
 	{
