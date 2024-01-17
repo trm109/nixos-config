@@ -114,6 +114,7 @@
     nodePackages.aws-cdk
     android-tools
     python3
+    rustup
 
 # Development (GUI)
     dbeaver
