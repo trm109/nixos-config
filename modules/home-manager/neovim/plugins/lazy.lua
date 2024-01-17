@@ -3,4 +3,5 @@ require("lazy").setup({
 		reset_packpath = false,
 	},
 	"tpope/vim-ragtag",
+	"neovim/nvim-lspconfig",
 })
