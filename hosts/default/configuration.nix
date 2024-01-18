@@ -119,6 +119,7 @@
     python3
     rustup
     gcc
+    gvfs
 
 # Development (GUI)
     dbeaver
