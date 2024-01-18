@@ -92,7 +92,7 @@
     inkscape-with-extensions
     pstoedit
     ghostscript
-    popsicle
+    etcher
 
     #virtualbox
     #virtualboxWithExtpack
