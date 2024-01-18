@@ -191,3 +191,7 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+-- Copilot
+-- Accept the current suggestion with ctrl-space
+vim.keymap.set('i', '<C-Space>', '<Plug>(copilot_accept_current)', {})
