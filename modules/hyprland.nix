@@ -32,7 +32,7 @@
     libnotify
     brightnessctl
     asusctl
-    libsForQt5.polkit-kde-agent
+    lxqt.lxqt-policykit
   ];
 
   # Enable the XDG portal
