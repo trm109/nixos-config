@@ -184,6 +184,7 @@ require("mason-lspconfig").setup({
 		"tsserver",
 		"pyright",
 		"marksman",
+		"r_language_server",
     },
 	handlers = {
 		lsp_zero.default_setup,
