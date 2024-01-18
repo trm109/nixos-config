@@ -29,6 +29,5 @@
     # Plugins
     networkmanagerapplet
     networkmanager-openvpn
-    networkmanager-openvpn-gnome
   ];
 }
