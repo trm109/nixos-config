@@ -165,6 +165,7 @@ end)
 -- Mason
 require("mason").setup()
 require("mason-lspconfig").setup({
+	PATH = "prepend",
     ensure_installed = {
         "lua_ls", 
         "clangd",
