@@ -81,6 +81,9 @@
     spotify
     zoom-us
     xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
+    xfce.thunar-media-tags-plugin
     pavucontrol
     microsoft-edge
     (prismlauncher.override { jdks = [ jdk8 jdk17]; })
