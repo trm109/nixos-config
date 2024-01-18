@@ -196,6 +196,6 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- Copilot
 -- Accept the current suggestion with ctrl backslash
-vim.keymap.set('i', '<C-\\>', 'copilot#Accept()', {expr = true, noremap = true})
+vim.keymap.set('i', '<C-Bslash>', 'copilot#Accept()', {expr = true, noremap = true})
 
 
