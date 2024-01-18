@@ -132,6 +132,7 @@
     stylua
     deno
     libgcc
+    cordless
 
 # Gaming
     steam
