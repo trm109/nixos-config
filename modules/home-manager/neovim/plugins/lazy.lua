@@ -39,7 +39,6 @@ require("lazy").setup({
 	"luukvbaal/statuscol.nvim",
 	{
 		"github/copilot.vim",
-		lazy = true,
 	},
 })
 
