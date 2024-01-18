@@ -16,7 +16,7 @@
 
   users.users.saik = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "docker" "libvirtd"];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" "docker" "libvirtd" "vboxusers" ];
     shell = pkgs.fish;
   };
 

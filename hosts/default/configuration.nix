@@ -14,14 +14,9 @@
       ../../modules/hyprland.nix # Enable Hyprland
       ../../modules/network.nix # Enable Networking
       ../../modules/asus.nix # Enable Asus Specifics
+      ../../modules/virtualisation.nix # Enable virtualisation
     ];
 
-  # Enable virtualization
-  #virtualisation.virtualbox.host.enable = true;
-  #virtualisation.virtualbox.guest.enable = true;
-  #virtualisation.virtualbox.host.enableExtensionPack = true;
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
 
   # Enable steam
   programs.steam.enable = true;
@@ -68,9 +63,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
-    # Plugins
-    networkmanagerapplet
-    networkmanager-openvpn
 
     # Desktop Apps
     discord
@@ -140,7 +132,6 @@
     stylua
     deno
     libgcc
-    protonvpn-cli
 
 # Gaming
     steam

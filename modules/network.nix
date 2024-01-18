@@ -15,6 +15,13 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+  networking.firewall.checkReversePath = false;
+
+  # Enable NAT
+  # networking.nat = { enable = true;
+  #   internalInterfaces = [ "enp0s3" ];
+  #   externalInterface = "wlp7s0";
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
