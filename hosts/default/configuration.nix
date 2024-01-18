@@ -113,7 +113,7 @@
     rustup
     gcc
     gvfs
-    r
+    R
 
 # Development (GUI)
     dbeaver
