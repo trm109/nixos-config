@@ -1,5 +1,5 @@
 # modules/network.nix
-
+{ config, pkgs, ... }:
 {
   networking.hostName = "saik-nix"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -23,4 +23,12 @@
     enable = true;
     enableSSHSupport = true;
   };
+  # add packages.
+  environment.systemPackages = with pkgs; [
+    protonvpn-cli
+    # Plugins
+    networkmanagerapplet
+    networkmanager-openvpn
+    networkmanager-openvpn-gnome
+  ];
 }
