@@ -92,7 +92,7 @@
     inkscape-with-extensions
     pstoedit
     ghostscript
-    mediawriter
+    popsicle
 
     #virtualbox
     #virtualboxWithExtpack
