@@ -195,5 +195,5 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- Copilot
--- Accept the current suggestion with ctrl-space
-vim.keymap.set('i', '<C-Space>', '<Plug>(copilot_accept_current)', {})
+-- Accept the current suggestion with ctrl backslash
+vim.keymap.set('i', '<C-\\>', 'copilot#accept()', {expr = true, noremap = true})
