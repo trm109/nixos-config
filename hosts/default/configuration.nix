@@ -114,6 +114,7 @@
     gcc
     gvfs
     R
+    rPackages.devtools
 
 # Development (GUI)
     dbeaver
