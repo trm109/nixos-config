@@ -115,6 +115,9 @@
     gvfs
     R
     rPackages.devtools
+    rPackages.Seurat
+    rPackages.sctransform
+    rPackages.dplyr
 
 # Development (GUI)
     dbeaver
