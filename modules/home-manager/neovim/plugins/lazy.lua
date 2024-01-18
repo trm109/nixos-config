@@ -39,7 +39,7 @@ require("lazy").setup({
 	"luukvbaal/statuscol.nvim",
 })
 
--- Gruvbox
+-- Gruvbox (Colorscheme)
 require("gruvbox").setup({
 	terminal_colors = true,
 	undercurl = true,
@@ -55,7 +55,7 @@ require("gruvbox").setup({
 })
 vim.cmd("colorscheme gruvbox")
 
--- Comment
+-- Comment (fold comment shortcuts)
 require("Comment").setup({
 	padding = true,
 })
@@ -64,7 +64,10 @@ require("Comment").setup({
 -- [count]gcc
 -- [count]gbc
 
--- CMP
+-- nvim-tree (file tree explorer)
+require("nvim-tree").setup()
+
+-- CMP (autocomplete/hints)
 local cmp = require('cmp')
 cmp.setup({
     snippet = {
