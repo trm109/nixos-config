@@ -24,3 +24,5 @@ vim.o.mouse = 'a'
 vim.api.nvim_set_keymap('n', '<C-Left>', ':tabprevious<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-Right>', ':tabnext<CR>', { noremap = true, silent = true })
 
+-- Always show tab
+vim.cmd('set showtabline=2')
