@@ -92,6 +92,9 @@ cmp.setup({
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<C-Bslash>'] = cmp.mapping(function(fallback)
+      vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
+    end)
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
@@ -196,6 +199,11 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- Copilot
 -- Accept the current suggestion with ctrl backslash
-vim.keymap.set('i', '<C-Bslash>', 'copilot#Accept()', {expr = true, noremap = true})
-
-
+-- vim.keymap.set('i', '<C-Bslash>', 'copilot#Accept()', {expr = true, noremap = true})
+vim.g.copilot_no_tab_map = true
+vim.keymap.set(
+    "i",
+    "<Plug>(vimrc:copilot-dummy-map)",
+    'copilot#Accept("")',
+    { silent = true, expr = true, desc = "Copilot dummy accept" }
+)
