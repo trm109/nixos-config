@@ -37,7 +37,10 @@ require("lazy").setup({
 	"williamboman/mason-lspconfig.nvim",
 	{'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
 	"luukvbaal/statuscol.nvim",
-	"github/copilot.vim",
+	{
+		"github/copilot.vim",
+		lazy = true,
+	},
 })
 
 -- Gruvbox (Colorscheme)
