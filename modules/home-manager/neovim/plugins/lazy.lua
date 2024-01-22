@@ -185,7 +185,6 @@ require("mason-lspconfig").setup({
         "bashls",
 		"tsserver",
 		"pyright",
-		"marksman",
 		"r_language_server",
     },
 	handlers = {
