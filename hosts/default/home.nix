@@ -111,7 +111,7 @@ in
     withPython3 = true;
     defaultEditor = true;
 
-    # Add in extra packages requirede for plugins
+    # Add in extra packages required for plugins
     extraPackages = with pkgs; [
       lua-language-server
       rnix-lsp
