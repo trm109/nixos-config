@@ -167,6 +167,8 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
 end)
 
+--require'lspconfig'.marksman.setup{}
+
 -- Mason
 require("mason").setup()
 require("mason-lspconfig").setup({
@@ -189,6 +191,11 @@ require("mason-lspconfig").setup({
 	handlers = {
 		lsp_zero.default_setup,
 	},
+	automatic_installation = {
+		exclude = {
+			"marksman",
+		}
+	}, 
 })
 
 -- Telescope
