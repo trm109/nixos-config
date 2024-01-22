@@ -124,6 +124,7 @@ in
       python311Packages.pip
       php
       ripgrep
+      marksman
     ];
 
     # Add in lua configs
