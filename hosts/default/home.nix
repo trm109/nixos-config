@@ -125,6 +125,7 @@ in
       php
       ripgrep
       marksman
+      rPackages.languageserver
     ];
 
     # Add in lua configs

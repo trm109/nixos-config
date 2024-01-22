@@ -185,13 +185,13 @@ require("mason-lspconfig").setup({
         "bashls",
 		"tsserver",
 		"pyright",
-		"r_language_server",
     },
 	handlers = {
 		lsp_zero.default_setup,
 	},
 	automatic_installation = {
 		exclude = {
+			"r_language_server",
 			"marksman",
 		}
 	}, 
