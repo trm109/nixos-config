@@ -127,7 +127,6 @@
     krita
     godot_4
     ventoy-full
-    insomnia
 
 # Tools (CLI)
     bat
@@ -139,6 +138,7 @@
     deno
     libgcc
     cordless
+    jq
 
 # Gaming
     steam
