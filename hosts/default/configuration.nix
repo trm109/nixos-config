@@ -120,13 +120,14 @@
     rPackages.dplyr
 
 # Development (GUI)
-    dbeaver
-    sequeler
-    obs-studio
+    #dbeaver
+    #sequeler
+    #obs-studio
     libreoffice
     krita
     godot_4
     ventoy-full
+    insomnia
 
 # Tools (CLI)
     bat
