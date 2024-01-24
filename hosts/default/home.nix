@@ -126,6 +126,7 @@ in
       ripgrep
       marksman
       rPackages.languageserver
+      vimPlugins.markdown-preview-nvim
     ];
 
     # Add in lua configs
