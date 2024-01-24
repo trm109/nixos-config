@@ -1,10 +1,3 @@
-require('lazy').setup('lazyplugins', {
-	performance = {
-		-- we install some packages via nix so we want to load from packpath too
-		reset_packpath = false,
-		-- rtp = { reset = false, } can be used too
-	},
-})
 require("lazy").setup({
 	"tpope/vim-ragtag",
 	"neovim/nvim-lspconfig",
