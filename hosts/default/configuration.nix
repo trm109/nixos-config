@@ -144,7 +144,7 @@
 # Gaming
     mangohud
     gamemode
-    keymapper
+    input-remapper
   ];
   
 
