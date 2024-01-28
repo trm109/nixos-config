@@ -20,6 +20,7 @@
 
   # Enable steam
   programs.steam.enable = true;
+
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -146,8 +147,6 @@
     keymapper
   ];
   
-  # Steam
-  programs.steam.enable = true;
 
   nixpkgs.overlays = [
     (self: super:
