@@ -144,9 +144,8 @@
 # Gaming
     mangohud
     gamemode
-    input-remapper
   ];
-  
+  services.input-remapper.enable = true;
 
   nixpkgs.overlays = [
     (self: super:
