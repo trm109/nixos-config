@@ -144,6 +144,7 @@
     steam
     mangohud
     gamemode
+    keymapper
   ];
 
   nixpkgs.overlays = [
