@@ -141,11 +141,13 @@
     jq
 
 # Gaming
-    steam
     mangohud
     gamemode
     keymapper
   ];
+  
+  # Steam
+  programs.steam.enable = true;
 
   nixpkgs.overlays = [
     (self: super:
