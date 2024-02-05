@@ -125,7 +125,7 @@
     #dbeaver
     #sequeler
     #obs-studio
-    blender
+    blender-hip
     libreoffice
     krita
     godot_4
