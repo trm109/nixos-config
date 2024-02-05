@@ -53,6 +53,7 @@
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
+  boot.supportedFilesystems = [ "ntfs" ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -126,6 +127,7 @@
     #sequeler
     #obs-studio
     blender-hip
+    gparted
     libreoffice
     krita
     godot_4
