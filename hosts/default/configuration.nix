@@ -59,7 +59,8 @@
   nixpkgs.config.permittedInsecurePackages = [
     "electron-19.1.9"
   ];
-
+  # Hardware for Mesa
+  hardware.opengl.extraPackages = [ pkgs.mesa.drivers ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
