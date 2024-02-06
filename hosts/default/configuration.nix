@@ -204,10 +204,10 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-
+  homeDirectory = "/home/saik";
   ## Testing
   systemd.tmpfiles.rules = [
-    "L+ /home/saik/test  -  -  -  -  /etc/nixos/test"
+    "L+ ${homeDirectory}/test  -  -  -  -  /etc/nixos/test"
   ];
 
 
