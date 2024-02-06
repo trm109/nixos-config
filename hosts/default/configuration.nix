@@ -205,13 +205,18 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   ## Testing
+  ## link ${homeDirectory}/folder ${nixosDirectory}/folder
   systemd.tmpfiles.rules = 
   let
     homeDirectory = "/home/saik";
-  in
-  [
-    "L+ ${homeDirectory}/test  -  -  -  -  /etc/nixos/test"
-  ];
+    nixosDirectory = "/etc/nixos";
+    folders = [
+      "test"
+      "test2"
+    ];
+  in #create a list of links
+    lib.concatMapStrings (folder: "L " + homeDirectory + "/" + folder + " " + nixosDirectory + "/" + folder + "\n") folders;
+
 
 
   system.stateVersion = "23.11"; # Did you read the comment?
