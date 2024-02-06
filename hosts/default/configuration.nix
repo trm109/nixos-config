@@ -215,7 +215,7 @@
       "test2"
     ];
   in #create an array of strings
-  map (folder: "L+ " + homeDirectory + "/" + folder + " " + nixosDirectory + "/" + folder) folders;
+  map (folder_name: "L+ ${homeDirectory}/${folder_name}  -  -  -  - ${nixosDirectory}/${folder_name}") folders;
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }
