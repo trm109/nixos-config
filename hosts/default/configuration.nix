@@ -214,10 +214,8 @@
       "test"
       "test2"
     ];
-  in #create a list of links
-    lib.concatMapStrings (folder: "L " + homeDirectory + "/" + folder + " " + nixosDirectory + "/" + folder + "\n") folders;
-
-
+  in #create an array of strings
+  builtins.genList (folder: "L ${homeDirectory}/${folder} - ${nixosDirectory}/${folder} - - - - - -") folders;
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }
