@@ -207,7 +207,7 @@
 
   ## Testing
   systemd.tmpfiles.rules = [
-    "L /home/saik/test  -  -  -  -  /etc/nixos/test"
+    "L+ /home/saik/test  -  -  -  -  /etc/nixos/test"
   ];
 
 
