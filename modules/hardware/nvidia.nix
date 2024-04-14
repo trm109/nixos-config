@@ -1,28 +1,31 @@
-{ ... }:
+{ lib, config, pkgs, ... }:
+let 
+  cfg = config.modules.hardware.nvidia;
+in
 {
-  # Nvidia
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+  options.modules.hardware.nvidia = {
+    enable = lib.mkEnableOption "Enable Nvidia Support";
   };
 
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement = {
+  config = lib.mkIf cfg.enable {
+    # Enable OpenGL
+    hardware.opengl = {
       enable = true;
-      finegrained = true;
+      driSupport = true;
+      driSupport32Bit = true;
     };
-    prime = {
-      offload.enable = true;
-      offload.enableOffloadCmd = true;
-      amdgpuBusId = "PCI:10:0:0";
-      nvidiaBusId = "PCI:1:0:0";
+    # enable x server drivers
+    services.xserver.videoDrivers = [ "amdgpu" "nvidia"];
+    # Enable kernel and drivers
+    hardware.nvidia = {
+
+      modesetting.enable = true;
+
+      nvidiaSettings = true;
+
+      package = config.boot.kernelPackages.nvidiaPackages.production;
     };
+    # for specific app gpu control
+    services.switcherooControl.enable = true;
   };
-  # Switcheroo
-  services.switcherooControl.enable = true;
-}
+} 
