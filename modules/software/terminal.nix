@@ -12,6 +12,7 @@
     tre-command
     unstable.ags
     gh
+    fastfetch
 # Fish stuff
     fishPlugins.done
     fishPlugins.fzf-fish
@@ -21,4 +22,8 @@
     fishPlugins.grc
     grc
   ];
+
+  # Enable SSH
+  services.openssh.enable = true;
+  networking.firewall.enable = false;
 }
