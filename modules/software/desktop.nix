@@ -16,6 +16,10 @@
     pavucontrol
     wl-clipboard
     libsForQt5.qt5ct
+    grim
+    slurp
+    libnotify
+    unstable.hyprlock
   ];
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;

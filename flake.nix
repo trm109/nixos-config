@@ -71,7 +71,7 @@
       viceroy = nixpkgs.lib.nixosSystem {
         specialArgs = {
           users = [ "saik" "sara" ];
-          hostname = "asus-flow";
+          hostname = "viceroy";
           hostType = "desktop";
         };
         inherit modules;
