@@ -15,6 +15,10 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ags = {
+      url = "github:Aylur/ags";
+    };
     # Hyprland
     #hyprland = {                                                          # Official Hyprland Flake
     #  url = "github:hyprwm/Hyprland";                                     # Requires "hyprland.nixosModules.default" to be added the host modules
@@ -22,7 +26,7 @@
     #};
   };
 
-  outputs = {self, nixpkgs, nixpkgs-unstable, ...} @ inputs: {
+  outputs = {self, nixpkgs, nixpkgs-unstable, ags, ...} @ inputs: {
     nixosConfigurations =
       let
         system = "x86_64-linux";
@@ -59,6 +63,7 @@
           users = [ "saik" "sara" ];
           hostname = "asus-flow";
           hostType = "desktop";
+          inherit ags;
         };
         inherit modules;
       };
