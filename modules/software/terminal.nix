@@ -21,6 +21,11 @@
     fzf
     fishPlugins.grc
     grc
+
+    openvpn
+    openresolv
+
+    chezmoi
   ];
 
   # Enable SSH

@@ -6,6 +6,7 @@
     (prismlauncher.override { jdks = [ jdk8 jdk17 ]; })
     vesktop
     spotify
+    stremio
     xfce.thunar
     libreoffice
     (ags.packages."x86_64-linux".default.override {
