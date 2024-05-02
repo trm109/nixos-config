@@ -22,6 +22,10 @@
     fishPlugins.grc
     grc
     nix-prefetch-git
+    openvpn
+    openresolv
+
+    chezmoi
   ];
 
   # Enable SSH

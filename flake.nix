@@ -26,7 +26,7 @@
     #};
   };
 
-  outputs = {self, nixpkgs, nixpkgs-unstable, ...} @ inputs: {
+  outputs = {self, nixpkgs, nixpkgs-unstable, ags, ...} @ inputs: {
     nixosConfigurations =
       let
         system = "x86_64-linux";
@@ -62,6 +62,7 @@
           users = [ "saik" "sara" ];
           hostname = "asus-flow";
           hostType = "desktop";
+          inherit ags;
         };
         inherit modules;
       };

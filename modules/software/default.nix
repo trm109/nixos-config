@@ -5,5 +5,7 @@
     ./desktop.nix
     ./applications.nix
     ./terminal.nix
+    ./ldap.nix
+    ./virtualisation.nix
   ];
 }
