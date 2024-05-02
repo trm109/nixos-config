@@ -1,4 +1,4 @@
-{ ags, pkgs, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     kitty
@@ -10,15 +10,6 @@
     stremio
     xfce.thunar
     libreoffice
-    (ags.packages."x86_64-linux".default.override {
-      extraPackages = [
-        gtksourceview
-        webkitgtk
-        accountsservice
-        libdbusmenu
-        libdbusmenu-gtk3
-      ];
-     })
   ];
   #programs.ags = {
   #  enable = true;
