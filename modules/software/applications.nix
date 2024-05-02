@@ -6,5 +6,6 @@
     (prismlauncher.override { jdks = [ jdk8 jdk17 ]; })
     vesktop
     spotify
+    unstable.zoom-us
   ];
 }

@@ -4,6 +4,5 @@
   users.users.sara = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "video" "input" ]; # Enable ‘sudo’ for the user.
-    initialPassword = "password";
   };
 }
