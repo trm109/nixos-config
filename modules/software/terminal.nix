@@ -26,6 +26,8 @@
     openresolv
 
     chezmoi
+
+    tldr
   ];
 
   # Enable SSH
