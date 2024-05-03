@@ -21,7 +21,7 @@
     fzf
     fishPlugins.grc
     grc
-
+    nix-prefetch-git
     openvpn
     openresolv
 
@@ -33,4 +33,7 @@
   # Enable SSH
   services.openssh.enable = true;
   networking.firewall.enable = false;
+  programs.ssh.forwardX11 = true;
+  programs.ssh.setXAuthLocation = true;
+  services.openssh.settings.X11Forwarding = true;
 }

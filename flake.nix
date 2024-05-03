@@ -15,9 +15,9 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     ags = {
       url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # Hyprland
     #hyprland = {                                                          # Official Hyprland Flake
@@ -48,13 +48,12 @@
         };
         modules = [ 
           ./.
-          (
-            { config, pkgs, ... }: {
-              nixpkgs.overlays = [
-                overlay-unstable
-              ];
-            }
-          )
+          ({ config, pkgs, ... }: {
+            nixpkgs.overlays = [
+              overlay-unstable
+            ];
+          })
+
         ];
       in {
 #Asus Flow X16 2022
@@ -73,6 +72,7 @@
           users = [ "saik" "sara" ];
           hostname = "viceroy";
           hostType = "desktop";
+          inherit inputs;
         };
         inherit modules;
       };
@@ -86,5 +86,23 @@
         inherit modules;
       };
     };
+  };
+  
+  # This allows for the gathering of prebuilt binaries, making building much faster
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://nix-gaming.cachix.org"
+      "https://isabelroses.cachix.org"
+      "https://pre-commit-hooks.cachix.org"
+      "https://cache.garnix.io"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+      "isabelroses.cachix.org-1:mXdV/CMcPDaiTmkQ7/4+MzChpOe6Cb97njKmBQQmLPM="
+      "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+    ];
   };
 }
