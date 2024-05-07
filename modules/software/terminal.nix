@@ -25,7 +25,7 @@
     openvpn
     openresolv
 
-    #chezmoi CRINGE
+    chezmoi
 
     tldr
   ];

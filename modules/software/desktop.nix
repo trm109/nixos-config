@@ -45,13 +45,6 @@ in
     xwayland.enable = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-    ];
-  };
   nixpkgs.overlays = [
     (final: prev:
     {
@@ -60,6 +53,7 @@ in
       });
     })
   ];
+
   environment.systemPackages = with pkgs; [
     #(inputs.ags.packages."x86_64-linux".default.override = {})
     unstable.ags
@@ -79,8 +73,20 @@ in
     openconnect
     openfortivpn
     hyprpaper
-  #];
   ];
+
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+          pkgs.xdg-desktop-portal-hyprland
+      ];
+    };
+    mime = {
+      enable = true;
+    };
+  };
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 }

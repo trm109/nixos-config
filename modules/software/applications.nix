@@ -26,9 +26,13 @@
   ];
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
-
+  #programs.firefox = {
+  #  enable = true;
+  #  package = (pkgs.wrapFirefox (pkgs.firefox-unwrapped.override { pipewireSupport = true;}) {});
+  #};
   environment.sessionVariables = {
-    XDG_CONFIG_HOME = "$HOME/etc";
+    #MOZ_USE_XINPUT2 = "1";
+    #MOZ_ENABLE_WAYLAND = "1";
     XDG_DATA_HOME   = "$HOME/var/lib";
     XDG_CACHE_HOME  = "$HOME/var/cache";
     XDG_VIDEOS_DIR  = "$HOME/Videos/";
