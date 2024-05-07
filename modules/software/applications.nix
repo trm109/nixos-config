@@ -10,6 +10,7 @@
     stremio
     xfce.thunar
     libreoffice
+    snapshot
   ];
   #programs.ags = {
   #  enable = true;
@@ -26,7 +27,12 @@
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
 
-
+  environment.sessionVariables = {
+    XDG_CONFIG_HOME = "$HOME/etc";
+    XDG_DATA_HOME   = "$HOME/var/lib";
+    XDG_CACHE_HOME  = "$HOME/var/cache";
+    XDG_VIDEOS_DIR  = "$HOME/Videos/";
+  };
   # Flox
   nix.settings.trusted-substituters = [ "https://cache.flox.dev" ];
   nix.settings.trusted-public-keys = [ "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs=" ];
