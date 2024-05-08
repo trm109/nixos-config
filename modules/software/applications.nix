@@ -2,7 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     kitty
-    chromium
+    brave
     (prismlauncher.override { jdks = [ jdk8 jdk17 ]; })
     vesktop
     spotify
