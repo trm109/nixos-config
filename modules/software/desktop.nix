@@ -96,7 +96,7 @@ in
     openconnect
     openfortivpn
     hyprpaper
-
+    brightnessctl
     gtk3
   ];
 

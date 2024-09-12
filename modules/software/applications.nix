@@ -11,6 +11,8 @@
     xfce.thunar
     libreoffice
     snapshot
+    darktable
+    rclone
   ];
   #programs.ags = {
   #  enable = true;
