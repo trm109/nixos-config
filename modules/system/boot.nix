@@ -4,5 +4,5 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
 # Enable crashDump
-  boot.crashDump.enable = true;
+  #boot.crashDump.enable = true;
 }
