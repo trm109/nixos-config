@@ -4,7 +4,7 @@
   inputs = {
     # Stable Packages
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-23.11";
+      url = "github:nixos/nixpkgs/nixos-24.05";
     };
     # Unstable Packages
     nixpkgs-unstable = {
