@@ -45,38 +45,6 @@ in
     xwayland.enable = true;
   };
 
-  nixpkgs.overlays = [
-    (final: prev:
-    {
-      unstable.ags = prev.unstable.ags.overrideAttrs (old: {
-        nativeBuildInputs = old.nativeBuildInputs ++ [
-          pkgs.unstable.pkg-config
-          pkgs.unstable.meson
-          pkgs.unstable.ninja
-          pkgs.unstable.nodePackages.typescript
-          pkgs.unstable.wrapGAppsHook
-          pkgs.unstable.gobject-introspection
-        ];
-        buildInputs = old.buildInputs ++ [
-          pkgs.unstable.gjs
-          pkgs.unstable.gtk3
-          pkgs.unstable.libpulseaudio
-          pkgs.unstable.upower
-          pkgs.unstable.gnome.gnome-bluetooth
-          pkgs.unstable.gtk-layer-shell
-          pkgs.unstable.glib-networking
-          pkgs.unstable.networkmanager
-          pkgs.unstable.libdbusmenu-gtk3
-          pkgs.unstable.gvfs
-          pkgs.unstable.libsoup_3
-          pkgs.unstable.libnotify
-          pkgs.unstable.pam
-          pkgs.unstable.accountsservice
-        ];
-      });
-    })
-  ];
-
   environment.systemPackages = with pkgs; [
     #(inputs.ags.packages."x86_64-linux".default.override = {})
     unstable.ags
