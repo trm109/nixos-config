@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     steam
+    steam-run
     protonup-qt
     mangohud
     gamemode

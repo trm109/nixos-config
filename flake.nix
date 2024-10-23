@@ -26,7 +26,7 @@
     #};
   };
 
-  outputs = {self, nixpkgs, nixpkgs-unstable, ags, ...} @ inputs: {
+  outputs = {self, nixpkgs, nixpkgs-unstable, ags, home-manager, ...} @ inputs: {
     nixosConfigurations =
       let
         system = "x86_64-linux";
@@ -53,7 +53,14 @@
               overlay-unstable
             ];
           })
-
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
+              extraSpecialArgs = { inherit inputs; };
+            };
+          }
         ];
       in {
 #Asus Flow X16 2022

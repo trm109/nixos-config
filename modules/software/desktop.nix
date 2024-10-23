@@ -44,6 +44,14 @@ in
     enable = true;
     xwayland.enable = true;
   };
+  #programs.ags = {
+  #  enable = true;
+  #  extraPackages = with pkgs; [
+  #    gtksourceview
+  #    webkitgtk
+  #    accountsservice
+  #  ];
+  #};
 
   environment.systemPackages = with pkgs; [
     #(inputs.ags.packages."x86_64-linux".default.override = {})
