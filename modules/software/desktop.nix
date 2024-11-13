@@ -55,7 +55,9 @@ in
 
   environment.systemPackages = with pkgs; [
     #(inputs.ags.packages."x86_64-linux".default.override = {})
-    unstable.ags
+    #unstable.ags
+    dunst
+    eww
     waybar
     fuzzel
     lxqt.lxqt-policykit

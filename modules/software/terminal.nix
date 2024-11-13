@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    neovim
     wget
     git
     unzip
@@ -13,6 +12,7 @@
     unstable.ags
     gh
     fastfetch
+    jq
 # Fish stuff
     fishPlugins.done
     fishPlugins.fzf-fish
@@ -29,7 +29,13 @@
 
     tldr
   ];
-
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    withNodeJs = true;
+    withPython3 = true;
+    withRuby = true;
+  };
   # Enable SSH
   services.openssh.enable = true;
   networking.firewall = { 

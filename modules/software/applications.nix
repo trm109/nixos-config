@@ -15,6 +15,7 @@
     darktable
     rclone
     unstable.blender-hip
+    insomnia
   ];
   #programs.ags = {
   #  enable = true;
