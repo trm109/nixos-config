@@ -12,12 +12,20 @@
     libreoffice
     snapshot
     darktable
+    firefox
   ];
   #programs.ags = {
   #  enable = true;
   #  package = ags.packages."x86_64-linux".default;
   #};
 
+  services.flatpak = {
+    enable = true;
+    update.onActivation = true;
+    packages = [
+      { flatpakref="https://sober.vinegarhq.org/sober.flatpakref"; sha256="1pj8y1xhiwgbnhrr3yr3ybpfis9slrl73i0b1lc9q89vhip6ym2l"; }
+    ];
+  };
   #Thunar
   programs.thunar.enable = true;
   programs.xfconf.enable = true;

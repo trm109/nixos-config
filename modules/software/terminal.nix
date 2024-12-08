@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    neovim
     wget
     git
     unzip
@@ -28,8 +27,11 @@
     chezmoi
 
     tldr
+    unstable.devenv
+    unstable.direnv
+    unstable.insomnia
   ];
-
+  programs.nix-ld.enable = true;
   # Enable SSH
   services.openssh.enable = true;
   networking.firewall = { 
@@ -41,6 +43,14 @@
     { from = 1714; to = 1764; } # KDE Connect
     ];  
   };  
+
+  programs.neovim = {
+    package = pkgs.unstable.neovim-unwrapped;
+    enable = true;
+    withRuby = true;
+    withPython3 = true;
+    withNodeJs = true;
+  };
   programs.ssh.forwardX11 = true;
   programs.ssh.setXAuthLocation = true;
   programs.kdeconnect.enable = true;

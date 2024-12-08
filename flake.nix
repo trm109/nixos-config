@@ -4,11 +4,14 @@
   inputs = {
     # Stable Packages
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-23.11";
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
     # Unstable Packages
     nixpkgs-unstable = {
       url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+    nixpkgs-stable = {
+      url = "github:nixos/nixpkgs/nixos-24.11";
     };
     # Home-Manager
     home-manager = {
@@ -19,6 +22,8 @@
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
     # Hyprland
     #hyprland = {                                                          # Official Hyprland Flake
     #  url = "github:hyprwm/Hyprland";                                     # Requires "hyprland.nixosModules.default" to be added the host modules
@@ -26,7 +31,7 @@
     #};
   };
 
-  outputs = {self, nixpkgs, nixpkgs-unstable, ags, ...} @ inputs: {
+  outputs = {self, nixpkgs, nixpkgs-unstable, ags, nix-flatpak, ...} @ inputs: {
     nixosConfigurations =
       let
         system = "x86_64-linux";
@@ -53,7 +58,7 @@
               overlay-unstable
             ];
           })
-
+          nix-flatpak.nixosModules.nix-flatpak
         ];
       in {
 #Asus Flow X16 2022

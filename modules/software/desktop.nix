@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 let
   #custom-ags = pkgs.buildNpmPackage {
   #  name = "ags";
@@ -96,8 +96,9 @@ in
     openconnect
     openfortivpn
     hyprpaper
-
+    helvum
     gtk3
+    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
   ];
 
   xdg = {
@@ -105,7 +106,7 @@ in
       enable = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-          pkgs.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-hyprland
       ];
     };
     mime = {
@@ -113,5 +114,5 @@ in
     };
   };
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 }
