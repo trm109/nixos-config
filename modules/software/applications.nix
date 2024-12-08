@@ -7,12 +7,16 @@
     vesktop
     spotify
     unstable.zoom-us
+    firefox
     stremio
     xfce.thunar
     libreoffice
     snapshot
     darktable
     firefox
+    rclone
+    blender-hip
+    insomnia
   ];
   #programs.ags = {
   #  enable = true;

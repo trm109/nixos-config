@@ -12,6 +12,7 @@
     unstable.ags
     gh
     fastfetch
+    jq
 # Fish stuff
     fishPlugins.done
     fishPlugins.fzf-fish

@@ -1,10 +1,11 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    unstable.protonup-qt
-    unstable.mangohud
-    unstable.gamemode
-    #grapejuice
+    steam
+    steam-run
+    protonup-qt
+    mangohud
+    gamemode
   ];
   programs.steam = {
     enable = true;

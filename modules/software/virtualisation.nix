@@ -1,33 +1,20 @@
 { pkgs, ... }:
 {
 # Enable common container config files in /etc/containers
-  virtualisation.containers.enable = true;
   virtualisation = {
     docker = {
       enable = true;
     };
+    containers.enable = true;
     libvirtd.enable = true;
-    #podman = {
-    #  enable = true;
-
-    #  # Create a `docker` alias for podman, to use it as a drop-in replacement
-    #  dockerCompat = true;
-
-    #  # Required for containers under podman-compose to be able to talk to each other.
-    #  defaultNetwork.settings.dns_enabled = true;
-    #};
+    virtualbox.host.enable = true;
+    virtualbox.host.enableExtensionPack = true;
   };
 
-  virtualisation.virtualbox.host.enable = true;
-
-  # Enable the Oracle Extension Pack.
-  virtualisation.virtualbox.host.enableExtensionPack = true;
   # Useful otherdevelopment tools
   environment.systemPackages = with pkgs; [
     dive # look into docker image layers
-    #podman-tui # status of containers in the terminal
     docker-compose # start group of containers for dev
-    #podman-compose # start group of containers for dev
     gnome-boxes
   ];
 }
