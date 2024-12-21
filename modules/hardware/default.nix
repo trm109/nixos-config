@@ -9,5 +9,6 @@
     ./nvidia.nix
     ./printer.nix
     ./radeon.nix
+    ./razer.nix
   ];
 }

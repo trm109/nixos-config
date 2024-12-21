@@ -44,6 +44,7 @@ in
     enable = true;
     xwayland.enable = true;
   };
+  services.displayManager.ly.enable = true;
   #programs.ags = {
   #  enable = true;
   #  extraPackages = with pkgs; [
