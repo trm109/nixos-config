@@ -9,10 +9,9 @@ in
 
   config = lib.mkIf cfg.enable {
     # Enable OpenGL
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
     # enable x server drivers
     services.xserver.videoDrivers = [ "amdgpu" "nvidia"];
