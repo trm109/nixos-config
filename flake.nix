@@ -31,7 +31,7 @@
     #};
   };
 
-  outputs = {self, nixpkgs, nixpkgs-unstable, nixpkgs-stable, ags, nix-flatpak, home-manager, ...} @ inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-stable, ags, nix-flatpak, home-manager, ...} @ inputs: {
     nixosConfigurations =
       let
         system = "x86_64-linux";
