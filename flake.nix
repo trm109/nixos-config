@@ -76,6 +76,7 @@
           hostname = "asus-flow";
           hostType = "desktop";
           inherit ags;
+          inherit inputs;
         };
         inherit modules;
       };
