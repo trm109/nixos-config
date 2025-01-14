@@ -7,13 +7,12 @@
     vesktop
     spotify
     unstable.zoom-us
-    firefox
     stremio
     xfce.thunar
     libreoffice
     snapshot
     darktable
-    firefox
+    firefox # Figure out Hyprland Nvidia Crash
     rclone
     blender-hip
     insomnia
