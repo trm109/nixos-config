@@ -35,7 +35,7 @@
     nixosConfigurations =
       let
         system = "x86_64-linux";
-        overlay-unstable = final: prev: {
+        overlay-unstable = final: prev: { # enables pkgs.unstable.pkg_name access
           # unstable = nixpkgs-unstable.legacyPackages.${prev.system};
           # use this variant if unfree packages are needed:
           unstable = import nixpkgs-unstable {
@@ -55,7 +55,7 @@
           ./.
           ({ config, pkgs, ... }: {
             nixpkgs.overlays = [
-              overlay-unstable
+              overlay-unstable # Add unstable under pkgs
             ];
           })
           nix-flatpak.nixosModules.nix-flatpak

@@ -26,10 +26,8 @@
     openresolv
 
     chezmoi
-
-    tldr
     unstable.devenv
-    unstable.direnv
+    tldr
     unstable.insomnia
   ];
   programs.nix-ld.enable = true;
@@ -44,7 +42,10 @@
     { from = 1714; to = 1764; } # KDE Connect
     ];  
   };  
-
+  programs.direnv = {
+    enable = true;
+    package = pkgs.unstable.direnv;
+  };
   programs.neovim = {
     package = pkgs.unstable.neovim-unwrapped;
     enable = true;
