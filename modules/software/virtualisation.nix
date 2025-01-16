@@ -1,18 +1,20 @@
 {pkgs, ...}: {
   # Enable common container config files in /etc/containers
   virtualisation = {
-    docker = {
-      # Swap to podman eventually
+    #containers.enable = true;
+    #libvirtd.enable = true;
+    podman = {
       enable = true;
+      autoPrune.enable = true;
+      dockerCompat = true;
     };
-    containers.enable = true;
-    libvirtd.enable = true;
   };
 
   # Useful otherdevelopment tools
   environment.systemPackages = with pkgs; [
+    podman-compose
     #dive # look into docker image layers
-    docker-compose # start group of containers for dev
+    #docker-compose # start group of containers for dev
     #gnome-boxes
   ];
 }

@@ -7,6 +7,11 @@
   };
 
   nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than +5";
+    };
     settings.experimental-features = ["nix-command" "flakes"];
     extraOptions = ''
       extra-substituters = https://devenv.cachix.org
