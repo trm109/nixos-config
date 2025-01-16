@@ -18,6 +18,11 @@
   # services.postgres.enable = true;
 
   # https://devenv.sh/scripts/
+  scripts.lint.exec = ''
+    alejandra .
+    deadnix .
+    statix check
+  '';
 
   enterShell = ''
     echo "Entering NixOS devenv shell"
@@ -30,7 +35,7 @@
   # Run all bash scripts through shellcheck
   # Any other files should be run through their respective suites
   enterTest = ''
-
+    nixos-rebuild dry-build --flake /etc/nixos#viceroy
   '';
 
   # https://devenv.sh/pre-commit-hooks/
