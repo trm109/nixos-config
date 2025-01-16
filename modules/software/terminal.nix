@@ -9,10 +9,11 @@
     rustup
     btop
     tre-command
-    unstable.ags
+    ags
     gh
     fastfetch
     jq
+    yq
 # Fish stuff
     fishPlugins.done
     fishPlugins.fzf-fish
@@ -28,9 +29,9 @@
     chezmoi
 
     tldr
-    unstable.devenv
-    unstable.direnv
-    unstable.insomnia
+    devenv
+    direnv
+    insomnia
   ];
   programs.nix-ld.enable = true;
   # Enable SSH
@@ -46,7 +47,7 @@
   };  
 
   programs.neovim = {
-    package = pkgs.unstable.neovim-unwrapped;
+    package = pkgs.neovim-unwrapped;
     enable = true;
     withRuby = true;
     withPython3 = true;
