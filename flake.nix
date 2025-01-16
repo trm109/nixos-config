@@ -2,106 +2,129 @@
   description = "Saik's NixOS Flake.";
 
   inputs = {
-    # Stable Packages
+    # Default Package Channel
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
-    # Unstable Packages
+    # Unstable Package Channel
     nixpkgs-unstable = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
+    # Stable Package Channel
     nixpkgs-stable = {
       url = "github:nixos/nixpkgs/nixos-24.11";
     };
     # Home-Manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ags = {
-      url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Flatpak functionality for NixOS
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    # Better Cursors for Hyprland
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
-    # Hyprland
-    #hyprland = {                                                          # Official Hyprland Flake
-    #  url = "github:hyprwm/Hyprland";                                     # Requires "hyprland.nixosModules.default" to be added the host modules
-    #  #inputs.nixpkgs.follows = "nixpkgs-unstable";
-    #};
+    # Bar for Hyprland
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-stable, ags, nix-flatpak, home-manager, ...} @ inputs: {
-    nixosConfigurations =
-      let
-        system = "x86_64-linux";
-        overlay-unstable = final: prev: { # enables pkgs.unstable.pkg_name access
-          # unstable = nixpkgs-unstable.legacyPackages.${prev.system};
-          # use this variant if unfree packages are needed:
-          unstable = import nixpkgs-unstable {
-            inherit system;
-            # Allow unfree packages
-            config = {
-              allowUnfree = true;
-              permittedInsecurePackages = [
-                "electron-24.8.6"
-                "electron-25.9.0"
-              ];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      nixpkgs-stable,
+      nix-flatpak,
+      home-manager,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations =
+        let # this is where shared configs are put
+          system = "x86_64-linux"; # I only have x86 systems, so this is fine but ugly
+          gamers = [
+            "saik"
+            "sara"
+          ]; # Me and my goth gamer gf
+          users = [ "saik" ]; # Default, just me
+          modules = [
+            ./. # import /etc/nixos/default.nix
+            {
+              # Default nixpkgs configs for the different channels
+              nixpkgs.overlays =
+                let
+                  config = {
+                    allowUnfree = true;
+                    permittedInsecurePackages = [
+                      # TODO determine if I still need these enabled
+                      "electron-24.8.6"
+                      "electron-25.9.0"
+                    ];
+                  };
+                in
+                [
+                  (final: prev: {
+                    # stable nixpkgs overlay
+                    stable = import nixpkgs-stable {
+                      # pkgs.stable == nixpkgs-stable channel
+                      inherit system;
+                      inherit config;
+                    };
+                  })
+                  (final: prev: {
+                    # unstable nixpkgs overlay
+                    unstable = import nixpkgs-unstable {
+                      # pkgs.unstable == nixpkgs-unstable channel
+                      inherit system;
+                      inherit config;
+                    };
+                  })
+                  inputs.hyprpanel.overlay
+                ];
+            }
+            nix-flatpak.nixosModules.nix-flatpak
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useUserPackages = true;
+                useGlobalPkgs = true;
+                extraSpecialArgs = { inherit inputs; };
+              };
+            }
+          ];
+        in
+        {
+          asus-flow = nixpkgs.lib.nixosSystem {
+            # Asus Flow X16 2022
+            specialArgs = {
+              users = gamers;
+              hostname = "asus-flow";
+              hostType = "desktop";
+              inherit inputs;
             };
+            inherit modules;
           };
-
-        };
-        modules = [ 
-          ./.
-          ({ config, pkgs, ... }: {
-            nixpkgs.overlays = [
-              overlay-unstable # Add unstable under pkgs
-            ];
-          })
-          nix-flatpak.nixosModules.nix-flatpak
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-              extraSpecialArgs = { inherit inputs; };
+          viceroy = nixpkgs.lib.nixosSystem {
+            # AMD/Radeon Desktop
+            specialArgs = {
+              users = gamers;
+              hostname = "viceroy";
+              hostType = "desktop";
+              inherit inputs;
             };
-          }
-        ];
-      in {
-#Asus Flow X16 2022
-      asus-flow = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          users = [ "saik" "sara" ];
-          hostname = "asus-flow";
-          hostType = "desktop";
-          inherit ags;
-          inherit inputs;
+            inherit modules;
+          };
+          #      optipleximus-prime = nixpkgs.lib.nixosSystem { # Optiplex
+          #        specialArgs = {
+          #          inherit users;
+          #          hostname = "optipleximus-prime";
+          #          hostType = "server";
+          #        };
+          #        inherit modules;
+          #      };
+          #    };
         };
-        inherit modules;
-      };
-#AMD/Radeon Desktop
-      viceroy = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          users = [ "saik" "sara" ];
-          hostname = "viceroy";
-          hostType = "desktop";
-          inherit inputs;
-        };
-        inherit modules;
-      };
-# Optiplex
-      optipleximus-prime = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          users = [ "saik" ];
-          hostname = "optipleximus-prime";
-          hostType = "server";
-        };
-        inherit modules;
-      };
     };
-  };
-  
+
   # This allows for the gathering of prebuilt binaries, making building much faster
   nixConfig = {
     extra-substituters = [
