@@ -19,9 +19,9 @@
 
   # https://devenv.sh/scripts/
   scripts.lint.exec = ''
-    alejandra .
     deadnix .
     statix check
+    alejandra .
   '';
 
   enterShell = ''
