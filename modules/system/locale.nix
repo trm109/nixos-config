@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-{
-# font
+{pkgs, ...}: {
+  # font
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -10,7 +9,7 @@
       google-fonts
     ];
     fontconfig.defaultFonts = {
-      monospace = [ "Comic Mono" "FiraCode" "DroidSansMono" ];
+      monospace = ["Comic Mono" "FiraCode" "DroidSansMono"];
     };
   };
   time.timeZone = "America/New_York";

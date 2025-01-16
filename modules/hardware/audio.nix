@@ -1,14 +1,22 @@
-{ lib, config, pkgs, hostType, ... }:
-let
-  cfg = config.modules.hardware.audio;
-in
 {
+  lib,
+  config,
+  hostType,
+  ...
+}: let
+  cfg = config.modules.hardware.audio;
+in {
   options.modules.hardware.audio = {
-    enable = lib.mkEnableOption "Enables audio" // {
-      default = if hostType == "desktop" then true
-      	else if hostType == "server" then false
-        else true;
-    };
+    enable =
+      lib.mkEnableOption "Enables audio"
+      // {
+        default =
+          if hostType == "desktop"
+          then true
+          else if hostType == "server"
+          then false
+          else true;
+      };
   };
 
   config = lib.mkIf cfg.enable {

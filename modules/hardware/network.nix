@@ -1,12 +1,17 @@
-{ lib, config, hostname, ...}:
-let
-  cfg = config.modules.hardware.network;
-in
 {
+  lib,
+  config,
+  hostname,
+  ...
+}: let
+  cfg = config.modules.hardware.network;
+in {
   options.modules.hardware.network = {
-    enable = lib.mkEnableOption "Enables Networking" // {
-      default = true;
-    };
+    enable =
+      lib.mkEnableOption "Enables Networking"
+      // {
+        default = true;
+      };
   };
 
   config = lib.mkIf cfg.enable {
@@ -14,7 +19,7 @@ in
     networking = {
       hostName = "${hostname}";
       networkmanager.enable = true;
-      nameservers = [ "8.8.8.8" "8.8.4.4" "1.1.1.1" "1.0.0.1" ];
+      nameservers = ["8.8.8.8" "8.8.4.4" "1.1.1.1" "1.0.0.1"];
     };
 
     # Reduces startup time ??

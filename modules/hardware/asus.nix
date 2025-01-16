@@ -1,16 +1,18 @@
-{ lib, config, ...}:
-let
-  cfg = config.modules.hardware.asus;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.modules.hardware.asus;
+in {
   options.modules.hardware.asus = {
     enable = lib.mkEnableOption "Enables Asus Specific Tweaks";
   };
   config = lib.mkIf cfg.enable {
-# Enable supergfxd
+    # Enable supergfxd
     services.supergfxd.enable = true;
 
-# Enable asusd
+    # Enable asusd
     services = {
       asusd = {
         enable = true;

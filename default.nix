@@ -1,5 +1,4 @@
-{ home-manager, ... }:
-{
+{...}: {
   imports = [
     ./hosts
     ./modules

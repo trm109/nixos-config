@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 {
   #openldap
   services.openldap = {

@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./gaming.nix
     ./desktop.nix

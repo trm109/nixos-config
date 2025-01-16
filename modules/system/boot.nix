@@ -1,8 +1,7 @@
-{ ... }:
-{
-# Support wack-ass windows filesystem
-  boot.supportedFilesystems = [ "ntfs" ];
+_: {
+  # Support wack-ass windows filesystem
+  boot.supportedFilesystems = ["ntfs"];
 
-# Enable crashDump
+  # Enable crashDump
   #boot.crashDump.enable = true;
 }

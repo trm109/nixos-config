@@ -1,8 +1,8 @@
-{ pkgs, ... }:
-{
-# Enable common container config files in /etc/containers
+{pkgs, ...}: {
+  # Enable common container config files in /etc/containers
   virtualisation = {
-    docker = { # Swap to podman eventually
+    docker = {
+      # Swap to podman eventually
       enable = true;
     };
     containers.enable = true;

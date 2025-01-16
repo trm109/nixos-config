@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./amd.nix
     ./asus.nix

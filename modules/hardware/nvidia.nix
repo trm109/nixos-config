@@ -1,8 +1,10 @@
-{ lib, config, pkgs, ... }:
-let 
-  cfg = config.modules.hardware.nvidia;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.modules.hardware.nvidia;
+in {
   options.modules.hardware.nvidia = {
     enable = lib.mkEnableOption "Enable Nvidia Support";
   };
@@ -14,10 +16,9 @@ in
       enable32Bit = true;
     };
     # enable x server drivers
-    services.xserver.videoDrivers = [ "amdgpu" "nvidia"];
+    services.xserver.videoDrivers = ["amdgpu" "nvidia"];
     # Enable kernel and drivers
     hardware.nvidia = {
-
       modesetting.enable = true;
 
       nvidiaSettings = true;
@@ -27,4 +28,4 @@ in
     # for specific app gpu control
     services.switcherooControl.enable = true;
   };
-} 
+}
