@@ -50,6 +50,7 @@
     gtk3 # For gtk apps
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # Cursor
     hyprpanel # Panel and notif manager
+    upower # TODO this is a temporary fix for the battery icon
   ];
 
   xdg = {

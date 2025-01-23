@@ -7,6 +7,7 @@
     binutils_nogold
     btop
     tre-command
+    grc
     gh
     fastfetch
     jo
