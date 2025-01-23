@@ -5,6 +5,7 @@
   # https://devenv.sh/packages/
   packages = [
     pkgs.git
+    pkgs.bat # For pretty printing files :)
   ];
 
   # https://devenv.sh/languages/
@@ -25,7 +26,8 @@
   '';
 
   enterShell = ''
-    echo "Entering NixOS devenv shell"
+    echo "Entering NixOS development environment!"
+    bat TODO.md
   '';
 
   # https://devenv.sh/tasks/

@@ -14,7 +14,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-user-session";
         user = "greeter";
       };
     };
@@ -51,6 +51,7 @@
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # Cursor
     hyprpanel # Panel and notif manager
     upower # TODO this is a temporary fix for the battery icon
+    cava # Cava for Hyprpanel
   ];
 
   xdg = {

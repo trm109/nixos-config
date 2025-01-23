@@ -4,6 +4,7 @@
     git
     unzip
     gcc
+    grc # dunno what this does but fish says I need it
     binutils_nogold
     btop
     tre-command
