@@ -25,6 +25,7 @@
     tldr
     devenv
     insomnia
+    nix-search-cli
   ];
   networking.firewall = {
     enable = true;

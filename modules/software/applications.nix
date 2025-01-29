@@ -24,6 +24,7 @@
       rclone # File sync
       #blender-hip
       #insomnia # API Testing, should really use nix-shell, nix develop, or devenv
+      mailspring # Email client
     ];
   };
 

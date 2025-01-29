@@ -40,5 +40,8 @@
       enable = true;
       enableUdevRules = true;
     };
+    keyd = {
+      enable = true;
+    };
   };
 }
