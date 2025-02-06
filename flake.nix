@@ -25,6 +25,8 @@
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
     # Bar for Hyprland
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    # Chaotic packages
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   outputs = {
@@ -79,6 +81,7 @@
         }
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager
+        chaotic.homeManagerModules.default
         {
           home-manager = {
             useUserPackages = true;

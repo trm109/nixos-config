@@ -26,7 +26,9 @@
     devenv
     insomnia
     nix-search-cli
+    #waypipe # Graphical forwarding over ssh
   ];
+  services.fail2ban.enable = true;
   networking.firewall = {
     enable = true;
     allowedTCPPortRanges = [
