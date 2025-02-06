@@ -56,6 +56,7 @@
     ssh.forwardX11 = true;
     ssh.setXAuthLocation = true;
     kdeconnect.enable = true;
+    tmux.enable = true;
   };
   # Enable SSH
   services = {

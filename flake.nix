@@ -54,6 +54,7 @@
                 # TODO determine if I still need these enabled
                 "electron-24.8.6"
                 "electron-25.9.0"
+                "dotnet-sdk-6.0.428"
               ];
             };
           in [
