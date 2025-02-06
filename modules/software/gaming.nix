@@ -32,6 +32,9 @@
       #"--steam"
       #];
     };
+    gamemode = {
+      enable = true;
+    };
   };
 
   # Input Remapper
