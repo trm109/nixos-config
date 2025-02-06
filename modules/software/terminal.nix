@@ -8,6 +8,7 @@
     binutils_nogold
     btop
     tre-command
+    grc
     gh
     fastfetch
     jo
@@ -24,6 +25,7 @@
     tldr
     devenv
     insomnia
+    nix-search-cli
   ];
   networking.firewall = {
     enable = true;

@@ -1,6 +1,7 @@
 {lib, ...}: {
   imports = [./hardware-configuration.nix];
-  module = {
+
+  modules = {
     # Hardware
     hardware = {
       # Asus Specific
@@ -9,6 +10,8 @@
       nvidia.enable = lib.mkDefault true;
       # Printers
       printers.enable = true;
+      # Battery management
+      battery.enable = true;
     };
   };
 
