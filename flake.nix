@@ -35,6 +35,7 @@
     nixpkgs-stable,
     nix-flatpak,
     home-manager,
+    chaotic,
     ...
   } @ inputs: {
     nixosConfigurations = let

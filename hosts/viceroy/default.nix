@@ -7,11 +7,11 @@
   specialisation = {
     zen.configuration = {
       system.nixos.tags = ["zen"];
-      boot.kernelPackages = linuxKernel.kernels.linux_zen;
+      boot.kernelPackages = pkgs.linuxPackages_zen;
     };
     xanmod.configuration = {
       system.nixos.tags = ["xanmod"];
-      boot.kernelPackages = linuxKernel.kernels.linux_xanmod_latest;
+      boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
     };
     cachy.configuration = {
       system.nixos.tags = ["cachy"];
