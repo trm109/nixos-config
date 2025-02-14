@@ -8,6 +8,10 @@
       autoPrune.enable = true;
       dockerCompat = true;
     };
+    lxd = {
+      enable = true;
+      ui.enable = true;
+    };
   };
 
   # Useful otherdevelopment tools
