@@ -3,6 +3,7 @@
     steam-run
     protonup-qt
     mangohud
+    nvtop
     (prismlauncher.override {jdks = [jdk8 jdk17 jdk21];})
   ];
   programs = {
@@ -32,6 +33,9 @@
       #"--steam"
       #];
     };
+    gamemode = {
+      enable = true;
+    };
   };
 
   # Input Remapper
@@ -40,8 +44,8 @@
       enable = true;
       enableUdevRules = true;
     };
-    keyd = {
-      enable = true;
-    };
+    #keyd = {
+    #  enable = true;
+    #};
   };
 }

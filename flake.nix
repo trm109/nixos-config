@@ -25,6 +25,8 @@
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
     # Bar for Hyprland
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    # Chaotic packages
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   outputs = {
@@ -33,6 +35,7 @@
     nixpkgs-stable,
     nix-flatpak,
     home-manager,
+    chaotic,
     ...
   } @ inputs: {
     nixosConfigurations = let
@@ -54,6 +57,7 @@
                 # TODO determine if I still need these enabled
                 "electron-24.8.6"
                 "electron-25.9.0"
+                "dotnet-sdk-6.0.428"
               ];
             };
           in [
@@ -78,6 +82,7 @@
         }
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager
+        chaotic.homeManagerModules.default
         {
           home-manager = {
             useUserPackages = true;

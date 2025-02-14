@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   config,
   ...
@@ -18,7 +19,29 @@ in {
       #driSupport = true;
       enable32Bit = true;
     };
-
+    # Add HIP support
+    systemd.tmpfiles.rules = [
+      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    ];
     services.switcherooControl.enable = true;
+    systemd.services.lactd = {
+      enable = true;
+      description = "Radeon GPU monitor";
+      after = [
+        "syslog.target"
+        "systemd-modules-load.service"
+      ];
+
+      unitConfig = {
+        ConditionPathExists = "${pkgs.lact}/bin/lact";
+      };
+
+      serviceConfig = {
+        User = "root";
+        ExecStart = "${pkgs.lact}/bin/lact daemon";
+      };
+
+      wantedBy = ["multi-user.target"];
+    };
   };
 }
