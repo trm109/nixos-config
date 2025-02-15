@@ -11,6 +11,9 @@
       enableKwallet = true;
     };
   };
+  services = {
+    fwupd.enable = true;
+  };
   programs = {
     gnupg.agent = {
       enable = true;
