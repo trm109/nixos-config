@@ -5,6 +5,11 @@
     mangohud
     nvtop
     (prismlauncher.override {jdks = [jdk8 jdk17 jdk21];})
+    r2modman
+    weston
+    firejail
+    zenity
+    lutris
   ];
   programs = {
     steam = {
@@ -47,5 +52,16 @@
     #keyd = {
     #  enable = true;
     #};
+    udev = {
+      packages = with pkgs; [
+        game-devices-udev-rules
+      ];
+    };
+  };
+  hardware = {
+    xone.enable = true;
+    xpadneo.enable = true;
+    steam-hardware.enable = true;
+    uinput.enable = true;
   };
 }

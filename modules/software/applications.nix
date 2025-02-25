@@ -12,7 +12,7 @@
       kitty # Terminal
       brave # Chromium Browser
       vesktop # Discord, customized for linux
-      spotify # Music streaming (Look for more performant alternatives)
+      #spotify # Music streaming (Look for more performant alternatives)
       #zoom-us # Just use the web version
       # TODO fix for wayland-nvidia
       unstable.firefox # Web browser

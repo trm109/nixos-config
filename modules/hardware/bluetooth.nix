@@ -18,6 +18,10 @@ in {
           else true;
       };
   };
+  #Privacy = device
+  #JustWorksRepairing = always
+  #Class = 0x000100
+  #FastConnectable = true
   config = lib.mkIf cfg.enable {
     hardware.bluetooth = {
       enable = true;
@@ -25,6 +29,13 @@ in {
       settings = {
         General = {
           Experimental = true;
+          Privacy = "device";
+          JustWorksRepairing = "always";
+          class = "0x000100";
+          FastConnectable = true;
+          ClassicBondedOnly = false;
+          #LEAutoSecurity = false;
+          UserspaceHID = true;
         };
       };
     };
