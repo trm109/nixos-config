@@ -24,9 +24,13 @@
     statix check
     alejandra .
   '';
+  scripts.update.exec = ''
+    nix flake update --flake /etc/nixos
+  '';
 
   enterShell = ''
     echo "Entering NixOS development environment!"
+    update
     bat TODO.md
   '';
 
@@ -43,6 +47,7 @@
   # https://devenv.sh/pre-commit-hooks/
   pre-commit.hooks = {
     # Bash/sh scripts check
+    shellcheck.enable = true;
     # Find dead nix snippets
     deadnix.enable = true;
     # Opinionated nix formatting
