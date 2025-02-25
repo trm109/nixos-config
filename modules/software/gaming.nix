@@ -3,7 +3,7 @@
     steam-run
     protonup-qt
     mangohud
-    nvtop
+    nvtopPackages.full
     (prismlauncher.override {jdks = [jdk8 jdk17 jdk21];})
     r2modman
     weston
