@@ -23,31 +23,7 @@
     fishPlugins.grc
     nix-prefetch-git
     tldr
-    (
-      devenv.override
-      (
-        old: {
-          rustPlatform =
-            old.rustPlatform
-            // {
-              buildRustPackage = args:
-                old.rustPlatform.buildRustPackage (
-                  args
-                  // {
-                    verison = "1.4.0";
-                    src = old.fetchFromGitHub {
-                      owner = "trm109";
-                      repo = "devenv-no-ai";
-                      rev = "5a7d859293c24e930942b0a777bddb9551476975";
-                      hash = "sha256-BFdIoDLJnyrw/ba42Gd5cIJNagc+Rkofh5xALbhVzLg=";
-                    };
-                    cargoHash = "sha256-kJ5N34SoIUtDxHDiZKo4+eQiUf11ibvzA0/4H5olQdY=";
-                  }
-                );
-            };
-        }
-      )
-    )
+    devenv
     insomnia
     nix-search-cli
     #waypipe # Graphical forwarding over ssh
