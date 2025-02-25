@@ -23,6 +23,10 @@ in {
     systemd.tmpfiles.rules = [
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
+    environment.systemPackages = with pkgs; [
+      #rocmPackages.hip
+      lact
+    ];
     services.switcherooControl.enable = true;
     systemd.services.lactd = {
       enable = true;
