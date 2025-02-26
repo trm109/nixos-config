@@ -11,9 +11,7 @@
     grc
     gh
     fastfetch
-    jo
     jq
-    yq
     # Fish stuff
     fishPlugins.done
     fishPlugins.fzf-fish
@@ -27,6 +25,7 @@
     insomnia
     nix-search-cli
     #waypipe # Graphical forwarding over ssh
+    bluetui
   ];
 
   services.fail2ban.enable = true;

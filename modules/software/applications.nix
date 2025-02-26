@@ -11,7 +11,7 @@
     systemPackages = with pkgs; [
       kitty # Terminal
       brave # Chromium Browser
-      vesktop # Discord, customized for linux
+      webcord # Discord client
       #spotify # Music streaming (Look for more performant alternatives)
       #zoom-us # Just use the web version
       # TODO fix for wayland-nvidia
