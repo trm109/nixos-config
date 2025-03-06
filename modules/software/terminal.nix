@@ -50,17 +50,65 @@
       enable = true;
       package = pkgs.unstable.direnv;
     };
-    neovim = {
-      package = pkgs.neovim-unwrapped;
-      enable = true;
-      withRuby = true;
-      withPython3 = true;
-      withNodeJs = true;
-    };
+    #neovim = {
+    #  package = pkgs.neovim-unwrapped;
+    #  enable = true;
+    #  withRuby = true;
+    #  withPython3 = true;
+    #  withNodeJs = true;
+    #};
     ssh.forwardX11 = true;
     ssh.setXAuthLocation = true;
     kdeconnect.enable = true;
     tmux.enable = true;
+    nixvim = {
+      # All nixvim options: https://nix-community.github.io/nixvim/search/
+      enable = true;
+      # autoCmd = {};
+      # autoGroups = {};
+      # build = {};
+      # clipboard = {};
+      colorschemes = {
+        catppuccin.enable = true;
+      };
+      # userCommands = {};
+      # diagnostics = {};
+      # enableMan = true;
+      # editorConfig = {};
+      # filetype = {};
+
+      # extraFiles = {};
+      # extraConfigLua = {};
+      # extraConfigLuaPost = {};
+      # extraConfigLuaPre = {};
+      # extraConfigVim = {};
+      # extraLuaPackages
+      # extraPackages = {};
+      # extraPlugins = {};
+      # extraPython3Packages = {};
+
+      # highlight = {};
+      # highlightOverride = {};
+      # match = {};
+      # keymaps = {};
+      # keymapsOnEvents = {};
+      # luaLoader = {};
+      # performance = {};
+      plugins = {
+        neo-tree = {
+          # https://github.com/nvim-neo-tree/neo-tree.nvim
+          enable = true;
+        };
+        indent-blankline = {
+          # https://github.com/lukas-reineke/indent-blankline.nvim
+          enable = true;
+        };
+        conform-nvim = {
+          # https://github.com/stevearc/conform.nvim
+          enable = true;
+        };
+      };
+    };
   };
   # Enable SSH
   services = {

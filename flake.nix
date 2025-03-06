@@ -15,12 +15,18 @@
       url = "github:nixos/nixpkgs/nixos-24.11";
     };
     # Home-Manager
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+    #home-manager = {
+    #  url = "github:nix-community/home-manager/release-24.11";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
+    #
+    nixvim = {
+      # nixified vim setup
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Flatpak functionality for NixOS
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    #nix-flatpak.url = "github:gmodena/nix-flatpak";
     # Better Cursors for Hyprland
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
     # Bar for Hyprland
@@ -29,15 +35,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
-  outputs = {
-    nixpkgs,
-    nixpkgs-unstable,
-    nixpkgs-stable,
-    nix-flatpak,
-    home-manager,
-    chaotic,
-    ...
-  } @ inputs: {
+  outputs = {nixpkgs, ...} @ inputs: {
     nixosConfigurations = let
       # this is where shared configs are put
       system = "x86_64-linux"; # I only have x86 systems, so this is fine but ugly
@@ -61,17 +59,17 @@
               ];
             };
           in [
+            # overlays
+            # Adding pkgs.stable and pkgs.unstable to the nixpkgs overlays
             (_final: _prev: {
               # stable nixpkgs overlay
-              stable = import nixpkgs-stable {
+              stable = import inputs.nixpkgs-stable {
                 # pkgs.stable == nixpkgs-stable channel
                 inherit system;
                 inherit config;
               };
-            })
-            (_final: _prev: {
               # unstable nixpkgs overlay
-              unstable = import nixpkgs-unstable {
+              unstable = import inputs.nixpkgs-unstable {
                 # pkgs.unstable == nixpkgs-unstable channel
                 inherit system;
                 inherit config;
@@ -80,16 +78,18 @@
             inputs.hyprpanel.overlay
           ];
         }
-        nix-flatpak.nixosModules.nix-flatpak
-        home-manager.nixosModules.home-manager
-        chaotic.homeManagerModules.default
-        {
-          home-manager = {
-            useUserPackages = true;
-            useGlobalPkgs = true;
-            extraSpecialArgs = {inherit inputs;};
-          };
-        }
+        #inputs.nix-flatpak.nixosModules.nix-flatpak
+        #inputs.home-manager.nixosModules.home-manager
+        #inputs.chaotic.homeManagerModules.default
+        inputs.chaotic.nixosModules.default
+        inputs.nixvim.nixosModules.nixvim
+        #{
+        #  home-manager = {
+        #    useUserPackages = true;
+        #    useGlobalPkgs = true;
+        #    extraSpecialArgs = {inherit inputs;};
+        #  };
+        #}
       ];
     in {
       asus-flow = nixpkgs.lib.nixosSystem {
