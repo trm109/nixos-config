@@ -5,15 +5,18 @@
       allowUnfree = true;
     };
   };
+
   security = {
     pam.services.kwallet = {
       name = "kwallet";
       enableKwallet = true;
     };
   };
+
   services = {
     fwupd.enable = true;
   };
+
   programs = {
     gnupg.agent = {
       enable = true;

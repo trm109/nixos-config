@@ -14,14 +14,8 @@
     nixpkgs-stable = {
       url = "github:nixos/nixpkgs/nixos-24.11";
     };
-    # Home-Manager
-    #home-manager = {
-    #  url = "github:nix-community/home-manager/release-24.11";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
-    #
+    # nixified vim setup
     nixvim = {
-      # nixified vim setup
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -46,6 +40,11 @@
       users = ["saik"]; # Default, just me
       modules = [
         ./. # import /etc/nixos/default.nix
+        #inputs.nix-flatpak.nixosModules.nix-flatpak
+        #inputs.home-manager.nixosModules.home-manager
+        #inputs.chaotic.homeManagerModules.default
+        inputs.chaotic.nixosModules.default
+        inputs.nixvim.nixosModules.nixvim
         {
           # Default nixpkgs configs for the different channels
           nixpkgs.overlays = let
@@ -78,18 +77,6 @@
             inputs.hyprpanel.overlay
           ];
         }
-        #inputs.nix-flatpak.nixosModules.nix-flatpak
-        #inputs.home-manager.nixosModules.home-manager
-        #inputs.chaotic.homeManagerModules.default
-        inputs.chaotic.nixosModules.default
-        inputs.nixvim.nixosModules.nixvim
-        #{
-        #  home-manager = {
-        #    useUserPackages = true;
-        #    useGlobalPkgs = true;
-        #    extraSpecialArgs = {inherit inputs;};
-        #  };
-        #}
       ];
     in {
       asus-flow = nixpkgs.lib.nixosSystem {
@@ -129,16 +116,16 @@
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://nix-gaming.cachix.org"
-      "https://isabelroses.cachix.org"
-      "https://pre-commit-hooks.cachix.org"
-      "https://cache.garnix.io"
+      #"https://isabelroses.cachix.org"
+      #"https://pre-commit-hooks.cachix.org"
+      #"https://cache.garnix.io"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-      "isabelroses.cachix.org-1:mXdV/CMcPDaiTmkQ7/4+MzChpOe6Cb97njKmBQQmLPM="
-      "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      #"isabelroses.cachix.org-1:mXdV/CMcPDaiTmkQ7/4+MzChpOe6Cb97njKmBQQmLPM="
+      #"pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+      #"cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
 }
