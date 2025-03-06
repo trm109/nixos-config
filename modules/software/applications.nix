@@ -3,7 +3,7 @@
     # TODO look over more options
     sessionVariables = {
       #MOZ_USE_XINPUT2 = "1";
-      #MOZ_ENABLE_WAYLAND = "1";
+      MOZ_ENABLE_WAYLAND = "1";
       XDG_DATA_HOME = "$HOME/var/lib";
       XDG_CACHE_HOME = "$HOME/var/cache";
       XDG_VIDEOS_DIR = "$HOME/Videos/";
