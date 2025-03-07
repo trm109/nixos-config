@@ -30,7 +30,7 @@
 
   enterShell = ''
     echo "Entering NixOS development environment!"
-    update
+    #update
     bat TODO.md
   '';
 
