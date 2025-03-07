@@ -10,7 +10,7 @@
     # connect xbox controller
     initrd.kernelModules = ["xpad" "joydev" "usbhid"];
     # Using cachy kernel
-    kernelPackages = pkgs.linuxPackages_cachyos-rc;
+    kernelPackages = pkgs.linuxPackages_cachyos-lto;
   };
   services = {
     scx.enable = true; # enables sched-ext
