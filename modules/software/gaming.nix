@@ -10,6 +10,7 @@
     firejail
     zenity
     lutris
+    goverlay
   ];
   programs = {
     steam = {

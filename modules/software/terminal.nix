@@ -26,6 +26,7 @@
     nix-search-cli
     #waypipe # Graphical forwarding over ssh
     bluetui
+    bat
   ];
 
   services.fail2ban.enable = true;
@@ -83,7 +84,9 @@
       # extraConfigLuaPre = {};
       # extraConfigVim = {};
       # extraLuaPackages
-      # extraPackages = {};
+      extraPackages = [
+        pkgs.alejandra
+      ];
       # extraPlugins = {};
       # extraPython3Packages = {};
 
@@ -129,6 +132,10 @@
         };
         # LSP
         lsp = {
+          enable = true;
+        };
+        # Adds browser-style tabs
+        bufferline = {
           enable = true;
         };
       };
