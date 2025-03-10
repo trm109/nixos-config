@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   cfg = config.modules.hardware.nvidia;
@@ -22,10 +23,16 @@ in {
       modesetting.enable = true;
 
       nvidiaSettings = true;
+      open = true;
 
       package = config.boot.kernelPackages.nvidiaPackages.production;
     };
     # for specific app gpu control
-    services.switcherooControl.enable = true;
+    services.switcherooControl = {
+      enable = true;
+      package = pkgs.switcheroo-control.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [pkgs.wrapGAppsNoGuiHook];
+      });
+    };
   };
 }
