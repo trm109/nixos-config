@@ -19,14 +19,20 @@
   # services.postgres.enable = true;
 
   # https://devenv.sh/scripts/
-  scripts.lint.exec = ''
-    deadnix .
-    statix check
-    alejandra .
-  '';
-  scripts.update.exec = ''
-    nix flake update --flake /etc/nixos
-  '';
+  scripts = {
+    lint.exec = ''
+      deadnix .
+      statix check
+      alejandra .
+    '';
+    update.exec = ''
+      nix flake update --flake /etc/nixos
+    '';
+    r-nixvim.exec = ''
+      nix build .#nixosConfigurations.viceroy.config.programs.nixvim.build.package
+      ./result/bin/nvim /etc/nixos/modules/software/terminal.nix
+    '';
+  };
 
   enterShell = ''
     echo "Entering NixOS development environment!"

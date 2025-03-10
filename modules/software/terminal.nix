@@ -85,7 +85,10 @@
       # extraConfigVim = {};
       # extraLuaPackages
       extraPackages = [
+        # extra packages, things like `conform` might require
         pkgs.alejandra
+        pkgs.biome
+        pkgs.black
       ];
       # extraPlugins = {};
       # extraPython3Packages = {};
@@ -134,10 +137,15 @@
         lsp = {
           enable = true;
         };
-        # Adds browser-style tabs
+        # Adds browser-style tabs to the top
         bufferline = {
           enable = true;
         };
+        # Fuzzy file finder
+        telescope = {
+          enable = true;
+        };
+        # statusline
       };
     };
   };
