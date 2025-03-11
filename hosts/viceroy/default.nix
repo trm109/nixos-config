@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [./hardware-configuration.nix];
   ## Hardware
   ### Radeon
@@ -8,6 +8,16 @@
       razer.enable = false;
     };
   };
+  #hardware.keyboard.qmk.enable = true;
+  #Vid: 0x3434
+  #Pid: 0x02A0
+  services.udev.extraRules = ''
+    SUBSYSTEMS=="usb", ATTRSV{idVendor}=="3434", ATTRS{idProduct=="02A0", TAG+="uaccess"
+  '';
+  environment.systemPackages = with pkgs; [
+    via
+  ];
+  services.udev.packages = [pkgs.via];
 
   #specialisation = {
   #  zen.configuration = {

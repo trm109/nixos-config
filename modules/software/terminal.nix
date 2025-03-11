@@ -68,7 +68,7 @@
       # autoCmd = {};
       # autoGroups = {};
       # build = {};
-      # clipboard = {};
+      #clipboard = {};
       colorschemes = {
         catppuccin.enable = true;
       };
@@ -109,6 +109,9 @@
           # https://github.com/lukas-reineke/indent-blankline.nvim
           enable = true;
         };
+        guess-indent = {
+          enable = true;
+        };
         conform-nvim = {
           # https://github.com/stevearc/conform.nvim
           enable = true;
@@ -146,6 +149,14 @@
           enable = true;
         };
         # statusline
+        # Markdown Preview
+        markdown-preview = {
+          enable = true;
+        };
+        # Clipboard History
+        neoclip = {
+          enable = true;
+        };
       };
     };
   };
