@@ -24,7 +24,9 @@
       rclone # File sync
       #blender-hip
       #insomnia # API Testing, should really use nix-shell, nix develop, or devenv
+      cheese # simple camera
       mailspring # Email client
+      vial # QMK keyboard stuff
     ];
   };
 

@@ -68,7 +68,7 @@
       # autoCmd = {};
       # autoGroups = {};
       # build = {};
-      # clipboard = {};
+      #clipboard = {};
       colorschemes = {
         catppuccin.enable = true;
       };
@@ -120,6 +120,15 @@
         indent-blankline = {
           # https://github.com/lukas-reineke/indent-blankline.nvim
           enable = true;
+          settings = {
+            scope = {
+              enabled = true;
+            };
+          };
+        };
+        # Attempt to assume indentation style.
+        guess-indent = {
+          enable = true;
         };
         # Lightweight yet powerful formatter plugin for Neovim
         conform-nvim = {
@@ -158,12 +167,24 @@
         telescope = {
           enable = true;
         };
-        # statusline
-        lualine = {
+        # Tree sitter
+        treesitter = {
           enable = true;
         };
         # line numbers
         numbertoggle = {
+          enable = true;
+        };
+        # statusline
+        lualine = {
+          enable = true;
+        };
+        # Markdown Preview
+        markdown-preview = {
+          enable = true;
+        };
+        # Clipboard History
+        neoclip = {
           enable = true;
         };
       };
