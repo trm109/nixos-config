@@ -101,14 +101,27 @@
       # luaLoader = {};
       # performance = {};
       plugins = {
+        # Library of 40+ independent Lua modules improving overall Neovim (version 0.8 and higher) experience with minimal effort
+        mini = {
+          #https://github.com/echasnovski/mini.nvim
+          enable = true;
+        };
+        # Provides Nerd Font icons (glyphs) for use by neovim plugins
+        web-devicons = {
+          # https://github.com/nvim-tree/nvim-web-devicons
+          enable = true;
+        };
+        # Neovim plugin to manage the file system and other tree like structures.
         neo-tree = {
           # https://github.com/nvim-neo-tree/neo-tree.nvim
           enable = true;
         };
+        # Indent guides for Neovim
         indent-blankline = {
           # https://github.com/lukas-reineke/indent-blankline.nvim
           enable = true;
         };
+        # Lightweight yet powerful formatter plugin for Neovim
         conform-nvim = {
           # https://github.com/stevearc/conform.nvim
           enable = true;
@@ -146,6 +159,13 @@
           enable = true;
         };
         # statusline
+        lualine = {
+          enable = true;
+        };
+        # line numbers
+        numbertoggle = {
+          enable = true;
+        };
       };
     };
   };
