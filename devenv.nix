@@ -29,7 +29,7 @@
       nix flake update --flake /etc/nixos
     '';
     r-nixvim.exec = ''
-      nix build .#nixosConfigurations.viceroy.config.programs.nixvim.build.package
+      nix build .#nixosConfigurations.viceroy.config.programs.nixvim.build.package && \
       ./result/bin/nvim /etc/nixos/modules/software/terminal.nix
     '';
   };

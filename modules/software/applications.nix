@@ -27,6 +27,8 @@
       cheese # simple camera
       mailspring # Email client
       vial # QMK keyboard stuff
+      #((pkgs.callPackage ../../pkgs/exo.nix {}).override
+      #  {rocmSupport = true;}) # Exo
     ];
   };
 
@@ -42,5 +44,15 @@
   services = {
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
+    ollama = {
+      enable = true;
+      #package = pkgs.ollama-rocm;
+      acceleration = "rocm";
+      loadModels = ["qwen2.5-coder:3b"];
+      port = 11434;
+    };
+    open-webui = {
+      enable = true;
+    };
   };
 }

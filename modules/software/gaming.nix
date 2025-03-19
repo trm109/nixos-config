@@ -5,7 +5,52 @@
     mangohud
     nvtopPackages.full
     (prismlauncher.override {jdks = [jdk8 jdk17 jdk21];})
-    r2modman
+    #(gale.overrideAttrs (old: {
+    #  src = pkgs.fetchFromGitHub {
+    #    owner = "Kesomannen";
+    #    repo = "gale";
+    #    rev = "52e9b4bce0001d6558d87a547a2cc37beb18700d";
+    #    hash = "sha256-t/N4u23ycCZtkQbIZToxCaD0FVrOQdWDIwUjGtX2yqk=";
+    #  };
+    #  npmDeps = pkgs.fetchNpmDeps {
+    #    name = "gale-1.4.3-npm-deps";
+    #    src = pkgs.fetchFromGitHub {
+    #      owner = "Kesomannen";
+    #      repo = "gale";
+    #      rev = "52e9b4bce0001d6558d87a547a2cc37beb18700d";
+    #      hash = "sha256-t/N4u23ycCZtkQbIZToxCaD0FVrOQdWDIwUjGtX2yqk=";
+    #    };
+    #    hash = "sha256-/+NhlQydGS6+2jEjpbwycwKplVo/++wcdPiBNY3R3FI=";
+    #  };
+    #  cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
+    #    pname = "gale";
+    #    version = "1.4.3";
+    #    src = pkgs.fetchFromGitHub {
+    #      owner = "Kesomannen";
+    #      repo = "gale";
+    #      rev = "52e9b4bce0001d6558d87a547a2cc37beb18700d";
+    #      hash = "sha256-t/N4u23ycCZtkQbIZToxCaD0FVrOQdWDIwUjGtX2yqk=";
+    #    };
+    #    cargoRoot = "src-tauri";
+    #    hash = "sha256-RceQ9Zc1yMTXSZ84wTPP51F/N+F6294JixBYjCgCY/0=";
+    #  };
+    #}))
+    (r2modman.overrideAttrs (
+      let
+        src = pkgs.fetchFromGitHub {
+          owner = "ebkr";
+          repo = "r2modmanPlus";
+          rev = "59c1fe5287593eb58b4ce6d5d8f2ca59ca64bfd4";
+          hash = "sha256-1b24tclqXGx85BGFYL9cbthLScVWau2OmRh9YElfCLs=";
+        };
+      in {
+        inherit src;
+        offlineCache = pkgs.fetchYarnDeps {
+          yarnLock = "${src}/yarn.lock";
+          hash = "sha256-3SMvUx+TwUmOur/50HDLWt0EayY5tst4YANWIlXdiPQ=";
+        };
+      }
+    ))
     weston
     firejail
     zenity
