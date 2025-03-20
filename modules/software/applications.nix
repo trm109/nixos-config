@@ -29,6 +29,7 @@
       vial # QMK keyboard stuff
       #((pkgs.callPackage ../../pkgs/exo.nix {}).override
       #  {rocmSupport = true;}) # Exo
+      mpv
     ];
   };
 
@@ -48,7 +49,7 @@
       enable = true;
       #package = pkgs.ollama-rocm;
       acceleration = "rocm";
-      loadModels = ["qwen2.5-coder:3b"];
+      #loadModels = ["qwen2.5-coder:3b"];
       port = 11434;
     };
     open-webui = {
