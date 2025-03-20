@@ -32,7 +32,10 @@
 
   services = {
     # Bans IPs that show malicious signs
-    fail2ban.enable = true;
+    fail2ban = {
+      #wantedBy = lib.mkForce [];
+      enable = true;
+    };
     # Home VPN
     #headscale = {
     #  enable = true;
@@ -45,6 +48,7 @@
     #};
     # SSH server
     openssh = {
+      #wantedBy = lib.mkForce [];
       enable = true;
       settings.X11Forwarding = true;
     };

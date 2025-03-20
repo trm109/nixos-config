@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   environment = {
     # TODO look over more options
     sessionVariables = {
@@ -42,10 +46,23 @@
       thunar-volman
     ];
   };
+  systemd.services = {
+    gvfs.wantedBy = lib.mkForce [];
+    tumbler.wantedBy = lib.mkForce [];
+    ollama.wantedBy = lib.mkForce [];
+    open-webui.wantedBy = lib.mkForce [];
+  };
   services = {
-    gvfs.enable = true; # Mount, trash, and other functionalities
-    tumbler.enable = true; # Thumbnail support for images
+    gvfs = {
+      enable = true; # Mount, trash, and other functionalities
+      #wantedBy = lib.mkForce [];
+    };
+    tumbler = {
+      #wantedBy = lib.mkForce [];
+      enable = true; # Thumbnail support for images
+    };
     ollama = {
+      #wantedBy = lib.mkForce [];
       enable = true;
       #package = pkgs.ollama-rocm;
       acceleration = "rocm";
