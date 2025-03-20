@@ -34,15 +34,15 @@
     # Bans IPs that show malicious signs
     fail2ban.enable = true;
     # Home VPN
-    headscale = {
-      enable = true;
-      address = "0.0.0.0";
-      port = 443;
-      settings = {
-        dns.magic_dns = false;
-        server_url = "https://murray-hill.asuscomm.com:443";
-      };
-    };
+    #headscale = {
+    #  enable = true;
+    #  address = "0.0.0.0";
+    #  port = 443;
+    #  settings = {
+    #    dns.magic_dns = false;
+    #    server_url = "https://murray-hill.asuscomm.com:443";
+    #  };
+    #};
     # SSH server
     openssh = {
       enable = true;
