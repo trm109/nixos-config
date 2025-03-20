@@ -13,15 +13,13 @@ in {
   config = lib.mkIf cfg.enable {
     boot.initrd.kernelModules = ["amdgpu"];
     hardware = {
-      opengl = {
-        extraPackages = with pkgs; [
-          rocmPackages.clr.icd
-        ];
-      };
       graphics = {
         enable = true;
         #driSupport = true;
         enable32Bit = true;
+        extraPackages = with pkgs; [
+          rocmPackages.clr.icd
+        ];
       };
     };
     environment.systemPackages = with pkgs; [
