@@ -296,6 +296,9 @@
         #    };
         #  };
         #};
+        git-conflict = {
+          enable = true;
+        };
         avante = {
           enable = true;
           package = pkgs.vimPlugins.avante-nvim.overrideAttrs {
