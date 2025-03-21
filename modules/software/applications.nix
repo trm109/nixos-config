@@ -14,7 +14,7 @@
     };
     systemPackages = with pkgs; [
       kitty # Terminal
-      brave # Chromium Browser
+      #brave # Chromium Browser
       webcord # Discord client
       #spotify # Music streaming (Look for more performant alternatives)
       #zoom-us # Just use the web version

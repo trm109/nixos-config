@@ -32,6 +32,10 @@
       nix build .#nixosConfigurations.viceroy.config.programs.nixvim.build.package && \
       ./result/bin/nvim /etc/nixos/modules/software/terminal.nix
     '';
+    clean-gen.exec = ''
+      nix-collect-garbage -d
+      /run/current-system/bin/switch-to-configuration boot
+    '';
   };
 
   enterShell = ''
