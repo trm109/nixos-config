@@ -111,6 +111,7 @@
       opts = {
         number = true;
         relativenumber = true;
+        tabstop = 4;
       };
       # extraFiles = {};
       # extraConfigLua = {};
@@ -213,6 +214,7 @@
               yaml = ["yamlfmt"];
               ts = ["biome"];
               tsx = ["biome"];
+              go = ["gofmt" "goimports" "golines"];
             };
             notify_no_formatters = true;
             notify_on_error = true;

@@ -13,10 +13,11 @@
       XDG_VIDEOS_DIR = "$HOME/Videos/";
     };
     systemPackages = with pkgs; [
-      kitty # Terminal, hardware accelerated.
-      webcord # Discord client. # TODO fix screen sharing
-      unstable.firefox # Web browser
-      librewolf # Firefox based web browser.
+      kitty # Terminal
+      webcord # Discord client
+      #spotify # Music streaming (Look for more performant alternatives)
+      #zoom-us # Just use the web version
+      librewolf # Web browser
       stremio # Video player + Torrent streaming
       xfce.thunar # File manager
       stable.libreoffice # Office suite
@@ -29,6 +30,7 @@
       vial # QMK keyboard stuff
       mpv # Video player
       kdePackages.filelight # Disk usage analyzer
+      bitwarden # Password manager
     ];
   };
 
@@ -42,24 +44,23 @@
     ];
   };
   systemd.services = let
-    wantedBy = lib.mkForce ["graphical.target"];
-    after = lib.mkForce ["graphical.target"];
+    wantedBy = lib.mkForce [];
   in {
     gvfs = {
-      inherit wantedBy after;
+      inherit wantedBy;
     };
     tumbler = {
-      inherit wantedBy after;
+      inherit wantedBy;
     };
     ollama = {
-      inherit wantedBy after;
+      inherit wantedBy;
       environment = {
         #ROCR_VISIBLE_DEVICES = "0";
         HSA_OVERRIDE_GFX_VERSION = "11.0.0"; # Need to override my gfx version for some reason
       };
     };
     open-webui = {
-      inherit wantedBy after;
+      inherit wantedBy;
     };
   };
   services = {

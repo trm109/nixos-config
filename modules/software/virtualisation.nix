@@ -13,7 +13,9 @@
       ui.enable = true;
     };
   };
-
+  systemd.services.lxd = {
+    wantedBy = [];
+  };
   # Useful otherdevelopment tools
   environment.systemPackages = with pkgs; [
     podman-compose
