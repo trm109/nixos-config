@@ -46,22 +46,22 @@
   systemd.services = let
     wantedBy = lib.mkForce [];
   in {
-    gvfs = {
-      inherit wantedBy;
-    };
-    tumbler = {
-      inherit wantedBy;
-    };
+    #gvfs = {
+    #  inherit wantedBy;
+    #};
+    #tumbler = {
+    #  inherit wantedBy;
+    #};
     ollama = {
       inherit wantedBy;
       environment = {
-        #ROCR_VISIBLE_DEVICES = "0";
+        ROCR_VISIBLE_DEVICES = "0";
         HSA_OVERRIDE_GFX_VERSION = "11.0.0"; # Need to override my gfx version for some reason
       };
     };
-    open-webui = {
-      inherit wantedBy;
-    };
+    #open-webui = {
+    #  inherit wantedBy;
+    #};
   };
   services = {
     gvfs = {
@@ -79,15 +79,15 @@
       enable = true;
       package = pkgs.ollama-rocm;
       acceleration = "rocm";
-      loadModels = ["qwen2.5-coder:3b" "deepseek-r1:7b"];
-      port = 9000;
+      #loadModels = ["qwen2.5-coder:3b" "deepseek-r1:7b"];
+      #port = 11434; changing this breaks the cli
       openFirewall = true;
     };
-    open-webui = {
-      # Open Web UI
-      enable = true;
-      port = 9001;
-      openFirewall = true;
-    };
+    #open-webui = {
+    #  # Open Web UI
+    #  enable = true;
+    #  port = 9001;
+    #  openFirewall = true;
+    #};
   };
 }

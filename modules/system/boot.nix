@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   boot = {
     # Support wack-ass windows filesystem
     supportedFilesystems = ["ntfs"];
@@ -14,6 +18,10 @@
   };
   services = {
     scx.enable = true; # enables sched-ext
+  };
+  systemd.services = {
+    mount-pstore.enable = lib.mkDefault false;
+    ModemManager.enable = lib.mkDefault false;
   };
 
   # Enable crashDump

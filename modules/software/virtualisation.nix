@@ -8,13 +8,10 @@
       autoPrune.enable = true;
       dockerCompat = true;
     };
-    lxd = {
-      enable = true;
-      ui.enable = true;
-    };
-  };
-  systemd.services.lxd = {
-    wantedBy = [];
+    #lxd = {
+    #  enable = true;
+    #  ui.enable = true;
+    #};
   };
   # Useful otherdevelopment tools
   environment.systemPackages = with pkgs; [
