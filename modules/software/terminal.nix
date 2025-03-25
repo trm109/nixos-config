@@ -111,7 +111,23 @@
       opts = {
         number = true;
         relativenumber = true;
-        tabstop = 4;
+        tabstop = 4; # annoying to have to set this every time
+
+        #nvim-ufo
+        foldcolumn = "auto:1";
+        foldlevel = 99;
+        foldenable = true;
+        #fillchars = "[[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]";
+        foldlevelstart = 99; # temp fix for nvim-ufo
+        fillchars = {
+          eob = " ";
+          fold = " ";
+          foldopen = "";
+          foldsep = "|";
+          foldclose = "";
+        };
+        # fix annoying
+        scrolloff = 3;
       };
       # extraFiles = {};
       # extraConfigLua = {};
@@ -134,16 +150,6 @@
       # vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
       # vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
       keymaps = [
-        {
-          mode = "n";
-          key = "zR";
-          action = "require('ufo').openAllFolds()";
-        }
-        {
-          mode = "n";
-          key = "zM";
-          action = "require('ufo').closeAllFolds()";
-        }
       ];
       # keymapsOnEvents = {};
       # luaLoader = {};
@@ -151,7 +157,13 @@
       plugins = {
         # Good folding for nix!
         nvim-ufo = {
-          enable = false;
+          enable = true;
+          settings = {
+            open_fold_hl_timeout = 0;
+            provider_selector = "function(bufnr, filetype, buftype)
+              return {'treesitter', 'indent'}
+            end";
+          };
         };
         # Treesitter, a syntax tree generator
         treesitter = {
@@ -250,8 +262,73 @@
         };
         # CMP - A completion plugin for neovim coded in Lua.
         # https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
-        cmp = {
+        #cmp = {
+        #  enable = true;
+        #};
+        blink-cmp = {
           enable = true;
+          settings = {
+            appearance = {
+              nerd_font_variant = "mono";
+              use_nvim_cmp_as_default = true;
+            };
+            completion = {
+              accept = {
+                auto_brackets = {
+                  enabled = true;
+                  semantic_token_resolution = {
+                    enabled = false;
+                  };
+                };
+              };
+              documentation = {
+                auto_show = true;
+              };
+              menu.draw.components.kind_icon = {
+                ellipsis = false;
+                text.__raw = ''
+                  function(ctx)
+                    local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+                    return kind_icon
+                  end
+                '';
+                highlight.__raw = ''
+                  function(ctx)
+                    local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                    return hl
+                  end
+                '';
+              };
+            };
+            keymap = {
+              preset = "enter";
+              "<Tab>" = [
+                "select_next"
+                "fallback"
+              ];
+              "<S-Tab>" = [
+                "select_prev"
+                "fallback"
+              ];
+            };
+            signature = {
+              enabled = true;
+            };
+            sources = {
+              default = [
+                "lsp"
+                "path"
+                "snippets"
+                "buffer"
+              ];
+              providers = {
+                buffer = {
+                  max_items = 5;
+                  min_keyword_length = 3;
+                };
+              };
+            };
+          };
         };
         # GitHub Copilot
         copilot-lua = {
@@ -310,7 +387,6 @@
                   sha256 = "sha256-UXt8c2esrAE9SzaQGRGZ4hdkKsYuo1Ftvn+JR80W15I=";
                 };
 
-                #cargoHash = "sha256-7W7uuyzqTTlvZAkeRYRIfkxYVbOv5h7elH8noZe1VMQ=";
                 useFetchCargoVendor = true;
                 cargoHash = "sha256-pmnMoNdaIR0i+4kwW3cf01vDQo39QakTCEG9AXA86ck=";
 
@@ -327,7 +403,6 @@
                 buildFeatures = ["luajit"];
 
                 checkFlags = [
-                  # Disabled because they access the network.
                   "--skip=test_hf"
                   "--skip=test_public_url"
                   "--skip=test_roundtrip"
@@ -348,7 +423,6 @@
               endpoint = "localhost:11434";
               model = "qwen2.5-coder:3b";
               #options = {
-              #  #disable_tools = true;
               #  num_ctx = 16384;
               #};
             };
@@ -366,31 +440,6 @@
             hash = "sha256-IkJ9KRrikJZvijjfqgnJ2/QYAuF8KX2/zFX1oUbE3aI=";
           };
         })
-        #(pkgs.vimUtils.buildVimPlugin {
-        #  name = "avante";
-        #  src = pkgs.fetchFromGitHub {
-        #    owner = "yetone";
-        #    repo = "avante.nvim";
-        #    rev = "1c8cac1958cdf04b65942f23fa5a14cc4cfae44e";
-        #    hash = "sha256-UXt8c2esrAE9SzaQGRGZ4hdkKsYuo1Ftvn+JR80W15I=";
-        #  };
-        #})
-        #((pkgs.vimPlugins.avante-nvim.override {
-        #    })
-        #  .overrideAttrs (oldAttrs: {
-        #    src = pkgs.fetchFromGitHub {
-        #      owner = "yetone";
-        #      repo = "avante.nvim";
-        #      rev = "1c8cac1958cdf04b65942f23fa5a14cc4cfae44e";
-        #      sha256 = "sha256-UXt8c2esrAE9SzaQGRGZ4hdkKsYuo1Ftvn+JR80W15I=";
-        #    };
-        #    nvimSkipModule = oldAttrs.nvimSkipModule ++ ["avante.providers.ollama" "avante.providers.vertex_claude"];
-        #  }))
-        #(pkgs.vimPlugins.img-clip-nvim.override
-        #  {
-        #    plugin = pkgs.vimPlugins.img-clip-nvim;
-        #    config = "lua require('img-clip').setup()";
-        #  })
         pkgs.vimPlugins.img-clip-nvim
       ];
     };

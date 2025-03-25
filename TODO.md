@@ -7,3 +7,5 @@
     - Create a flake lib for symlinking from `/etc/nixos/*/program_name/dot-config-name/ -> ~/.dot-config-name/`
         - Initialize individual program dot-configs as git submodules.
             - .gitignore presets for things like `fish` where if you clone onto another machine, it becomes very upset.
+- Notifications have default timeout
+- ollama dynamic gfx version
