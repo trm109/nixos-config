@@ -9,16 +9,6 @@
     xwayland.enable = true;
     withUWSM = true;
     package = pkgs.hyprland;
-    #package =
-    #  (import (builtins.fetchGit {
-    #    # Descriptive name to make the store path easier to identify
-    #    name = "my-old-revision";
-    #    url = "https://github.com/NixOS/nixpkgs/";
-    #    ref = "refs/heads/nixpkgs-unstable";
-    #    rev = "21808d22b1cda1898b71cf1a1beb524a97add2c4";
-    #  }) {system = "x86_64-linux";})
-    #  .hyprland;
-
     #portalPackage = pkgs.stable.xdg-desktop-portal-hyprland;
   };
   #services.desktopManager.plasma6.enable = true;
@@ -35,21 +25,7 @@
       };
     };
   };
-  #programs.ags = {
-  #  enable = true;
-  #  extraPackages = with pkgs; [
-  #    gtksourceview
-  #    webkitgtk
-  #    accountsservice
-  #  ];
-  #};
   environment.systemPackages = with pkgs; [
-    #(inputs.ags.packages."x86_64-linux".default.override = {})
-    #ags
-    #dunst
-    #eww
-    #stable.waybar
-    #mako # Notifications
     fuzzel # App launcher
     lxqt.lxqt-policykit # Polkit
     pavucontrol # For audio control

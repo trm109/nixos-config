@@ -65,9 +65,28 @@
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers.
       extest.enable = true; # Whether to enable Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
       protontricks.enable = true; # Enable ProtonTricks
+      gamescopeSession = {
+        enable = true;
+        args = [
+          "--output-width"
+          "3840"
+          "--output-height"
+          "2160"
+          "--framerate-limit"
+          "60"
+          "--steam"
+          "--hdr-enabled"
+          "--hdr-itm-enable"
+          "--prefer-output"
+          "DP-1"
+          "--prefer-vk-device"
+          "1002:744c"
+        ];
+      };
     };
     gamescope = {
       enable = true;
+      #package = pkgs.gamescope-wsi; # wayland support
       #env = {
       #ENABLE_GAMESCOPE_WSI = "1";
       #DXVK_HDR = "1";

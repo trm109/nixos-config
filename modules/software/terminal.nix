@@ -3,15 +3,15 @@
     wget
     git
     unzip
-    gcc
-    grc # dunno what this does but fish says I need it
+    gcc #
+    #grc # Coloriser, required by fish
     binutils_nogold
     btop
     tre-command
     grc
     gh
     fastfetch
-    jq
+    #jq # json parser
     # Fish stuff
     fishPlugins.done
     fishPlugins.fzf-fish
@@ -130,24 +130,45 @@
       # highlight = {};
       # highlightOverride = {};
       # match = {};
-      # keymaps = {};
+      # vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+      # vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+      keymaps = [
+        {
+          mode = "n";
+          key = "zR";
+          action = "require('ufo').openAllFolds()";
+        }
+        {
+          mode = "n";
+          key = "zM";
+          action = "require('ufo').closeAllFolds()";
+        }
+      ];
       # keymapsOnEvents = {};
       # luaLoader = {};
       # performance = {};
       plugins = {
+        # Good folding for nix!
+        nvim-ufo = {
+          enable = false;
+        };
         # Treesitter, a syntax tree generator
         treesitter = {
           enable = true;
         };
+        # pretty UI (box) for Neovim
+        #TODO Replace with snacks
         dressing = {
           enable = true;
         };
+        #  UI Component Library for Neovim.
         nui = {
           enable = true;
         };
         web-devicons = {
           enable = true;
         };
+        # "Swiss Army knife" among Neovim plugins, bunch of libs
         mini = {
           enable = true;
         };
@@ -197,7 +218,7 @@
             notify_on_error = true;
           };
         };
-        # LSP
+        # Language Server Protocol support for Neovim
         lsp = {
           enable = true;
         };
@@ -226,6 +247,7 @@
           enable = true;
         };
         # CMP - A completion plugin for neovim coded in Lua.
+        # https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
         cmp = {
           enable = true;
         };
@@ -252,57 +274,12 @@
             ];
           };
         };
-        # Cursor AI helper
-        #avante = {
-        #  enable = true;
-        #  package = pkgs.vimPlugins.avante-nvim;
-        #  settings = {
-        #    provider = "ollama";
-        #    vendors = {
-        #      ollama = {
-        #        __inherited_from = "openai";
-        #        endpoint = "http://127.0.0.1:11434/v1";
-        #        model = "qwen2.5-coder:3b";
-        #        disable_tools = true;
-        #      };
-        #    };
-        #    diff = {
-        #      autojump = true;
-        #      debug = false;
-        #      list_opener = "copen";
-        #    };
-        #    highlights = {
-        #      diff = {
-        #        current = "DiffText";
-        #        incoming = "DiffAdd";
-        #      };
-        #    };
-        #    hints = {
-        #      enabled = true;
-        #    };
-        #    mappings = {
-        #      diff = {
-        #        both = "cb";
-        #        next = "]x";
-        #        none = "c0";
-        #        ours = "co";
-        #        prev = "[x";
-        #        theirs = "ct";
-        #      };
-        #    };
-        #    windows = {
-        #      sidebar_header = {
-        #        align = "center";
-        #        rounded = true;
-        #      };
-        #      width = 30;
-        #      wrap = true;
-        #    };
-        #  };
-        #};
+        # Conflict marker stuff
+        # TODO make it a 'conflict handler suite' type thing
         git-conflict = {
           enable = true;
         };
+        # Cursor-like ai promopt
         avante = {
           enable = true;
           package = pkgs.vimPlugins.avante-nvim.overrideAttrs {

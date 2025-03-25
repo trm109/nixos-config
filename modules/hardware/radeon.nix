@@ -9,7 +9,7 @@ in {
   options.modules.hardware.radeon = {
     enable = lib.mkEnableOption "Enable Radeon Support";
   };
-
+  # TODO move both nvidia and radeon to graphics.nix
   config = lib.mkIf cfg.enable {
     boot.initrd.kernelModules = ["amdgpu"];
     hardware = {
@@ -19,6 +19,7 @@ in {
         enable32Bit = true;
         extraPackages = with pkgs; [
           rocmPackages.clr.icd
+          gamescope-wsi
         ];
       };
     };

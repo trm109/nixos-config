@@ -1,6 +1,6 @@
 {
   #openldap
-  services.openldap = {
-    enable = true;
-  };
+  #services.openldap = {
+  #  enable = true;
+  #};
 }

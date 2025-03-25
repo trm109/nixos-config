@@ -13,27 +13,22 @@
       XDG_VIDEOS_DIR = "$HOME/Videos/";
     };
     systemPackages = with pkgs; [
-      kitty # Terminal
-      #brave # Chromium Browser
-      webcord # Discord client
-      #spotify # Music streaming (Look for more performant alternatives)
-      #zoom-us # Just use the web version
-      # TODO fix for wayland-nvidia
+      kitty # Terminal, hardware accelerated.
+      webcord # Discord client. # TODO fix screen sharing
       unstable.firefox # Web browser
+      librewolf # Firefox based web browser.
       stremio # Video player + Torrent streaming
       xfce.thunar # File manager
       stable.libreoffice # Office suite
       snapshot # Simple camera
       darktable # Photo editing
       rclone # File sync
-      #blender-hip
-      #insomnia # API Testing, should really use nix-shell, nix develop, or devenv
+      blender-hip
       cheese # simple camera
       mailspring # Email client
       vial # QMK keyboard stuff
-      #((pkgs.callPackage ../../pkgs/exo.nix {}).override
-      #  {rocmSupport = true;}) # Exo
-      mpv
+      mpv # Video player
+      kdePackages.filelight # Disk usage analyzer
     ];
   };
 
@@ -46,31 +41,52 @@
       thunar-volman
     ];
   };
-  systemd.services = {
-    gvfs.wantedBy = lib.mkForce [];
-    tumbler.wantedBy = lib.mkForce [];
-    ollama.wantedBy = lib.mkForce [];
-    open-webui.wantedBy = lib.mkForce [];
+  systemd.services = let
+    wantedBy = lib.mkForce ["graphical.target"];
+    after = lib.mkForce ["graphical.target"];
+  in {
+    gvfs = {
+      inherit wantedBy after;
+    };
+    tumbler = {
+      inherit wantedBy after;
+    };
+    ollama = {
+      inherit wantedBy after;
+      environment = {
+        #ROCR_VISIBLE_DEVICES = "0";
+        HSA_OVERRIDE_GFX_VERSION = "11.0.0"; # Need to override my gfx version for some reason
+      };
+    };
+    open-webui = {
+      inherit wantedBy after;
+    };
   };
   services = {
     gvfs = {
+      # Gnome Virtual File System
+      # Allows applications to access files on local and remote file systems
+      # Includes mounting of drives
       enable = true; # Mount, trash, and other functionalities
-      #wantedBy = lib.mkForce [];
     };
     tumbler = {
-      #wantedBy = lib.mkForce [];
-      enable = true; # Thumbnail support for images
+      # Requests thumbnails for files
+      enable = true;
     };
     ollama = {
-      #wantedBy = lib.mkForce [];
+      # Local LLM runner
       enable = true;
-      #package = pkgs.ollama-rocm;
+      package = pkgs.ollama-rocm;
       acceleration = "rocm";
-      #loadModels = ["qwen2.5-coder:3b"];
-      port = 11434;
+      loadModels = ["qwen2.5-coder:3b" "deepseek-r1:7b"];
+      port = 9000;
+      openFirewall = true;
     };
     open-webui = {
+      # Open Web UI
       enable = true;
+      port = 9001;
+      openFirewall = true;
     };
   };
 }
