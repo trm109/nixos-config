@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   environment = {
     # TODO look over more options
     sessionVariables = {
@@ -14,12 +10,10 @@
     };
     systemPackages = with pkgs; [
       kitty # Terminal
-      #brave # Chromium Browser
       webcord # Discord client
       #spotify # Music streaming (Look for more performant alternatives)
       #zoom-us # Just use the web version
-      # TODO fix for wayland-nvidia
-      unstable.firefox # Web browser
+      librewolf # Web browser
       stremio # Video player + Torrent streaming
       xfce.thunar # File manager
       stable.libreoffice # Office suite
@@ -34,6 +28,7 @@
       #((pkgs.callPackage ../../pkgs/exo.nix {}).override
       #  {rocmSupport = true;}) # Exo
       mpv
+      bitwarden
     ];
   };
 
@@ -46,12 +41,12 @@
       thunar-volman
     ];
   };
-  systemd.services = {
-    gvfs.wantedBy = lib.mkForce [];
-    tumbler.wantedBy = lib.mkForce [];
-    ollama.wantedBy = lib.mkForce [];
-    open-webui.wantedBy = lib.mkForce [];
-  };
+  #systemd.services = {
+  #  gvfs.wantedBy = lib.mkForce [];
+  #  tumbler.wantedBy = lib.mkForce [];
+  #  ollama.wantedBy = lib.mkForce [];
+  #  open-webui.wantedBy = lib.mkForce [];
+  #};
   services = {
     gvfs = {
       enable = true; # Mount, trash, and other functionalities
