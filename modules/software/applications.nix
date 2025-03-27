@@ -18,6 +18,7 @@
       #spotify # Music streaming (Look for more performant alternatives)
       #zoom-us # Just use the web version
       librewolf # Web browser
+      brave
       stremio # Video player + Torrent streaming
       xfce.thunar # File manager
       stable.libreoffice # Office suite

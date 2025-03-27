@@ -12,6 +12,7 @@
       printers.enable = true;
       # Battery management
       battery.enable = true;
+      razer.enable = false;
     };
   };
 
