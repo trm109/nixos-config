@@ -124,6 +124,12 @@
         game-devices-udev-rules
       ];
     };
+    #sunshine = {
+    #  enable = true;
+    #  autoStart = true;
+    #  capSysAdmin = true;
+    #  openFirewall = true;
+    #};
   };
   hardware = {
     #xone.enable = true;
