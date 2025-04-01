@@ -35,13 +35,13 @@ in
             pkgs.ollama;
         openFirewall = config.modules.services.network.enable;
       };
-      open-webui = {
-        # browser-accessible chat interface for ollama
-        enable = true;
-        # TODO fix this, currently broken.
-        # port = 8080;
-        openFirewall = config.modules.services.network.enable;
-      };
+      #open-webui = {
+      #  # browser-accessible chat interface for ollama
+      #  enable = true;
+      #  # TODO fix this, currently broken.
+      #  # port = 8080;
+      #  openFirewall = config.modules.services.network.enable;
+      #};
     };
     systemd.services = {
       ollama = {

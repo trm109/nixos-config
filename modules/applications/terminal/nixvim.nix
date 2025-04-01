@@ -146,13 +146,18 @@ in
                 timeout_ms = 500;
               };
               formatters_by_ft = {
+                "_" = [
+                  "squeeze_blanks"
+                  "trim_whitespace"
+                  "trim_newlines"
+                ];
                 css = [ "prettier" ];
                 html = [ "prettier" ];
                 json = [ "prettier" ];
                 just = [ "just" ];
                 lua = [ "stylua" ];
                 nix = [
-                  "alejandra"
+                  #"alejandra"
                   "nixfmt"
                 ];
                 ruby = [ "rubocop" ];
@@ -171,6 +176,7 @@ in
               notify_on_error = true;
             };
           };
+
           # Language Server Protocol support for Neovim
           lsp = {
             enable = true;

@@ -29,9 +29,10 @@
     update.exec = ''
       nix flake update --flake /etc/nixos
     '';
+    # TODO make hostname variable
     r-nixvim.exec = ''
       nix build .#nixosConfigurations.viceroy.config.programs.nixvim.build.package && \
-      ./result/bin/nvim /etc/nixos/modules/software/terminal.nix
+      ./result/bin/nvim ./flake.nix
     '';
     clean-gen.exec = ''
       nix-collect-garbage -d
@@ -69,6 +70,10 @@
     nixfmt-rfc-style.enable = true;
     # Find nix anti-patterns
     statix.enable = true;
+    # remove trailing whitespaces
+    trim-trailing-whitespace.enable = true;
+    # removes newlines at the end of the file
+    end-of-file-fixer.enable = true;
   };
   # See full reference at https://devenv.sh/reference/options/
 }
