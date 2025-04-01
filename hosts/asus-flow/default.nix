@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [./hardware-configuration.nix];
 
   modules = {
@@ -15,6 +19,9 @@
       razer.enable = false;
     };
   };
+
+  boot.crashDump.enable = true;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
 
   specialisation = {
     # Low power, high efficiency
