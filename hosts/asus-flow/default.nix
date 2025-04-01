@@ -1,33 +1,37 @@
+{ lib, pkgs, ... }:
 {
-  pkgs,
-  lib,
-  ...
-}: {
-  imports = [./hardware-configuration.nix];
+  imports = [ ./hardware-configuration.nix ];
 
   modules = {
-    # Hardware
-    hardware = {
-      # Asus Specific
-      asus.enable = true;
-      # Nvidia (CONDITIONAL, specialisation based)
-      nvidia.enable = lib.mkDefault true;
-      # Printers
-      printers.enable = true;
-      # Battery management
-      battery.enable = true;
-      razer.enable = false;
+    applications = {
+      desktop.wayland.hyprland.enable = true;
+      graphical.gaming.enable = true;
     };
+    firmware = {
+      asus.enable = true;
+    };
+    # Hardware
+    #hardware = {
+    #  # Asus Specific
+    #  asus.enable = true;
+    #  # Nvidia (CONDITIONAL, specialisation based)
+    #  nvidia.enable = lib.mkDefault true;
+    #  # Printers
+    #  printers.enable = true;
+    #  # Battery management
+    #  battery.enable = true;
+    #  razer.enable = false;
+    #};
   };
 
   boot.crashDump.enable = true;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
+  boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_14;
 
   specialisation = {
     # Low power, high efficiency
     efficience.configuration = {
-      system.nixos.tags = ["efficience"];
-      modules.hardware.nvidia.enable = false;
+      system.nixos.tags = [ "efficience" ];
+      modules.firmware.gpu.nvidia.enable = false;
     };
   };
 }

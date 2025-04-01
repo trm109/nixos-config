@@ -1,7 +1,0 @@
-{...}: {
-  imports = [
-    ./hosts
-    ./modules
-    ./users
-  ];
-}

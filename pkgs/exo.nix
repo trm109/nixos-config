@@ -17,11 +17,11 @@ python3Packages.buildPythonApplication {
     hash = "sha256-MYQz30rbgdXjNahOiM3PhGQIy4oDuspiDJ7l+0G1eaM=";
   };
 
-  build-system = with python3Packages; [setuptools];
+  build-system = with python3Packages; [ setuptools ];
 
   pythonRelaxDeps = true;
 
-  pythonRemoveDeps = ["uuid"];
+  pythonRemoveDeps = [ "uuid" ];
 
   dependencies = with python3Packages; [
     aiohttp
@@ -46,16 +46,15 @@ python3Packages.buildPythonApplication {
     tqdm
     transformers
     #tinygrad
-    ((tinygrad.override {inherit rocmSupport;}).overridePythonAttrs
-      (old: {
-        src = fetchFromGitHub {
-          owner = "tinygrad";
-          repo = "tinygrad";
-          rev = "1ea4876dfa2646123a9cbff5a82a76582909165f";
-          hash = "sha256-j0vG4V+OMe2PD4Zo4UgdfFGbOpCLtceatibVbghpW8o=";
-        };
-        disabledTests = old.disabledTests ++ ["test_quant_128"];
-      }))
+    ((tinygrad.override { inherit rocmSupport; }).overridePythonAttrs (old: {
+      src = fetchFromGitHub {
+        owner = "tinygrad";
+        repo = "tinygrad";
+        rev = "1ea4876dfa2646123a9cbff5a82a76582909165f";
+        hash = "sha256-j0vG4V+OMe2PD4Zo4UgdfFGbOpCLtceatibVbghpW8o=";
+      };
+      disabledTests = old.disabledTests ++ [ "test_quant_128" ];
+    }))
     # >   - nuitka not installed
     #>   - opencv-python not installed
     #>   - scapy not installed
@@ -76,8 +75,11 @@ python3Packages.buildPythonApplication {
       };
 
       pyproject = true;
-      build-system = with python3Packages; [cython setuptools];
-      buildInputs = [libdrm];
+      build-system = with python3Packages; [
+        cython
+        setuptools
+      ];
+      buildInputs = [ libdrm ];
 
       postPatch = ''
         substituteInPlace ./setup.py \
@@ -87,8 +89,8 @@ python3Packages.buildPythonApplication {
       meta = {
         homepage = "https://github.com/mark9064/pyamdgpuinfo";
         description = "Python module that provides AMD GPU information";
-        licenses = with lib.licenses; [gpl3Only];
-        platforms = ["x86_64-linux"];
+        licenses = with lib.licenses; [ gpl3Only ];
+        platforms = [ "x86_64-linux" ];
       };
     })
   ];
@@ -114,7 +116,7 @@ python3Packages.buildPythonApplication {
     description = "Run your own AI cluster at home with everyday devices";
     homepage = "https://github.com/exo-explore/exo";
     license = lib.licenses.gpl3Only;
-    maintainers = with lib.maintainers; [GaetanLepage];
+    maintainers = with lib.maintainers; [ GaetanLepage ];
     mainProgram = "exo";
   };
 }

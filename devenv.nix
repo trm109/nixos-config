@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # https://devenv.sh/basics/
   #env.GREET = "devenv";
 
@@ -23,18 +24,22 @@
     lint.exec = ''
       deadnix .
       statix check
-      alejandra .
+      nixfmt .
     '';
     update.exec = ''
       nix flake update --flake /etc/nixos
     '';
+    # TODO make hostname variable
     r-nixvim.exec = ''
       nix build .#nixosConfigurations.viceroy.config.programs.nixvim.build.package && \
-      ./result/bin/nvim /etc/nixos/modules/software/terminal.nix
+      ./result/bin/nvim ./flake.nix
     '';
     clean-gen.exec = ''
       nix-collect-garbage --delete-older-than +6
       /run/current-system/bin/switch-to-configuration boot
+    '';
+    repl.exec = ''
+      nix repl --expr "builtins.getFlake \"$PWD\""
     '';
   };
 
@@ -61,9 +66,14 @@
     # Find dead nix snippets
     deadnix.enable = true;
     # Opinionated nix formatting
-    alejandra.enable = true;
+    #alejandra.enable = true;
+    nixfmt-rfc-style.enable = true;
     # Find nix anti-patterns
     statix.enable = true;
+    # remove trailing whitespaces
+    trim-trailing-whitespace.enable = true;
+    # removes newlines at the end of the file
+    end-of-file-fixer.enable = true;
   };
   # See full reference at https://devenv.sh/reference/options/
 }

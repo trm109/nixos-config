@@ -29,87 +29,128 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
-  outputs = {nixpkgs, ...} @ inputs: {
-    nixosConfigurations = let
-      # this is where shared configs are put
-      system = "x86_64-linux"; # I only have x86 systems, so this is fine but ugly
-      gamers = [
-        "saik"
-        "sara"
-      ]; # Me and my goth gamer gf
-      users = ["saik"]; # Default, just me
-      modules = [
-        ./. # import /etc/nixos/default.nix
-        #inputs.nix-flatpak.nixosModules.nix-flatpak
-        #inputs.home-manager.nixosModules.home-manager
-        #inputs.chaotic.homeManagerModules.default
-        inputs.chaotic.nixosModules.default
-        inputs.nixvim.nixosModules.nixvim
-        {
-          # Default nixpkgs configs for the different channels
-          nixpkgs.overlays = let
-            config = {
-              allowUnfree = true;
-              permittedInsecurePackages = [
-                # TODO determine if I still need these enabled
-                "electron-24.8.6"
-                "electron-25.9.0"
-                "dotnet-sdk-6.0.428"
-              ];
-            };
-          in [
-            # overlays
-            # Adding pkgs.stable and pkgs.unstable to the nixpkgs overlays
-            (_final: _prev: {
-              # stable nixpkgs overlay
-              stable = import inputs.nixpkgs-stable {
-                # pkgs.stable == nixpkgs-stable channel
-                inherit system;
-                inherit config;
-              };
-              # unstable nixpkgs overlay
-              unstable = import inputs.nixpkgs-unstable {
-                # pkgs.unstable == nixpkgs-unstable channel
-                inherit system;
-                inherit config;
-              };
-            })
-            inputs.hyprpanel.overlay
+  outputs =
+    { nixpkgs, ... }@inputs:
+    {
+      nixosConfigurations =
+        let
+          # this is where shared configs are put
+          system = "x86_64-linux"; # I only have x86 systems, so this is fine but ugly
+          gamers = [
+            "saik"
+            "sara"
+          ]; # Me and my goth gamer gf
+          users = [ "saik" ]; # Default, just me
+          modules = [
+            ./hosts
+            ./modules
+            ./users
+            inputs.chaotic.nixosModules.default
+            inputs.nixvim.nixosModules.nixvim
+            {
+              # Default nixpkgs configs for the different channels
+              nixpkgs.overlays =
+                let
+                  config = {
+                    allowUnfree = true;
+                    permittedInsecurePackages = [
+                      # TODO determine if I still need these enabled
+                      "electron-24.8.6"
+                      "electron-25.9.0"
+                      "dotnet-sdk-6.0.428"
+                    ];
+                  };
+                in
+                [
+                  # overlays
+                  # Adding pkgs.stable and pkgs.unstable to the nixpkgs overlays
+                  (_final: _prev: {
+                    # stable nixpkgs overlay
+                    stable = import inputs.nixpkgs-stable {
+                      # pkgs.stable == nixpkgs-stable channel
+                      inherit system;
+                      inherit config;
+                    };
+                    # unstable nixpkgs overlay
+                    unstable = import inputs.nixpkgs-unstable {
+                      # pkgs.unstable == nixpkgs-unstable channel
+                      inherit system;
+                      inherit config;
+                    };
+                  })
+                  inputs.hyprpanel.overlay
+                ];
+            }
           ];
-        }
-      ];
-    in {
-      asus-flow = nixpkgs.lib.nixosSystem {
-        # Asus Flow X16 2022
-        specialArgs = {
-          users = gamers;
-          hostname = "asus-flow";
-          hostType = "desktop";
-          inherit inputs;
+        in
+        {
+          asus-flow = nixpkgs.lib.nixosSystem {
+            # Asus Flow X16 2022
+            specialArgs = {
+              users = gamers;
+              hostname = "asus-flow";
+              hostType = "desktop";
+              inherit inputs;
+              hw = {
+                formFactor = "laptop";
+                gpus = [
+                  {
+                    type = "discrete";
+                    vendor = "nvidia";
+                    model = "3060";
+                  }
+                  {
+                    type = "integrated";
+                    vendor = "amd";
+                    model = "680M";
+                  }
+                ];
+                cpu = {
+                  vendor = "amd";
+                };
+              };
+            };
+            inherit modules;
+          };
+          viceroy = nixpkgs.lib.nixosSystem {
+            # AMD/Radeon Desktop
+            specialArgs = {
+              users = gamers;
+              hostname = "viceroy";
+              hostType = "desktop";
+              inherit inputs;
+              hw = {
+                formFactor = "desktop";
+                gpus = [
+                  {
+                    type = "discrete";
+                    vendor = "amd";
+                    model = "7900 GRE";
+                  }
+                  {
+                    type = "integrated";
+                    vendor = "amd";
+                    model = "Raphael"; # TODO find an easier way to get this. clinfo?
+                  }
+                ];
+                cpu = {
+                  vendor = "amd";
+                };
+              };
+            };
+            inherit modules;
+          };
+          #      optipleximus-prime = nixpkgs.lib.nixosSystem { # Optiplex
+          #        specialArgs = {
+          #          inherit users;
+          #          hostname = "optipleximus-prime";
+          #          hostType = "server";
+          #        };
+          #        inherit modules;
+          #      };
+          #    };
         };
-        inherit modules;
-      };
-      viceroy = nixpkgs.lib.nixosSystem {
-        # AMD/Radeon Desktop
-        specialArgs = {
-          users = gamers;
-          hostname = "viceroy";
-          hostType = "desktop";
-          inherit inputs;
-        };
-        inherit modules;
-      };
-      #      optipleximus-prime = nixpkgs.lib.nixosSystem { # Optiplex
-      #        specialArgs = {
-      #          inherit users;
-      #          hostname = "optipleximus-prime";
-      #          hostType = "server";
-      #        };
-      #        inherit modules;
-      #      };
-      #    };
     };
-  };
 
   # This allows for the gathering of prebuilt binaries, making building much faster
   nixConfig = {

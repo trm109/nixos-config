@@ -1,24 +1,23 @@
-{pkgs, ...}: {
-  imports = [./hardware-configuration.nix];
+{ ... }:
+{
+  imports = [ ./hardware-configuration.nix ];
   ## Hardware
   ### Radeon
+  #modules = {
+  #  hardware = {
+  #    radeon.enable = true;
+  #    razer.enable = false;
+  #  };
+  #};
   modules = {
-    hardware = {
-      radeon.enable = true;
-      razer.enable = false;
+    applications = {
+      desktop.wayland.hyprland.enable = true;
+      graphical = {
+        gaming.enable = true;
+      };
     };
   };
   #hardware.keyboard.qmk.enable = true;
-  #Vid: 0x3434
-  #Pid: 0x02A0
-  services.udev.extraRules = ''
-    SUBSYSTEMS=="usb", ATTRSV{idVendor}=="3434", ATTRS{idProduct=="02A0", TAG+="uaccess"
-  '';
-  environment.systemPackages = with pkgs; [
-    via
-  ];
-  services.udev.packages = [pkgs.via];
-
   #specialisation = {
   #  zen.configuration = {
   #    system.nixos.tags = ["zen"];
