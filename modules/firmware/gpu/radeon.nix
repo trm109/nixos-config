@@ -13,7 +13,7 @@ in
     #TODO figure out how to tell what the value of cfg.enable is...
     enable = lib.mkOption {
       #builtins.length (builtins.filter (gpu: gpu.type == "integrated") nixosConfigurations.viceroy._module.specialArgs.hw.gpus) > 0
-      default = builtins.length (builtins.filter (gpu: gpu.vendor == "radeon") hw.gpus) > 0;
+      default = builtins.length (builtins.filter (gpu: gpu.vendor == "amd") hw.gpus) > 0 || false;
       description = "Enable Radeon Support";
     };
     enableAcceleration = lib.mkOption {

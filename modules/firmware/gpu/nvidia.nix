@@ -10,7 +10,7 @@ in
 {
   options.modules.firmware.gpu.nvidia = {
     enable = lib.mkOption {
-      default = builtins.length (builtins.filter (gpu: gpu.vendor == "nvidia") hw.gpus) > 0;
+      default = builtins.length (builtins.filter (gpu: gpu.vendor == "nvidia") hw.gpus) > 0 || false;
       description = "Enable Nvidia Support";
     };
     enableAcceleration = lib.mkOption {
