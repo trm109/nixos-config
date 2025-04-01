@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   environment = {
     # TODO look over more options
     sessionVariables = {
@@ -44,9 +40,7 @@
       thunar-volman
     ];
   };
-  systemd.services = let
-    wantedBy = lib.mkForce [];
-  in {
+  systemd.services = {
     #gvfs = {
     #  inherit wantedBy;
     #};
@@ -54,7 +48,7 @@
     #  inherit wantedBy;
     #};
     ollama = {
-      inherit wantedBy;
+      #inherit wantedBy;
       environment = {
         ROCR_VISIBLE_DEVICES = "0";
         HSA_OVERRIDE_GFX_VERSION = "11.0.0"; # Need to override my gfx version for some reason
@@ -84,11 +78,11 @@
       #port = 11434; changing this breaks the cli
       openFirewall = true;
     };
-    #open-webui = {
-    #  # Open Web UI
-    #  enable = true;
-    #  port = 9001;
-    #  openFirewall = true;
-    #};
+    open-webui = {
+      # Open Web UI
+      enable = true;
+      #port = 9001;
+      openFirewall = true;
+    };
   };
 }
