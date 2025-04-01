@@ -2,6 +2,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 let
@@ -10,7 +11,7 @@ in
 {
   imports = [
     ./fish.nix
-    ./virtualisation.nix
+    ./virt.nix
     ./nixvim.nix
   ];
 
@@ -47,9 +48,6 @@ in
       nix-search-cli
     ];
     programs = {
-      openssh = {
-        enable = true;
-      };
       tmux = {
         enable = true;
       };

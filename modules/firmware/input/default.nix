@@ -1,4 +1,8 @@
-{ lib, ... }:
+{
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.modules.firmware.input;
 in
@@ -13,7 +17,7 @@ in
     };
   };
 
-  config = mkIf (!cfg.enable) {
+  config = lib.mkIf (!cfg.enable) {
     modules.firmware.input = {
       gamepad.enable = false;
     };

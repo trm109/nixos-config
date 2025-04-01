@@ -18,7 +18,8 @@ in
 
   config = lib.mkIf cfg.enable {
     hardware.openrazer = {
-      enable = true;
+      #enable = true; # This is currently broken
+      enable = false;
       inherit users;
       batteryNotifier.enable = true;
     };

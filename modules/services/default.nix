@@ -1,4 +1,8 @@
-{ lib, ... }:
+{
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.modules.services;
 in
@@ -11,6 +15,7 @@ in
     ./network.nix
     ./printers.nix
     ./razer.nix
+    ./ssh.nix
   ];
   options.modules.services = {
     enable = lib.mkOption {

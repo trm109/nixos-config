@@ -3,6 +3,7 @@
   hostType,
   lib,
   pkgs,
+  config,
   ...
 }:
 let

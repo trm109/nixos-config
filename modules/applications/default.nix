@@ -1,12 +1,17 @@
 # Things that a human would run
-{ lib, ... }:
+{
+  hostType,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.modules.applications;
 in
 {
   imports = [
-    ./graphical.nix
-    ./terminal.nix
+    ./graphical
+    ./terminal
   ];
   options.modules.applications = {
     enable = lib.mkOption {
@@ -16,7 +21,7 @@ in
   };
   config = lib.mkIf (!cfg.enable) {
     modules.applications = {
-      graphical.enable = false;
+      graphical.enable = hostType == "desktop" || false;
       terminal.enable = false;
     };
   };

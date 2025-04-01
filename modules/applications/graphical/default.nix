@@ -1,4 +1,9 @@
-{ lib, ... }:
+{
+  hostType,
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.modules.applications.graphical;
 in
@@ -18,7 +23,9 @@ in
   };
 
   config = lib.mkIf (!cfg.enable) {
-    gaming.enable = false;
-    productivity.enable = false;
+    modules.applications.graphical = {
+      gaming.enable = false;
+      productivity.enable = false;
+    };
   };
 }

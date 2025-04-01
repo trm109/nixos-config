@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 let
@@ -36,14 +37,16 @@ in
       bitwarden # password manager
       insomnia # REST client
     ];
-    programs = {
-      # Thunar dependencies
+    services = {
       gvfs = {
         enable = true;
       };
       tumbler = {
         enable = true;
       };
+    };
+    programs = {
+      # Thunar dependencies
       thunar = {
         enable = true;
         plugins = with pkgs.xfce; [

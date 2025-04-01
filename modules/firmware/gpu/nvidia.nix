@@ -8,9 +8,8 @@ let
   cfg = config.modules.firmware.gpu.nvidia;
 in
 {
-  options.modules.hardware.nvidia = {
+  options.modules.firmware.gpu.nvidia = {
     enable = lib.mkOption {
-      # if array gpus has { vendor = "nvidia" } then enable, else false
       default = (builtins.length (builtins.filter (gpu: gpu.vendor == "nvidia") hw.gpus)) > 0;
       description = "Enable Nvidia Support";
     };

@@ -2,6 +2,7 @@
   lib,
   config,
   hostname,
+  pkgs,
   ...
 }:
 let

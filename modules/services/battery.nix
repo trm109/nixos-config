@@ -1,4 +1,9 @@
-{ lib, ... }:
+{
+  lib,
+  config,
+  hw,
+  ...
+}:
 let
   cfg = config.modules.services.battery;
 in

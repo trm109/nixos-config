@@ -3,6 +3,9 @@
 {
   lib,
   pkgs,
+  config,
+  hostType,
+  hw,
   ...
 }:
 let
@@ -13,6 +16,7 @@ in
     enable = lib.mkOption {
       # if hostType is desktop, and user has a hw.gpus.*.type = "discrete"
       default = hostType == "desktop" && builtins.any (gpu: gpu.type == "discrete") hw.gpus || false;
+      #default = false;
       description = "Enable the AI services module";
     };
   };

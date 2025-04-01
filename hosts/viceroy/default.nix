@@ -3,12 +3,12 @@
   imports = [ ./hardware-configuration.nix ];
   ## Hardware
   ### Radeon
-  modules = {
-    hardware = {
-      radeon.enable = true;
-      razer.enable = false;
-    };
-  };
+  #modules = {
+  #  hardware = {
+  #    radeon.enable = true;
+  #    razer.enable = false;
+  #  };
+  #};
   #hardware.keyboard.qmk.enable = true;
   #Vid: 0x3434
   #Pid: 0x02A0

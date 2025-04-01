@@ -1,13 +1,14 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 let
-  cfg = config.modules.applications.terminal.virtualisation;
+  cfg = config.modules.applications.terminal.virt;
 in
 {
-  options.modules.applications.terminal.virtualisation = {
+  options.modules.applications.terminal.virt = {
     enable = lib.mkOption {
       default = true;
       description = "Enable virtualisation tools";
@@ -21,8 +22,6 @@ in
     virtualisation = {
       podman = {
         enable = true;
-        autoPrune = true;
-        dockerCompat = true;
       };
     };
   };

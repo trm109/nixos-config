@@ -2,6 +2,8 @@
 {
   lib,
   pkgs,
+  config,
+  hostType,
   ...
 }:
 let
