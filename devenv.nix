@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # https://devenv.sh/basics/
   #env.GREET = "devenv";
 
@@ -61,7 +62,8 @@
     # Find dead nix snippets
     deadnix.enable = true;
     # Opinionated nix formatting
-    alejandra.enable = true;
+    #alejandra.enable = true;
+    nixfmt-rfc-style.enable = true;
     # Find nix anti-patterns
     statix.enable = true;
   };

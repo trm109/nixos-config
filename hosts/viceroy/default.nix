@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  imports = [./hardware-configuration.nix];
+{ pkgs, ... }:
+{
+  imports = [ ./hardware-configuration.nix ];
   ## Hardware
   ### Radeon
   modules = {
@@ -17,7 +18,7 @@
   environment.systemPackages = with pkgs; [
     via
   ];
-  services.udev.packages = [pkgs.via];
+  services.udev.packages = [ pkgs.via ];
 
   #specialisation = {
   #  zen.configuration = {

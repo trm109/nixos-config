@@ -1,0 +1,35 @@
+{
+  hw,
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.modules.firmware.gpu.nvidia;
+in
+{
+  options.modules.hardware.nvidia = {
+    enable = lib.mkOption {
+      # if array gpus has { vendor = "nvidia" } then enable, else false
+      default = (builtins.length (builtins.filter (gpu: gpu.vendor == "nvidia") hw.gpus)) > 0;
+      description = "Enable Nvidia Support";
+    };
+    enableAcceleration = lib.mkOption {
+      default = cfg.enable || false;
+      description = "Enable Nvidia Acceleration";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    hardware.nvidia = {
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+    };
+    services.xserver.videoDrivers = lib.mkIf config.modules.applications.desktop.x11.enable [
+      "nvidia"
+    ];
+    nixpkgs.config.rocmSupport = cfg.enableAcceleration;
+  };
+}

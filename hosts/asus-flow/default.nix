@@ -1,5 +1,6 @@
-{lib, ...}: {
-  imports = [./hardware-configuration.nix];
+{ lib, ... }:
+{
+  imports = [ ./hardware-configuration.nix ];
 
   modules = {
     # Hardware
@@ -19,7 +20,7 @@
   specialisation = {
     # Low power, high efficiency
     efficience.configuration = {
-      system.nixos.tags = ["efficience"];
+      system.nixos.tags = [ "efficience" ];
       modules.hardware.nvidia.enable = false;
     };
   };

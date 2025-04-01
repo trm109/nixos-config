@@ -2,14 +2,19 @@
 Flakes based, very minimal Home-Manager implementation.
 
 ## General Structure
-├── hosts # Folder holding configs for specific devices.
-│   ├── asus-flow # My Asus Nvidia Tablet Gaming Laptop (Asus Flow x16 2022). Has some Nvidia config overrides.
-│   └── viceroy # My pure AMD desktop.
-├── modules # Anything that isn't user or host related
-│   ├── hardware # Hardware configs for things like audio, gpu drivers, etc. Includes some mkEnableOption settings for Nvidia.
-│   ├── software # Includes anything not related to Nix or the Firmware. Anything from Minecraft to Neovim.
-│   └── system # Linux and Nix configs. Things like Locale, fonts, boot settings.
-└── users # My user configs. Has my gf <3 and I
+### Hosts (Machine-specific configs)
+### Modules (Groups of 'capabilities' organized arbitrarily)
+#### Applications
+Things that humans will run.
+##### Desktop
+Desktop-specific definitions. Things that only make sense in the context of a specific Desktop Environment.
+#### Firmware
+Software needed for specific hardware. Things like Nvidia drivers.
+Should NOT contain derivations that enable things, just definitions for IF they are enabled.
+#### Services
+Things that run in the background, and are NOT run by humans. Network manager, Bluetooth, daemons, etc.
+### Users (User specific configs)
+### Pkgs (custom defined package definitions or overrides)
 
 ## Devenv
 I use Devenv.sh for all of my dev environment needs, including my NixOS Config.
