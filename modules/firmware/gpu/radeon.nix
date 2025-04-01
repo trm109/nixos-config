@@ -9,18 +9,22 @@ let
   cfg = config.modules.firmware.gpu.radeon;
 in
 {
-  options.modules.firmware.gpu.radeon = {
-    #TODO figure out how to tell what the value of cfg.enable is...
-    enable = lib.mkOption {
-      #builtins.length (builtins.filter (gpu: gpu.type == "integrated") nixosConfigurations.viceroy._module.specialArgs.hw.gpus) > 0
-      default = builtins.length (builtins.filter (gpu: gpu.vendor == "amd") hw.gpus) > 0 || false;
-      description = "Enable Radeon Support";
+  options.modules.firmware.gpu.radeon =
+    let
+      hasAmdGpu = builtins.length (builtins.filter (gpu: gpu.vendor == "amd") hw.gpus) > 0;
+      hasDiscreteAmdGpu =
+        builtins.length (builtins.filter (gpu: gpu.type == "discrete" && gpu.vendor == "amd") hw.gpus) > 0;
+    in
+    {
+      enable = lib.mkOption {
+        default = hasAmdGpu || false;
+        description = "Enable AMD GPU Support";
+      };
+      enableAcceleration = lib.mkOption {
+        default = hasDiscreteAmdGpu || false;
+        description = "Enable AMD GPU Acceleration";
+      };
     };
-    enableAcceleration = lib.mkOption {
-      default = cfg.enable || false;
-      description = "Enable Radeon Acceleration";
-    };
-  };
 
   config = lib.mkIf cfg.enable {
     hardware.amdgpu = {

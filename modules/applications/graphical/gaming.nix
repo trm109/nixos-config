@@ -28,7 +28,6 @@ in
       steam-run
       protonup-qt
       mangohud
-      nvtopPackages.full
       goverlay
       (prismlauncher.override {
         jdks = [

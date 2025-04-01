@@ -152,8 +152,8 @@ in
                 just = [ "just" ];
                 lua = [ "stylua" ];
                 nix = [
-                  "nixfmt"
                   "alejandra"
+                  "nixfmt"
                 ];
                 ruby = [ "rubocop" ];
                 terraform = [ "tofu_fmt" ];

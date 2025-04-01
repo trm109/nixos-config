@@ -32,6 +32,7 @@ in
     environment.systemPackages = with pkgs; [
       clinfo
       lact
+      nvtopPackages.full
     ];
 
     services = {
