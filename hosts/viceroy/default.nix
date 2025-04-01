@@ -9,6 +9,14 @@
   #    razer.enable = false;
   #  };
   #};
+  modules = {
+    applications = {
+      desktop.wayland.hyprland.enable = true;
+      graphical = {
+        gaming.enable = true;
+      };
+    };
+  };
   #hardware.keyboard.qmk.enable = true;
   #Vid: 0x3434
   #Pid: 0x02A0

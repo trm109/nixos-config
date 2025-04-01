@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  hostType,
   ...
 }:
 let
@@ -10,7 +11,7 @@ in
 {
   options.modules.applications.graphical.productivity = {
     enable = lib.mkOption {
-      default = false;
+      default = hostType == "desktop" || false;
       description = ''
         Enable graphical, productivity applications.
       '';

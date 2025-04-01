@@ -1,6 +1,5 @@
 # Things that a human would run
 {
-  hostType,
   config,
   lib,
   ...
@@ -10,6 +9,7 @@ let
 in
 {
   imports = [
+    ./desktop
     ./graphical
     ./terminal
   ];
@@ -21,7 +21,7 @@ in
   };
   config = lib.mkIf (!cfg.enable) {
     modules.applications = {
-      graphical.enable = hostType == "desktop" || false;
+      graphical.enable = false;
       terminal.enable = false;
     };
   };
