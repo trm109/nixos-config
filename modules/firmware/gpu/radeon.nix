@@ -10,6 +10,7 @@ let
 in
 {
   options.modules.firmware.gpu.radeon = {
+    #TODO figure out how to tell what the value of cfg.enable is...
     enable = lib.mkOption {
       default = (builtins.length (builtins.filter (gpu: gpu.vendor == "radeon") hw.gpus)) > 0;
       description = "Enable Radeon Support";

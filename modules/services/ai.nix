@@ -43,14 +43,14 @@ in
         openFirewall = config.modules.services.network.enable;
       };
     };
-    #systemd.services = {
-    #  ollama = {
-    #    # TODO test this.
-    #    #environment = lib.mkIf config.modules.firmware.gpu.radeon.enableAcceleration {
-    #    #  ROCR_VISIBLE_DEVICES = "0";
-    #    #  HSA_OVERRIDE_GFX_VERSION = "11.0.0";
-    #    #};
-    #  };
-    #};
+    systemd.services = {
+      ollama = {
+        # TODO test this.
+        environment = lib.mkIf config.modules.firmware.gpu.radeon.enableAcceleration {
+          ROCR_VISIBLE_DEVICES = "0";
+          HSA_OVERRIDE_GFX_VERSION = "11.0.0";
+        };
+      };
+    };
   };
 }

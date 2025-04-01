@@ -24,7 +24,7 @@
     lint.exec = ''
       deadnix .
       statix check
-      alejandra .
+      nixfmt .
     '';
     update.exec = ''
       nix flake update --flake /etc/nixos
@@ -36,6 +36,9 @@
     clean-gen.exec = ''
       nix-collect-garbage -d
       /run/current-system/bin/switch-to-configuration boot
+    '';
+    repl.exec = ''
+      nix repl --expr "builtins.getFlake \"$PWD\""
     '';
   };
 
