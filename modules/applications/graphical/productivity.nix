@@ -32,7 +32,6 @@ in
       blender-hip # 3d modeling software
       cheese # simple camera app, for testing mostly
       mailspring # email client
-      vial # QMK keyboard configuration TODO branch off
       mpv # video player, supports hdr
       kdePackages.filelight # Disk Usage Analyzer
       bitwarden # password manager
