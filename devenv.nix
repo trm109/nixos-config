@@ -33,7 +33,7 @@
       ./result/bin/nvim /etc/nixos/modules/software/terminal.nix
     '';
     clean-gen.exec = ''
-      nix-collect-garbage -d
+      nix-collect-garbage --delete-older-than +6
       /run/current-system/bin/switch-to-configuration boot
     '';
   };
