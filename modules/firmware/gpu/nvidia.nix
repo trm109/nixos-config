@@ -10,7 +10,7 @@ in
 {
   options.modules.firmware.gpu.nvidia = {
     enable = lib.mkOption {
-      default = (builtins.length (builtins.filter (gpu: gpu.vendor == "nvidia") hw.gpus)) > 0;
+      default = builtins.length (builtins.filter (gpu: gpu.vendor == "nvidia") hw.gpus) > 0;
       description = "Enable Nvidia Support";
     };
     enableAcceleration = lib.mkOption {
@@ -29,6 +29,6 @@ in
     services.xserver.videoDrivers = lib.mkIf config.modules.applications.desktop.x11.enable [
       "nvidia"
     ];
-    nixpkgs.config.rocmSupport = cfg.enableAcceleration;
+    nixpkgs.config.cudaSupport = cfg.enableAcceleration;
   };
 }

@@ -12,7 +12,8 @@ in
   options.modules.firmware.gpu.radeon = {
     #TODO figure out how to tell what the value of cfg.enable is...
     enable = lib.mkOption {
-      default = (builtins.length (builtins.filter (gpu: gpu.vendor == "radeon") hw.gpus)) > 0;
+      #builtins.length (builtins.filter (gpu: gpu.type == "integrated") nixosConfigurations.viceroy._module.specialArgs.hw.gpus) > 0
+      default = builtins.length (builtins.filter (gpu: gpu.vendor == "radeon") hw.gpus) > 0;
       description = "Enable Radeon Support";
     };
     enableAcceleration = lib.mkOption {
@@ -37,5 +38,6 @@ in
         "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
       ];
     };
+    nixpkgs.config.rocmSupport = cfg.enableAcceleration;
   };
 }

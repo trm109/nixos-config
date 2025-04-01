@@ -24,7 +24,7 @@ in
       forgit # A utility tool powered by fzf for using git interactively
       hydro # Ultra-pure, lag-free prompt with async Git status
       tide # Ultimate Fish prompt
-      sponge # keeps your fish shell history clean from typos, incorrectly used commands and everything you don't want to store due to privacy reasons
+      #sponge # keeps your fish shell history clean from typos, incorrectly used commands and everything you don't want to store due to privacy reasons
       colored-man-pages # Fish shell plugin to colorize man pages
     ];
   };

@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./gamepad.nix
+    ./qmk.nix
   ];
   options.modules.firmware.input = {
     enable = lib.mkOption {
@@ -20,6 +21,7 @@ in
   config = lib.mkIf (!cfg.enable) {
     modules.firmware.input = {
       gamepad.enable = false;
+      qmk.enable = false;
     };
   };
 }

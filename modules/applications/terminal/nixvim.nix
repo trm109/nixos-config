@@ -151,7 +151,10 @@ in
                 json = [ "prettier" ];
                 just = [ "just" ];
                 lua = [ "stylua" ];
-                nix = [ "alejandra" ];
+                nix = [
+                  "nixfmt"
+                  "alejandra"
+                ];
                 ruby = [ "rubocop" ];
                 terraform = [ "tofu_fmt" ];
                 tf = [ "tofu_fmt" ];
