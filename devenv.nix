@@ -56,7 +56,7 @@
   # Run all bash scripts through shellcheck
   # Any other files should be run through their respective suites
   enterTest = ''
-    nixos-rebuild dry-build --flake /etc/nixos#viceroy
+    nix flake check
   '';
 
   # https://devenv.sh/pre-commit-hooks/
