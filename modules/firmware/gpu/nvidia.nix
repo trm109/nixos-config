@@ -25,6 +25,7 @@ in
       nvidiaSettings = true;
       open = true;
       package = config.boot.kernelPackages.nvidiaPackages.production;
+      # dynamicBoost.enable = true; #TODO figure out if this works on AMD systems.
     };
     services.xserver.videoDrivers = lib.mkIf config.modules.applications.desktop.x11.enable [
       "nvidia"
