@@ -35,7 +35,11 @@
       ./result/bin/nvim ./flake.nix
     '';
     clean-gen.exec = ''
-      nix-collect-garbage --delete-older-than +6
+      if [ "$EUID" -ne 0 ]
+        then echo "Please run as root"
+        exit
+      fi
+      nix-env --delete-generations +6 --profile /nix/var/nix/profiles/system
       /run/current-system/bin/switch-to-configuration boot
     '';
     repl.exec = ''
