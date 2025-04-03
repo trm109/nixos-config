@@ -16,6 +16,7 @@ in
     ./printers.nix
     ./razer.nix
     ./ssh.nix
+    ./keyring.nix
   ];
   options.modules.services = {
     enable = lib.mkOption {
@@ -32,6 +33,7 @@ in
       network.enable = false;
       printers.enable = false;
       razer.enable = false;
+      keyring.enable = false;
     };
   };
 }

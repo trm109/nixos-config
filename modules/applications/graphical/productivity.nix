@@ -36,6 +36,7 @@ in
       kdePackages.filelight # Disk Usage Analyzer
       bitwarden # password manager
       insomnia # REST client
+      github-desktop # GitHub client
     ];
     services = {
       gvfs = {
