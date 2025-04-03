@@ -1,4 +1,8 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -24,8 +28,13 @@
     #};
   };
 
-  boot.crashDump.enable = true;
-  boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_14;
+  boot = {
+    crashDump = {
+      enable = true;
+      reservedMemory = "512M";
+    };
+    kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_14;
+  };
 
   specialisation = {
     # Low power, high efficiency
