@@ -27,7 +27,7 @@
       nixfmt .
     '';
     update.exec = ''
-      nix flake update --flake /etc/nixos
+      nix flake update
     '';
     # TODO make hostname variable
     r-nixvim.exec = ''

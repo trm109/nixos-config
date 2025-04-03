@@ -19,6 +19,7 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       networkmanagerapplet # TODO if a graphical session is present
+      openfortivpn # fortissl vpn client
     ];
     # Network
     networking = {
