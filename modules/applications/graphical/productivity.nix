@@ -31,7 +31,7 @@ in
       darktable # Photo editing
       blender-hip # 3d modeling software
       cheese # simple camera app, for testing mostly
-      mailspring # email client
+      thunderbird # email client
       mpv # video player, supports hdr
       kdePackages.filelight # Disk Usage Analyzer
       bitwarden # password manager
