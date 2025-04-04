@@ -25,6 +25,9 @@ in
     in
     lib.mkIf cfg.enable {
       # enable kwallet for all users
+      environment.systemPackages = [
+        pkgs.kdePackages.kwalletmanager
+      ];
       security.pam.services =
         {
           login.kwallet = {
