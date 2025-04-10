@@ -25,7 +25,7 @@ in
       webcord-vencord # Discord client, but better
       spotube # Spotify client
       librewolf # firefox-based browser
-      chromium # backup, chromium based browser.
+      ungoogled-chromium # backup, chromium based browser.
       stremio # Video Player + Torrent Streaming
       stable.libreoffice # office suite
       darktable # Photo editing
