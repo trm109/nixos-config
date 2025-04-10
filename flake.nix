@@ -49,37 +49,23 @@
             inputs.nixvim.nixosModules.nixvim
             {
               # Default nixpkgs configs for the different channels
-              nixpkgs.overlays =
-                let
-                  config = {
-                    allowUnfree = true;
-                    permittedInsecurePackages = [
-                      # TODO determine if I still need these enabled
-                      "electron-24.8.6"
-                      "electron-25.9.0"
-                      "dotnet-sdk-6.0.428"
-                    ];
+              nixpkgs.overlays = [
+                # overlays
+                # Adding pkgs.stable and pkgs.unstable to the nixpkgs overlays
+                (_final: _prev: {
+                  # stable nixpkgs overlay
+                  stable = import inputs.nixpkgs-stable {
+                    # pkgs.stable == nixpkgs-stable channel
+                    inherit system;
                   };
-                in
-                [
-                  # overlays
-                  # Adding pkgs.stable and pkgs.unstable to the nixpkgs overlays
-                  (_final: _prev: {
-                    # stable nixpkgs overlay
-                    stable = import inputs.nixpkgs-stable {
-                      # pkgs.stable == nixpkgs-stable channel
-                      inherit system;
-                      inherit config;
-                    };
-                    # unstable nixpkgs overlay
-                    unstable = import inputs.nixpkgs-unstable {
-                      # pkgs.unstable == nixpkgs-unstable channel
-                      inherit system;
-                      inherit config;
-                    };
-                  })
-                  inputs.hyprpanel.overlay
-                ];
+                  # unstable nixpkgs overlay
+                  unstable = import inputs.nixpkgs-unstable {
+                    # pkgs.unstable == nixpkgs-unstable channel
+                    inherit system;
+                  };
+                })
+                inputs.hyprpanel.overlay
+              ];
             }
           ];
         in
@@ -88,10 +74,11 @@
             # Asus Flow X16 2022
             specialArgs = {
               users = gamers;
-              hostname = "asus-flow";
-              hostType = "desktop";
+              hostname = "asus-flow"; # TODO move this to hardware-configuration.nix (??)
+              hostType = "desktop"; # TODO fix spelling, all should be camelcase
               inherit inputs;
               hw = {
+                # TODO, move this to hardware-configuration.nix import as a json or something. Use vendorid:productid
                 formFactor = "laptop";
                 gpus = [
                   {

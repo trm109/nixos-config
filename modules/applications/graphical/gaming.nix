@@ -28,6 +28,7 @@ in
       steam-run
       protonup-qt
       mangohud
+      vintagestory
       goverlay
       (prismlauncher.override {
         jdks = [
