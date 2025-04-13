@@ -6,6 +6,11 @@
     ./hardware-configuration.nix
   ];
 
+  networking.firewall = {
+    allowedTCPPorts = [
+      42420 # Vintage Story
+    ];
+  };
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
