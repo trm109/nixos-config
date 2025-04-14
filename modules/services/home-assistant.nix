@@ -4,8 +4,7 @@ let
 in
 {
   options.modules.services.home-assistant = {
-    enable = mkOption {
-      type = types.bool;
+    enable = lib.mkOption {
       default = false;
       description = "Enable Home Assistant";
     };
@@ -21,7 +20,7 @@ in
           latitude = -81.6;
           temperature_unit = "F";
           time_zone = "America/New_York";
-          unit_system = "imperial";
+          unit_system = "us_customary";
         };
       };
     };
