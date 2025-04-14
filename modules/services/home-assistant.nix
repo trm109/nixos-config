@@ -1,6 +1,6 @@
 { lib, ... }:
 let
-  cfg = modules.services.home-assistant;
+  cfg = config.modules.services.home-assistant;
 in
 {
   options.modules.services.home-assistant = {
