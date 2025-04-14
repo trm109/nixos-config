@@ -17,6 +17,7 @@ in
     ./razer.nix
     ./ssh.nix
     ./keyring.nix
+    ./home-assistant.nix
   ];
   options.modules.services = {
     enable = lib.mkOption {

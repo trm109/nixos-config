@@ -5,7 +5,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
+  modules.services.home-assistant.enable = true;
   networking.firewall = {
     allowedTCPPorts = [
       42420 # Vintage Story
