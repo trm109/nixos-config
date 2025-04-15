@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   config,
   ...
@@ -15,6 +16,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = [
+      inputs.agenix.packages."x86_64-linux".default # TODO make this dynamic based on arch
+    ];
     # nix (packages)
     nixpkgs = {
       config = {

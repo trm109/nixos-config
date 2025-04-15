@@ -27,6 +27,7 @@
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     # Chaotic packages
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs =
@@ -45,6 +46,7 @@
             ./hosts
             ./modules
             ./users
+            inputs.agenix.nixosModules.default
             inputs.chaotic.nixosModules.default
             inputs.nixvim.nixosModules.nixvim
             {
@@ -127,28 +129,28 @@
             };
             inherit modules;
           };
-	  plex-0 = nixpkgs.lib.nixosSystem {
-	    specialArgs = {
-	      users = gamers;
-	      hostname = "plex-0";
-	      hostType = "server";
-	      inherit inputs;
-	      hw = {
-	        formFactor = "desktop";
-		gpus = [
-		  {
-		    type = "integrated";
-		    vendor = "intel";
-		    model = "";
-		  }
-		];
-		cpu = {
-		  vendor = "intel";
-		};
-	      };
-	    };
-	    inherit modules;
-	  };
+          plex-0 = nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              users = gamers;
+              hostname = "plex-0";
+              hostType = "server";
+              inherit inputs;
+              hw = {
+                formFactor = "desktop";
+                gpus = [
+                  {
+                    type = "integrated";
+                    vendor = "intel";
+                    model = "";
+                  }
+                ];
+                cpu = {
+                  vendor = "intel";
+                };
+              };
+            };
+            inherit modules;
+          };
           #      optipleximus-prime = nixpkgs.lib.nixosSystem { # Optiplex
           #        specialArgs = {
           #          inherit users;

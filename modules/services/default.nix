@@ -36,6 +36,7 @@ in
       razer.enable = false;
       keyring.enable = false;
       homelab.enable = false;
+      ssh.enable = false;
     };
   };
 }
