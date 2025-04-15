@@ -18,6 +18,7 @@ in
     ./ssh.nix
     ./keyring.nix
     ./home-assistant.nix
+    ./teslamate.nix
   ];
   options.modules.services = {
     enable = lib.mkOption {
@@ -35,6 +36,9 @@ in
       printers.enable = false;
       razer.enable = false;
       keyring.enable = false;
+      ssh.enable = false;
+      home-assistant.enable = false;
+      teslamate.enable = false;
     };
   };
 }
