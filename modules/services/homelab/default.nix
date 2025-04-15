@@ -20,6 +20,9 @@ in
   };
   config = lib.mkIf (!cfg.enable) {
     modules.services = {
+      home-assistant.enable = false;
+      grafana.enable = false;
+      teslamate.enable = false;
     };
   };
 }
