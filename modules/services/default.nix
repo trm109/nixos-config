@@ -17,7 +17,7 @@ in
     ./razer.nix
     ./ssh.nix
     ./keyring.nix
-    ./home-assistant.nix
+    ./homelab
   ];
   options.modules.services = {
     enable = lib.mkOption {
@@ -35,6 +35,7 @@ in
       printers.enable = false;
       razer.enable = false;
       keyring.enable = false;
+      homelab.enable = false;
     };
   };
 }
