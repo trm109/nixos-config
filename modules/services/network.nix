@@ -44,6 +44,10 @@ in
           "127.0.0.0/8" # localhost
         ];
       };
+      avahi = {
+        enable = true;
+        nssmdns4 = true;
+      };
     };
     # Reduces startup time
     systemd.services.NetworkManager-wait-online.enable = false;

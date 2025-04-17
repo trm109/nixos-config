@@ -71,6 +71,7 @@ in
           pkgs.alejandra
           pkgs.biome
           pkgs.black
+          pkgs.nixfmt-rfc-style
         ];
         # extraPlugins = {};
         # extraPython3Packages = {};
