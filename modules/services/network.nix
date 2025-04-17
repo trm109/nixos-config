@@ -38,7 +38,11 @@ in
 
     services = {
       fail2ban = {
-        enable = true;
+        enable = lib.mkDefault true;
+        ignoreIP = [
+          "192.168.0.0/16" # local network
+          "127.0.0.0/8" # localhost
+        ];
       };
     };
     # Reduces startup time

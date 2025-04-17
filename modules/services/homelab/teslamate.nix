@@ -1,36 +1,35 @@
 {
-  pkgs,
   config,
   lib,
   ...
 }:
 let
-  cfg = config.modules.services.teslamate;
-  teslamate-grafana-dashboards = pkgs.stdenv.mkDerivation rec {
-    pname = "teslamate-grafana-dashboards";
-    version = "1.33.0";
+  cfg = config.modules.services.homelab.teslamate;
+  #teslamate-grafana-dashboards = pkgs.stdenv.mkDerivation rec {
+  #  pname = "teslamate-grafana-dashboards";
+  #  version = "1.33.0";
 
-    src = pkgs.fetchFromGitHub {
-      owner = "teslamate-org";
-      repo = "teslamate";
-      rev = "v${version}";
-      hash = "sha256-yDAYft2/91lLLKSKrejlIQBrYZVFF6BA1J0hE7w+OF4=";
-    };
+  #  src = pkgs.fetchFromGitHub {
+  #    owner = "teslamate-org";
+  #    repo = "teslamate";
+  #    rev = "v${version}";
+  #    hash = "sha256-yDAYft2/91lLLKSKrejlIQBrYZVFF6BA1J0hE7w+OF4=";
+  #  };
 
-    dontBuild = true;
+  #  dontBuild = true;
 
-    installPhase = ''
-      mkdir -p "$out"
-      cp "$src"/grafana/dashboards.yml "$out"
-      cp -r "$src"/grafana/dashboards "$out"
-    '';
-  };
+  #  installPhase = ''
+  #    mkdir -p "$out"
+  #    cp "$src"/grafana/dashboards.yml "$out"
+  #    cp -r "$src"/grafana/dashboards "$out"
+  #  '';
+  #};
 in
 {
-  options.modules.services.teslamate = {
+  options.modules.services.homelab.teslamate = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = config.modules.services.home-assistant.enable || false;
+      default = config.modules.services.homelab.enable || false;
     };
   };
 
@@ -102,22 +101,22 @@ in
             "/var/lib/teslamate/mosquitto-data:/mosquitto/data"
           ];
         };
-        "tesla-grafana" = {
-          image = "docker.io/teslamate/grafana:latest";
-          environmentFiles = [
-            config.age.secrets.teslamate.path
-          ];
-          ports = [ "3000:3000" ];
-          extraOptions = [
-            "--network=host"
-          ];
-          #workdir = "/var/lib/teslamate/grafana";
-          volumes = [
-            "/var/lib/teslamate/grafana:/var/lib/grafana"
-            "/var/lib/teslamate/grafana/plugins:/var/lib/grafana/plugins"
-            "/var/lib/teslamate/grafana/grafana.db:/var/lib/grafana/grafana.db"
-          ];
-        };
+        #"tesla-grafana" = {
+        #  image = "docker.io/teslamate/grafana:latest";
+        #  environmentFiles = [
+        #    config.age.secrets.teslamate.path
+        #  ];
+        #  ports = [ "3000:3000" ];
+        #  extraOptions = [
+        #    "--network=host"
+        #  ];
+        #  #workdir = "/var/lib/teslamate/grafana";
+        #  volumes = [
+        #    "/var/lib/teslamate/grafana:/var/lib/grafana"
+        #    "/var/lib/teslamate/grafana/plugins:/var/lib/grafana/plugins"
+        #    "/var/lib/teslamate/grafana/grafana.db:/var/lib/grafana/grafana.db"
+        #  ];
+        #};
       };
     };
     users = {
@@ -173,77 +172,77 @@ in
       ];
     };
 
-    services.grafana = {
-      enable = lib.mkDefault true;
+    #services.grafana = {
+    #  enable = lib.mkDefault true;
 
-      settings.server = {
-        domain = "grafana.murray-hill.asuscomm.com";
-        http_port = 3000;
-        http_addr = "0.0.0.0";
-      };
+    #  settings.server = {
+    #    domain = "grafana.murray-hill.asuscomm.com";
+    #    http_port = 3000;
+    #    http_addr = "0.0.0.0";
+    #  };
 
-      provision = {
-        enable = true;
+    #  provision = {
+    #    enable = true;
 
-        datasources = {
-          settings.datasources = [
-            {
-              name = "TeslaMate";
-              type = "postgres";
-              access = "proxy";
-              url = "localhost:5432";
-              username = "teslamate";
-              database = "teslamate";
-              secureJsonData = {
-                password = "$__file{${config.age.secrets.teslamate_db.path}}";
-              };
-              jsonData = {
-                postgresVersion = "1400";
-                sslmode = "disable";
-              };
-            }
-          ];
-        };
+    #    datasources = {
+    #      settings.datasources = [
+    #        {
+    #          name = "TeslaMate";
+    #          type = "postgres";
+    #          access = "proxy";
+    #          url = "localhost:5432";
+    #          username = "teslamate";
+    #          database = "teslamate";
+    #          secureJsonData = {
+    #            password = "$__file{${config.age.secrets.teslamate_db.path}}";
+    #          };
+    #          jsonData = {
+    #            postgresVersion = "1400";
+    #            sslmode = "disable";
+    #          };
+    #        }
+    #      ];
+    #    };
 
-        dashboards = {
-          settings.providers = [
-            {
-              name = "teslamate";
-              orgId = 1;
-              folder = "TeslaMate";
-              folderUid = "Nr4ofiDZk";
-              type = "file";
-              disableDeletion = false;
-              editable = true;
-              updateIntervalSeconds = 86400;
-              options.path = "${teslamate-grafana-dashboards}/dashboards";
-            }
-            {
-              name = "teslamate_internal";
-              orgId = 1;
-              folder = "TeslaMate/Internal";
-              folderUid = "Nr5ofiDZk";
-              type = "file";
-              disableDeletion = false;
-              editable = true;
-              updateIntervalSeconds = 86400;
-              options.path = "${teslamate-grafana-dashboards}/dashboards/internal";
-            }
-            {
-              name = "teslamate_reports";
-              orgId = 1;
-              folder = "TeslaMate/Reports";
-              folderUid = "Nr6ofiDZk";
-              type = "file";
-              disableDeletion = false;
-              allowUiUpdates = true;
-              updateIntervalSeconds = 86400;
-              options.path = "${teslamate-grafana-dashboards}/dashboards/reports";
-            }
-          ];
-        };
-      };
-    };
+    #    dashboards = {
+    #      settings.providers = [
+    #        {
+    #          name = "teslamate";
+    #          orgId = 1;
+    #          folder = "TeslaMate";
+    #          folderUid = "Nr4ofiDZk";
+    #          type = "file";
+    #          disableDeletion = false;
+    #          editable = true;
+    #          updateIntervalSeconds = 86400;
+    #          options.path = "${teslamate-grafana-dashboards}/dashboards";
+    #        }
+    #        {
+    #          name = "teslamate_internal";
+    #          orgId = 1;
+    #          folder = "TeslaMate/Internal";
+    #          folderUid = "Nr5ofiDZk";
+    #          type = "file";
+    #          disableDeletion = false;
+    #          editable = true;
+    #          updateIntervalSeconds = 86400;
+    #          options.path = "${teslamate-grafana-dashboards}/dashboards/internal";
+    #        }
+    #        {
+    #          name = "teslamate_reports";
+    #          orgId = 1;
+    #          folder = "TeslaMate/Reports";
+    #          folderUid = "Nr6ofiDZk";
+    #          type = "file";
+    #          disableDeletion = false;
+    #          allowUiUpdates = true;
+    #          updateIntervalSeconds = 86400;
+    #          options.path = "${teslamate-grafana-dashboards}/dashboards/reports";
+    #        }
+    #      ];
+    #    };
+    #  };
+    #};
 
     networking.firewall.allowedTCPPorts = [ 4000 ];
   };

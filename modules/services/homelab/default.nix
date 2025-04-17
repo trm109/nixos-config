@@ -12,17 +12,37 @@ in
     ./grafana.nix
     ./teslamate.nix
   ];
-  options.modules.services = {
+  options.modules.services.homelab = {
     enable = lib.mkOption {
       default = false;
       description = "Enable the services module";
     };
   };
-  config = lib.mkIf (!cfg.enable) {
-    modules.services = {
-      home-assistant.enable = false;
-      grafana.enable = false;
-      teslamate.enable = false;
+  config = lib.mkIf cfg.enable {
+    services = {
+      avahi = {
+        enable = true;
+        nssmdns4 = true;
+        publish = {
+          enable = true;
+          addresses = true;
+        };
+      };
+
+      nginx = {
+        enable = true;
+      };
     };
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
   };
+  #config = lib.mkIf (!cfg.enable) {
+  #  modules.services.homelab = {
+  #    home-assistant.enable = false;
+  #    grafana.enable = false;
+  #    teslamate.enable = false;
+  #  };
+  #};
 }
