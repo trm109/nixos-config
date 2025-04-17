@@ -38,25 +38,24 @@ in
       fzf # fuzzy finder
       tldr # man pages, but better
       #devenv
-      (devenv.override (old: {
-        rustPlatform = old.rustPlatform // {
+      (devenv.override {
+        rustPlatform = pkgs.rustPlatform // {
           buildRustPackage =
             args:
-            old.rustPlatform.buildRustPackage (
+            pkgs.rustPlatform.buildRustPackage (
               args
               // {
-                verison = "1.5.2";
-                src = old.fetchFromGitHub {
+                src = pkgs.fetchFromGitHub {
                   owner = "cachix";
                   repo = "devenv";
-                  rev = "379980fb42ca804f7c3220d978d9da86360a68fa";
+                  rev = "v1.5.2";
                   hash = "sha256-rXtUUxfQ34ukTy2OyHwuypnSgK95FRPGwJf69QnWMrc=";
                 };
                 cargoHash = "sha256-oiOh8m7MypViLbzy/13NpSiOwkfRwybUpDs91f+HbGA=";
               }
             );
         };
-      }))
+      })
 
       direnv
       bat # cat clone
