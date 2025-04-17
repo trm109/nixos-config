@@ -12,14 +12,14 @@ in
     ./grafana.nix
     ./teslamate.nix
   ];
-  options.modules.services = {
+  options.modules.services.homelab = {
     enable = lib.mkOption {
       default = false;
       description = "Enable the services module";
     };
   };
   config = lib.mkIf (!cfg.enable) {
-    modules.services = {
+    modules.services.homelab = {
       home-assistant.enable = false;
       grafana.enable = false;
       teslamate.enable = false;

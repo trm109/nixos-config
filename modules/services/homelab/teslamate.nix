@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.modules.services.teslamate;
+  cfg = config.modules.services.homelab.teslamate;
   teslamate-grafana-dashboards = pkgs.stdenv.mkDerivation rec {
     pname = "teslamate-grafana-dashboards";
     version = "1.33.0";
@@ -27,10 +27,10 @@ let
   };
 in
 {
-  options.modules.services.teslamate = {
+  options.modules.services.homelab.teslamate = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = config.modules.services.home-assistant.enable || false;
+      default = config.modules.services.homelab.home-assistant.enable || false;
     };
   };
 

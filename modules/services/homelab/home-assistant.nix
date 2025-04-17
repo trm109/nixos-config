@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.modules.services.home-assistant;
+  cfg = config.modules.services.homelab.home-assistant;
 in
 {
-  options.modules.services.home-assistant = {
+  options.modules.services.homelab.home-assistant = {
     enable = lib.mkOption {
       default = false;
       description = "Enable Home Assistant";
