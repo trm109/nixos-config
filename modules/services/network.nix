@@ -40,6 +40,10 @@ in
       fail2ban = {
         enable = true;
       };
+      avahi = {
+        enable = true;
+        nssmdns4 = true;
+      };
     };
     # Reduces startup time
     systemd.services.NetworkManager-wait-online.enable = false;
