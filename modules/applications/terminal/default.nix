@@ -38,15 +38,15 @@ in
       fzf # fuzzy finder
       tldr # man pages, but better
       #devenv
-      (devenv.override (old: {
-        rustPlatform = old.rustPlatform // {
+      (devenv.override {
+        rustPlatform = pkgs.rustPlatform // {
           buildRustPackage =
             args:
-            old.rustPlatform.buildRustPackage (
+            pkgs.rustPlatform.buildRustPackage (
               args
               // {
                 verison = "1.5.2";
-                src = old.fetchFromGitHub {
+                src = pkgs.fetchFromGitHub {
                   owner = "cachix";
                   repo = "devenv";
                   rev = "379980fb42ca804f7c3220d978d9da86360a68fa";
@@ -56,7 +56,7 @@ in
               }
             );
         };
-      }))
+      })
 
       direnv
       bat # cat clone
