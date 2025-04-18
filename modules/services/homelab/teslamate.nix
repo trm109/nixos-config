@@ -18,13 +18,13 @@ let
 
   #  dontBuild = true;
 
-  #  installPhase = ''
-  #    mkdir -p "$out"
-  #    cp "$src"/grafana/dashboards.yml "$out"
-  #    cp -r "$src"/grafana/dashboards "$out"
-  #  '';
-  #};
 in
+#  installPhase = ''
+#    mkdir -p "$out"
+#    cp "$src"/grafana/dashboards.yml "$out"
+#    cp -r "$src"/grafana/dashboards "$out"
+#  '';
+#};
 {
   options.modules.services.homelab.teslamate = {
     enable = lib.mkOption {
@@ -34,13 +34,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    age.secrets = {
-      #teslamate_encryption.file = ../../secrets/teslamate_encryption.age;
-      teslamate_db.file = ../../secrets/teslamate_db.age;
-      teslamate_mqtt.file = ../../secrets/teslamate_mqtt.age;
-      teslamate.file = ../../secrets/teslamate.age;
-    };
-
     systemd.services."teslamate-bootstrap" = {
       preStart = ''
         mkdir -p /var/lib/teslamate
@@ -152,7 +145,7 @@ in
     #    CREATE EXTENSION IF NOT EXISTS earthdistance WITH SCHEMA public
     #  '';
     #  identMap = ''
-    #    # Arbitraty Name    systemUser DBUser
+    #    # Arbitrary Name    systemUser DBUser
     #    superuser_map       teslamate teslamate
     #    superuser_map       root      teslamate
     #  '';
