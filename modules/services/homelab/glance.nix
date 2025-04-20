@@ -1,5 +1,6 @@
 { config, lib, ... }:
 let
+  hcfg = config.modules.services.homelab;
   cfg = config.modules.services.homelab.glance;
 in
 {
@@ -9,10 +10,10 @@ in
       default = false;
       description = "Enable glance";
     };
-    domain = lib.mkOption {
+    subdomain = lib.mkOption {
       type = lib.types.str;
-      default = config.networking.hostName;
-      description = "Domain for glance";
+      default = "${hcfg.domain}";
+      description = "Subdomain for glance";
     };
   };
 
@@ -22,9 +23,14 @@ in
       glance = {
         enable = true;
       };
-      nginx.virtualHosts.${cfg.domain}.locations."/" = lib.mkForce {
-        proxyPass = with config.services.glance.settings.server; "http://${host}:${toString port}";
-        proxyWebsockets = true;
+      nginx.virtualHosts.${cfg.subdomain} = {
+        enableACME = hcfg.useHttps;
+        addSSL = hcfg.useHttps && !hcfg.forceHttps;
+        onlySSL = hcfg.forceHttps;
+        locations."/" = lib.mkForce {
+          proxyPass = with config.services.glance.settings.server; "http://${host}:${toString port}";
+          proxyWebsockets = true;
+        };
       };
     };
   };

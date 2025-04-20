@@ -1,4 +1,4 @@
-{ ... }:
+{ _ }:
 {
   age.secrets = {
     teslamate_encryption_key.file = ./teslamate/encryption_key.age;

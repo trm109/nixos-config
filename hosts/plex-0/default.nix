@@ -7,7 +7,8 @@
   ];
   modules.services.homelab = {
     enable = true;
-    teslamate.enable = false;
+    teslamate.enable = lib.mkForce false;
+    #adguardhome.enable = lib.mkForce false;
   };
   networking.firewall = {
     allowedTCPPorts = [
