@@ -20,6 +20,8 @@ in
     environment.systemPackages = with pkgs; [
       networkmanagerapplet # TODO if a graphical session is present
       openfortivpn # fortissl vpn client
+      #tailscale # tailscale client
+      trayscale
     ];
     # Network
     networking = {
@@ -47,6 +49,10 @@ in
       avahi = {
         enable = true;
         nssmdns4 = true;
+      };
+      tailscale = {
+        enable = true;
+        useRoutingFeatures = "both";
       };
     };
     # Reduces startup time
