@@ -1,5 +1,6 @@
 { config, lib, ... }:
 let
+  hcfg = config.modules.services.homelab;
   cfg = config.modules.services.homelab.grafana;
 in
 {
@@ -9,14 +10,14 @@ in
       default = config.modules.services.homelab.enable || false;
       description = "Enable Grafana service";
     };
-    domain = lib.mkOption {
+    subdomain = lib.mkOption {
       type = lib.types.str;
-      default = "${config.networking.hostName}";
-      description = "Domain for Grafana service";
+      default = "grafana.${hcfg.domain}";
+      description = "Subdomain for Grafana service";
     };
     port = lib.mkOption {
       type = lib.types.int;
-      default = 3000;
+      default = 3012;
       description = "Port for Grafana service";
     };
   };
@@ -32,26 +33,22 @@ in
           server = {
             #DEBUG
             router_logging = true;
-            #enforce_domain = true;
             http_addr = "127.0.0.1";
             http_port = cfg.port;
-            domain = "optiplex";
-            root_url = "http://optiplex/grafana/";
-            serve_from_sub_path = true;
+            domain = cfg.subdomain;
+            enforce_domain = true;
           };
         };
       };
 
-      nginx.virtualHosts."optiplex" = {
-        #enable = true;
-        #ssl = true;
-        #addSSL = true;
-        #enable = lib.mkDefault true;
-        #forceSSL = lib.mkDefault true;
-        locations."/grafana/" = {
-          proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
-          #proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
-          #proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${http_port}";
+      nginx.virtualHosts."${cfg.subdomain}" = {
+        enableACME = hcfg.useHttps;
+        addSSL = hcfg.useHttps && !hcfg.forceHttps;
+        onlySSL = hcfg.forceHttps;
+        locations."/" = {
+          proxyPass =
+            with config.services.grafana.settings.server;
+            "${protocol}://${http_addr}:${toString http_port}";
           proxyWebsockets = true;
           recommendedProxySettings = true;
           #extraConfig = ''
@@ -60,11 +57,7 @@ in
           #'';
         };
       };
-    };
-    # if external
-    networking.firewall = {
-      allowedTCPPorts = [ config.services.grafana.settings.server.http_port ];
-      allowedUDPPorts = [ config.services.grafana.settings.server.http_port ];
+
     };
   };
 }

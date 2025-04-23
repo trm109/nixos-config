@@ -6,27 +6,17 @@ let
   };
   users = {
     # ssh-keygen -t ed25519
-    saik = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG0dOeMjrqq3Hd26UY7b/HLUh+bYgsdSFZTn39n+cEiS";
+    #saik = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG0dOeMjrqq3Hd26UY7b/HLUh+bYgsdSFZTn39n+cEiS";
+    saik = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEwHC0dPH+1iqtVZWVEJ+wLmJK17A/TzdcNGNRWrGK6";
   };
-  #allUsers = builtins.attrValues users;
-  #allHosts = builtins.attrValues hosts;
 in
+#allUsers = builtins.attrValues users;
+#allHosts = builtins.attrValues hosts;
 {
-  #"secret.age".publicKeys = allUser ++ allHosts;
-  "teslamate.age".publicKeys = [
+  # Teslamate
+  "teslamate/encryption_key.age".publicKeys = [
     users.saik
     hosts.plex-0
   ];
-  "teslamate_db.age".publicKeys = [
-    users.saik
-    hosts.plex-0
-  ];
-  "teslamate_mqtt.age".publicKeys = [
-    users.saik
-    hosts.plex-0
-  ];
-  "teslamate_encryption.age".publicKeys = [
-    users.saik
-    hosts.plex-0
-  ];
+  "teslamate/refresh_token.age".publicKeys = [ users.saik ];
 }
