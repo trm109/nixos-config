@@ -28,6 +28,10 @@
     # Chaotic packages
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -49,6 +53,7 @@
             inputs.agenix.nixosModules.default
             inputs.chaotic.nixosModules.default
             inputs.nixvim.nixosModules.nixvim
+            inputs.nix-minecraft.nixosModules.minecraft-servers
             {
               # Default nixpkgs configs for the different channels
               nixpkgs.overlays = [
@@ -67,6 +72,7 @@
                   };
                 })
                 inputs.hyprpanel.overlay
+                inputs.nix-minecraft.overlay
               ];
             }
           ];

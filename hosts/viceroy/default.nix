@@ -16,23 +16,6 @@
         gaming.enable = true;
       };
     };
-    services.homelab = {
-      nginx = {
-        enable = true;
-        https = true;
-        useSubnet = false;
-      };
-      glance = {
-        enable = true;
-      };
-      grafana = {
-        enable = true;
-      };
-      home-assistant = {
-        enable = true;
-      };
-      tailscale.enable = true;
-    };
   };
   # https://github.com/ahbk/my-nixos/blob/c0c8c2cccd72b5c688154483d1e8e261e26f57b4/modules/collabora.nix#L33
   #security.acme = {

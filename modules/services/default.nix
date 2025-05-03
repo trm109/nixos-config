@@ -17,6 +17,7 @@ in
     ./razer.nix
     ./ssh.nix
     ./keyring.nix
+    ./gameserver.nix
     ./homelab
   ];
   options.modules.services = {

@@ -19,7 +19,7 @@ in
     services.tailscale = {
       enable = true;
       openFirewall = true;
-      useRoutingFeatures = "server";
+      useRoutingFeatures = lib.mkDefault "server";
     };
     environment.systemPackages = with pkgs; [
       tailscale

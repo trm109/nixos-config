@@ -6,7 +6,7 @@ in
   options.modules.services.homelab.adguardhome = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = config.modules.services.homelab.nginx.enable || false;
+      default = config.modules.services.homelab.enable || false;
       description = "Enable AdGuard Home";
     };
     filters = lib.mkOption {

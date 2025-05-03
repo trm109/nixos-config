@@ -5,11 +5,15 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  modules.services.homelab = {
-    enable = true;
-    teslamate.enable = lib.mkForce false;
-    #adguardhome.enable = lib.mkForce false;
+  modules.services = {
+    gameserver.minecraft.enable = true;
+    homelab = {
+      enable = true;
+      teslamate.enable = lib.mkForce false;
+      #adguardhome.enable = lib.mkForce false;
+    };
   };
+
   networking.firewall = {
     allowedTCPPorts = [
       42420 # Vintage Story
