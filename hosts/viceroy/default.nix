@@ -17,6 +17,10 @@
       };
     };
   };
+  hardware = {
+    xpadneo.enable = false;
+    xone.enable = false;
+  };
   # https://github.com/ahbk/my-nixos/blob/c0c8c2cccd72b5c688154483d1e8e261e26f57b4/modules/collabora.nix#L33
   #security.acme = {
   #  acceptTerms = true;

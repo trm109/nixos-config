@@ -29,8 +29,8 @@ in
       bluetui # bluetooth manager TUI
     ];
     hardware = {
-      xpadneo.enable = true; # Xbox Controller - Bluetooth
-      xone.enable = true; # Xbox Controller - USB & wireless dongle
+      xpadneo.enable = lib.mkDefault true; # Xbox Controller - Bluetooth
+      xone.enable = lib.mkDefault true; # Xbox Controller - USB & wireless dongle
       bluetooth = {
         enable = true;
         powerOnBoot = true;
