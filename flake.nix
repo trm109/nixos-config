@@ -50,6 +50,7 @@
             ./hosts
             ./modules
             ./users
+            ./secrets
             inputs.agenix.nixosModules.default
             inputs.chaotic.nixosModules.default
             inputs.nixvim.nixosModules.nixvim

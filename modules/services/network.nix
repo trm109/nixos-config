@@ -21,7 +21,7 @@ in
       networkmanagerapplet # TODO if a graphical session is present
       openfortivpn # fortissl vpn client
       #tailscale # tailscale client
-      trayscale
+      ktailctl
     ];
     # Network
     networking = {
@@ -31,6 +31,7 @@ in
       };
       networkmanager.enable = true;
       nameservers = [
+        # TODO use tailscale's config
         "8.8.8.8"
         "8.8.4.4"
         "1.1.1.1"
@@ -51,8 +52,12 @@ in
         nssmdns4 = true;
       };
       tailscale = {
+        # TODO add automatic Agenix certs.
+        # TODO add auto-start
+        # TODO add AdGuardHome as DNS
         enable = true;
         useRoutingFeatures = "both";
+        authKeyFile = config.age.secrets.tailscale_auth_key.path;
       };
     };
     # Reduces startup time
