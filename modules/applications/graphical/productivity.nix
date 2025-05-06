@@ -56,6 +56,11 @@ in
         ];
       };
       #xfconf.enable = true; #TODO test if this is needed
+      obs-studio = {
+        enable = true;
+        plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+        enableVirtualCamera = true;
+      };
     };
   };
 }

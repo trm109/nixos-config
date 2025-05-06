@@ -18,10 +18,11 @@ in
 
   config = lib.mkIf cfg.enable {
     hardware.openrazer = {
-      #enable = true; # This is currently broken
-      enable = false;
+      enable = true; # This is currently broken
+      #enable = false;
       inherit users;
       batteryNotifier.enable = true;
+      verboseLogging = true;
     };
     environment.systemPackages = with pkgs; [
       polychromatic
