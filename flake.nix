@@ -19,8 +19,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Flatpak functionality for NixOS
-    #nix-flatpak.url = "github:gmodena/nix-flatpak";
     # Better Cursors for Hyprland
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
     # Bar for Hyprland
@@ -46,6 +44,16 @@
             "sara"
           ]; # Me and my goth gamer gf
           users = [ "saik" ]; # Default, just me
+          pubKeys = {
+            hosts = {
+              plex-0 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICNNE769ehQ8NoDm/tcz/oafehsysGN0taoLfafuha0A";
+              viceroy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICppn/DPe6WPH6JXAP+cIb8qsHVR6fgD6YpS11cuF4N2";
+              #TODO add asus-flow
+            };
+            users = {
+              saik = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEwHC0dPH+1iqtVZWVEJ+wLmJK17A/TzdcNGNRWrGK6";
+            };
+          };
           modules = [
             ./hosts
             ./modules
@@ -73,7 +81,6 @@
                   };
                 })
                 inputs.hyprpanel.overlay
-                inputs.nix-minecraft.overlay
               ];
             }
           ];
@@ -105,6 +112,7 @@
                   vendor = "amd";
                 };
               };
+              inherit pubKeys;
             };
             inherit modules;
           };
@@ -133,6 +141,7 @@
                   vendor = "amd";
                 };
               };
+              inherit pubKeys;
             };
             inherit modules;
           };
@@ -155,6 +164,7 @@
                   vendor = "intel";
                 };
               };
+              inherit pubKeys;
             };
             inherit modules;
           };
@@ -169,22 +179,4 @@
           #    };
         };
     };
-
-  # This allows for the gathering of prebuilt binaries, making building much faster
-  nixConfig = {
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-      "https://nix-gaming.cachix.org"
-      #"https://isabelroses.cachix.org"
-      #"https://pre-commit-hooks.cachix.org"
-      #"https://cache.garnix.io"
-    ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-      #"isabelroses.cachix.org-1:mXdV/CMcPDaiTmkQ7/4+MzChpOe6Cb97njKmBQQmLPM="
-      #"pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-      #"cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-    ];
-  };
 }

@@ -25,6 +25,7 @@ in
     ];
     # Network
     networking = {
+      domain = "bionix.fyi";
       hostName = "${hostname}";
       firewall = {
         enable = true;

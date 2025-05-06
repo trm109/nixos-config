@@ -9,3 +9,4 @@
             - .gitignore presets for things like `fish` where if you clone onto another machine, it becomes very upset.
 - Notifications have default timeout
 - ollama dynamic gfx version
+- s3fs FUSE
