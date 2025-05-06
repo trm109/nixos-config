@@ -3,8 +3,6 @@
   lib,
   config,
   users,
-  pubKeys,
-  hostname,
   ...
 }:
 let
@@ -16,29 +14,29 @@ in
       default = true;
       description = "Enable the nix module";
     };
-    enableRemoteBuilds = lib.mkOption {
-      default = true;
-      description = "Enable remote builds";
-    };
+    #enableRemoteBuilds = lib.mkOption {
+    #  default = true;
+    #  description = "Enable remote builds";
+    #};
   };
 
   config = lib.mkIf cfg.enable {
-    programs.ssh.knownHosts = lib.mkIf cfg.enableRemoteBuilds {
-      plex-0 = {
-        hostNames = [
-          "plex-0"
-          "plex-0.${config.networking.domain}"
-        ];
-        publicKey = pubKeys.hosts.plex-0;
-      };
-      viceroy = {
-        hostNames = [
-          "viceroy"
-          "viceroy.${config.networking.domain}"
-        ];
-        publicKey = pubKeys.hosts.viceroy;
-      };
-    };
+    #programs.ssh.knownHosts = lib.mkIf cfg.enableRemoteBuilds {
+    #  plex-0 = {
+    #    hostNames = [
+    #      "plex-0"
+    #      "plex-0.${config.networking.domain}"
+    #    ];
+    #    publicKey = pubKeys.hosts.plex-0;
+    #  };
+    #  viceroy = {
+    #    hostNames = [
+    #      "viceroy"
+    #      "viceroy.${config.networking.domain}"
+    #    ];
+    #    publicKey = pubKeys.hosts.viceroy;
+    #  };
+    #};
     environment.systemPackages = [
       inputs.agenix.packages."x86_64-linux".default # TODO make this dynamic based on arch
     ];
@@ -66,7 +64,6 @@ in
         auto-optimise-store = true;
         trusted-users = [
           "root"
-          "nixremote"
         ] ++ users;
         substituters = [
           "https://nix-community.cachix.org"
@@ -79,29 +76,30 @@ in
           "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
         ];
       };
-      extraOptions = ''
-        builders-use-substitutes = true
-      '';
-      buildMachines = [
-        {
-          hostName = "viceroy";
-          system = "x86_64-linux";
-          sshUser = "nixremote";
-          sshKey = pubKeys.hosts.${hostname};
-          # if the builder supports building for multiple architectures,
-          # replace the previous line by, e.g.
-          # systems = ["x86_64-linux" "aarch64-linux"];
-          maxJobs = 1;
-          speedFactor = 2;
-          supportedFeatures = [
-            "nixos-test"
-            "benchmark"
-            "big-parallel"
-          ];
-          mandatoryFeatures = [ ];
-        }
-      ];
-      distributedBuilds = true;
+      #extraOptions = ''
+      #  builders-use-substitutes = true
+      #'';
+      buildMachines = lib.mkForce [ ];
+      #buildMachines = [
+      #  {
+      #    hostName = "viceroy";
+      #    system = "x86_64-linux";
+      #    sshUser = "nixremote";
+      #    sshKey = pubKeys.hosts.${hostname};
+      #    # if the builder supports building for multiple architectures,
+      #    # replace the previous line by, e.g.
+      #    # systems = ["x86_64-linux" "aarch64-linux"];
+      #    maxJobs = 1;
+      #    speedFactor = 2;
+      #    supportedFeatures = [
+      #      "nixos-test"
+      #      "benchmark"
+      #      "big-parallel"
+      #    ];
+      #    mandatoryFeatures = [ ];
+      #  }
+      #];
+      #distributedBuilds = true;
     };
   };
 }

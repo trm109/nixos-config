@@ -37,25 +37,25 @@ in
       fastfetch # fetches system info
       fzf # fuzzy finder
       tldr # man pages, but better
-      #devenv
-      (devenv.override {
-        rustPlatform = pkgs.rustPlatform // {
-          buildRustPackage =
-            args:
-            pkgs.rustPlatform.buildRustPackage (
-              args
-              // {
-                src = pkgs.fetchFromGitHub {
-                  owner = "cachix";
-                  repo = "devenv";
-                  rev = "v1.5.2";
-                  hash = "sha256-rXtUUxfQ34ukTy2OyHwuypnSgK95FRPGwJf69QnWMrc=";
-                };
-                cargoHash = "sha256-oiOh8m7MypViLbzy/13NpSiOwkfRwybUpDs91f+HbGA=";
-              }
-            );
-        };
-      })
+      devenv
+      #(devenv.override {
+      #  rustPlatform = pkgs.rustPlatform // {
+      #    buildRustPackage =
+      #      args:
+      #      pkgs.rustPlatform.buildRustPackage (
+      #        args
+      #        // {
+      #          src = pkgs.fetchFromGitHub {
+      #            owner = "cachix";
+      #            repo = "devenv";
+      #            rev = "v1.5.2";
+      #            hash = "sha256-rXtUUxfQ34ukTy2OyHwuypnSgK95FRPGwJf69QnWMrc=";
+      #          };
+      #          cargoHash = "sha256-oiOh8m7MypViLbzy/13NpSiOwkfRwybUpDs91f+HbGA=";
+      #        }
+      #      );
+      #  };
+      #})
 
       direnv
       bat # cat clone
