@@ -15,20 +15,25 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    virtualisation.podman = {
+      enable = true;
+      defaultNetwork.settings = {
+        dns_enabled = true;
+      };
+    };
     virtualisation.oci-containers.containers =
       let
         db_user = "teslamate";
         db_name = "teslamate";
-        db_host = "database";
+        db_host = "teslamate-db";
         mqtt_host = "mosquitto";
       in
-      {
+      rec {
         teslamate = {
           image = "teslamate/teslamate:latest";
-          restartPolicy = "always";
           ports = [ "4000:4000" ];
           volumes = [
-            "./import:/opt/app/import"
+            "teslamate-import:/var/lib/teslamate/import"
           ];
           environment = {
             #ENCRYPTION_KEY = tesla_encryption_key;
@@ -41,12 +46,14 @@ in
           environmentFiles = [
             config.age.secrets.teslamate-core-env.path
           ];
-          extraOptions = [ "--cap-drop=all" ];
+          extraOptions = [
+            "--cap-drop=all"
+          ];
+          autoStart = true;
         };
 
         teslamate-db = {
           image = "postgres:17";
-          restartPolicy = "always";
           volumes = [
             "teslamate-db:/var/lib/postgresql/data"
           ];
@@ -58,11 +65,12 @@ in
           environmentFiles = [
             config.age.secrets.teslamate-db-env.path
           ];
+          extraOptions = [
+          ];
         };
 
         teslamate-grafana = {
           image = "teslamate/grafana:latest";
-          restartPolicy = "always";
           ports = [ "3000:3000" ];
           volumes = [
             "teslamate-grafana-data:/var/lib/grafana"
@@ -76,12 +84,13 @@ in
           environmentFiles = [
             config.age.secrets.teslamate-grafana-env.path
           ];
+          extraOptions = [
+          ];
         };
 
         teslamate-mqtt = {
           image = "eclipse-mosquitto:2";
-          restartPolicy = "always";
-          command = [
+          cmd = [
             "mosquitto"
             "-c"
             "/mosquitto-no-auth.conf"
@@ -89,6 +98,8 @@ in
           volumes = [
             "mosquitto-conf:/mosquitto/config"
             "mosquitto-data:/mosquitto/data"
+          ];
+          extraOptions = [
           ];
         };
       };

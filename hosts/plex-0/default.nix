@@ -9,7 +9,7 @@
     gameserver.minecraft.enable = true;
     homelab = {
       enable = true;
-      teslamate.enable = lib.mkForce false;
+      #teslamate.enable = lib.mkForce false;
       #adguardhome.enable = lib.mkForce false;
     };
   };
