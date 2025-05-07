@@ -5,26 +5,7 @@
 }:
 let
   cfg = config.modules.services.homelab.teslamate;
-  #teslamate-grafana-dashboards = pkgs.stdenv.mkDerivation rec {
-  #  pname = "teslamate-grafana-dashboards";
-  #  version = "1.33.0";
-
-  #  src = pkgs.fetchFromGitHub {
-  #    owner = "teslamate-org";
-  #    repo = "teslamate";
-  #    rev = "v${version}";
-  #    hash = "sha256-yDAYft2/91lLLKSKrejlIQBrYZVFF6BA1J0hE7w+OF4=";
-  #  };
-
-  #  dontBuild = true;
-
 in
-#  installPhase = ''
-#    mkdir -p "$out"
-#    cp "$src"/grafana/dashboards.yml "$out"
-#    cp -r "$src"/grafana/dashboards "$out"
-#  '';
-#};
 {
   options.modules.services.homelab.teslamate = {
     enable = lib.mkOption {
@@ -34,209 +15,83 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services."teslamate-bootstrap" = {
-      preStart = ''
-        mkdir -p /var/lib/teslamate
-
-        chown -R teslamate /var/lib/teslamate
-      '';
-    };
-
-    virtualisation.oci-containers = {
-      backend = "podman";
-      containers = {
-        "teslamate" = {
-          image = "docker.io/teslamate/teslamate:latest";
-          environmentFiles = [
-            config.age.secrets.teslamate.path
-          ];
-          #environment = {
-          #  #DATABASE_USER = "teslamate";
-          #  #DATABASE_NAME = "teslamate";
-          #  #DATABASE_HOST = "127.0.0.1";
-          #  #MQTT_HOST = "192.168.50.3"; # TODO replace with DDNS address?
-          #  #MQTT_USERNAME = "teslamate";
-          #  #TZ = "America/New_York";
-          #};
-          extraOptions = [
-            "--cap-drop=ALL"
-            "--network=host"
-          ];
+    virtualisation.oci-containers.containers =
+      let
+        db_user = "teslamate";
+        db_name = "teslamate";
+        db_host = "database";
+        mqtt_host = "mosquitto";
+      in
+      {
+        teslamate = {
+          image = "teslamate/teslamate:latest";
+          restartPolicy = "always";
           ports = [ "4000:4000" ];
-          dependsOn = [ "tesla-db" ];
-        };
-        "tesla-db" = {
-          image = "docker.io/postgres:latest";
-          environmentFiles = [
-            config.age.secrets.teslamate.path
-          ];
-          #environment = {
-          #  #POSTGRES_USER = "teslamate";
-          #  #POSTGRES_PASSWORD = "" from secrets/teslamate.age
-          #  #POSTGRES_DB = "teslamate";
-          #};
-          ports = [ "5432:5432" ];
           volumes = [
-            "/var/lib/teslamate/data:/var/lib/postgresql/data" # TODO systemd server to create this folder
+            "./import:/opt/app/import"
           ];
-          extraOptions = [
-            "--network=host"
-          ];
-        };
-        "tesla-mqtt" = {
-          image = "docker.io/eclipse-mosquitto:latest";
-          entrypoint = "mosquitto -c /mosquitto/config/mosquitto.conf";
-          extraOptions = [
-            "--network=host"
-          ];
-          volumes = [
-            "/var/lib/teslamate/mosquitto-conf:/mosquitto/config"
-            "/var/lib/teslamate/mosquitto-data:/mosquitto/data"
-          ];
-        };
-        #"tesla-grafana" = {
-        #  image = "docker.io/teslamate/grafana:latest";
-        #  environmentFiles = [
-        #    config.age.secrets.teslamate.path
-        #  ];
-        #  ports = [ "3000:3000" ];
-        #  extraOptions = [
-        #    "--network=host"
-        #  ];
-        #  #workdir = "/var/lib/teslamate/grafana";
-        #  volumes = [
-        #    "/var/lib/teslamate/grafana:/var/lib/grafana"
-        #    "/var/lib/teslamate/grafana/plugins:/var/lib/grafana/plugins"
-        #    "/var/lib/teslamate/grafana/grafana.db:/var/lib/grafana/grafana.db"
-        #  ];
-        #};
-      };
-    };
-    users = {
-      users."teslamate" = {
-        isSystemUser = true;
-        group = "teslamate";
-      };
-      groups."teslamate" = { };
-    };
-
-    #services.postgresql = {
-    #  enable = lib.mkDefault true;
-
-    #  ensureDatabases = [ "teslamate" ];
-    #  ensureUsers = [
-    #    {
-    #      name = "teslamate";
-    #      ensureDBOwnership = true;
-    #    }
-    #  ];
-    #  enableTCPIP = true;
-
-    #  authentication = ''
-    #    # Generated file; do not edit!
-    #    # TYPE  DATABASE        USER            ADDRESS                 METHOD
-    #    local   all             all                                     trust
-    #    host    all             all             127.0.0.1/32            trust
-    #    host    all             all             ::1/128                 trust
-    #  '';
-    #  initialScript = pkgs.writeText "teslamate-initial-script" ''
-    #    GRANT ALL PRIVILEGES ON DATABASE teslamate TO teslamate;
-    #    CREATE EXTENSION IF NOT EXISTS cube WITH SCHEMA public
-    #    CREATE EXTENSION IF NOT EXISTS earthdistance WITH SCHEMA public
-    #  '';
-    #  identMap = ''
-    #    # Arbitrary Name    systemUser DBUser
-    #    superuser_map       teslamate teslamate
-    #    superuser_map       root      teslamate
-    #  '';
-    #};
-
-    services.mosquitto = {
-      enable = lib.mkDefault true;
-      listeners = [
-        {
-          users = {
-            teslamate = {
-              acl = [ "readwrite teslamate/#" ];
-              passwordFile = config.age.secrets.teslamate_mqtt.path;
-            };
+          environment = {
+            #ENCRYPTION_KEY = tesla_encryption_key;
+            DATABASE_USER = db_user;
+            #DATABASE_PASS = db_pass;
+            DATABASE_NAME = db_name;
+            DATABASE_HOST = db_host;
+            MQTT_HOST = mqtt_host;
           };
-        }
-      ];
-    };
+          environmentFiles = [
+            config.age.secrets.teslamate-core-env.path
+          ];
+          extraOptions = [ "--cap-drop=all" ];
+        };
 
-    #services.grafana = {
-    #  enable = lib.mkDefault true;
+        teslamate-db = {
+          image = "postgres:17";
+          restartPolicy = "always";
+          volumes = [
+            "teslamate-db:/var/lib/postgresql/data"
+          ];
+          environment = {
+            POSTGRES_USER = db_user;
+            #POSTGRES_PASSWORD = db_pass;
+            POSTGRES_DB = db_name;
+          };
+          environmentFiles = [
+            config.age.secrets.teslamate-db-env.path
+          ];
+        };
 
-    #  settings.server = {
-    #    domain = "grafana.murray-hill.asuscomm.com";
-    #    http_port = 3000;
-    #    http_addr = "0.0.0.0";
-    #  };
+        teslamate-grafana = {
+          image = "teslamate/grafana:latest";
+          restartPolicy = "always";
+          ports = [ "3000:3000" ];
+          volumes = [
+            "teslamate-grafana-data:/var/lib/grafana"
+          ];
+          environment = {
+            DATABASE_USER = db_user;
+            #DATABASE_PASS = db_pass;
+            DATABASE_NAME = db_name;
+            DATABASE_HOST = db_host;
+          };
+          environmentFiles = [
+            config.age.secrets.teslamate-grafana-env.path
+          ];
+        };
 
-    #  provision = {
-    #    enable = true;
-
-    #    datasources = {
-    #      settings.datasources = [
-    #        {
-    #          name = "TeslaMate";
-    #          type = "postgres";
-    #          access = "proxy";
-    #          url = "localhost:5432";
-    #          username = "teslamate";
-    #          database = "teslamate";
-    #          secureJsonData = {
-    #            password = "$__file{${config.age.secrets.teslamate_db.path}}";
-    #          };
-    #          jsonData = {
-    #            postgresVersion = "1400";
-    #            sslmode = "disable";
-    #          };
-    #        }
-    #      ];
-    #    };
-
-    #    dashboards = {
-    #      settings.providers = [
-    #        {
-    #          name = "teslamate";
-    #          orgId = 1;
-    #          folder = "TeslaMate";
-    #          folderUid = "Nr4ofiDZk";
-    #          type = "file";
-    #          disableDeletion = false;
-    #          editable = true;
-    #          updateIntervalSeconds = 86400;
-    #          options.path = "${teslamate-grafana-dashboards}/dashboards";
-    #        }
-    #        {
-    #          name = "teslamate_internal";
-    #          orgId = 1;
-    #          folder = "TeslaMate/Internal";
-    #          folderUid = "Nr5ofiDZk";
-    #          type = "file";
-    #          disableDeletion = false;
-    #          editable = true;
-    #          updateIntervalSeconds = 86400;
-    #          options.path = "${teslamate-grafana-dashboards}/dashboards/internal";
-    #        }
-    #        {
-    #          name = "teslamate_reports";
-    #          orgId = 1;
-    #          folder = "TeslaMate/Reports";
-    #          folderUid = "Nr6ofiDZk";
-    #          type = "file";
-    #          disableDeletion = false;
-    #          allowUiUpdates = true;
-    #          updateIntervalSeconds = 86400;
-    #          options.path = "${teslamate-grafana-dashboards}/dashboards/reports";
-    #        }
-    #      ];
-    #    };
-    #  };
-    #};
-
+        teslamate-mqtt = {
+          image = "eclipse-mosquitto:2";
+          restartPolicy = "always";
+          command = [
+            "mosquitto"
+            "-c"
+            "/mosquitto-no-auth.conf"
+          ];
+          volumes = [
+            "mosquitto-conf:/mosquitto/config"
+            "mosquitto-data:/mosquitto/data"
+          ];
+        };
+      };
     networking.firewall.allowedTCPPorts = [ 4000 ];
   };
 }

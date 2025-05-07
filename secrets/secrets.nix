@@ -17,6 +17,18 @@ in
     hosts.plex-0
   ];
   "teslamate/refresh_token.age".publicKeys = [ users.saik ];
+  "homelab/teslamate-core-env.age".publicKeys = [
+    users.saik
+    hosts.plex-0
+  ];
+  "homelab/teslamate-grafana-env.age".publicKeys = [
+    users.saik
+    hosts.plex-0
+  ];
+  "homelab/teslamate-db-env.age".publicKeys = [
+    users.saik
+    hosts.plex-0
+  ];
   "tailscale/auth_key.age".publicKeys = [
     users.saik
     hosts.plex-0
