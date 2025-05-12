@@ -16,6 +16,10 @@
         gaming.enable = true;
       };
     };
+    services.homelab.kubernetes = {
+      enable = true;
+      masterHostname = "plex-0";
+    };
   };
   hardware = {
     xpadneo.enable = false;

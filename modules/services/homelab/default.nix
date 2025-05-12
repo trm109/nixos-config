@@ -14,6 +14,7 @@ in
     ./glance.nix
     ./teslamate.nix
     ./tailscale.nix
+    ./kubernetes.nix
   ];
   options.modules.services.homelab = {
     enable = lib.mkOption {
