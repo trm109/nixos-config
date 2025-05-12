@@ -6,13 +6,21 @@
     ./hardware-configuration.nix
   ];
   modules.services = {
-    gameserver.minecraft.enable = true;
+    #gameserver.minecraft.enable = true;
     homelab = {
-      enable = true;
+      #enable = true;
       #teslamate.enable = lib.mkForce false;
       #adguardhome.enable = lib.mkForce false;
+      kubernetes = {
+        enable = true;
+        isMaster = true;
+        #masterHostname = config.networking.hostName;
+        #masterHostname = "100.69.238.57";
+        masterHostname = "192.168.50.3";
+      };
     };
   };
+  #services.k3s.clusterInit = true;
 
   networking.firewall = {
     allowedTCPPorts = [

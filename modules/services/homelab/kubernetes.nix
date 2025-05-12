@@ -26,8 +26,29 @@ in
     services.k3s = {
       enable = true;
       role = if cfg.isMaster then "server" else "agent";
-      serverAddr = "https://${cfg.masterHostname}:6443";
+      serverAddr = if cfg.isMaster then "" else "https://${cfg.masterHostname}:6443";
       tokenFile = config.age.secrets.k3s-token.path;
+      clusterInit = cfg.isMaster; # Homelabs don't need multiple masters, usually.
+    };
+    networking = {
+      firewall = {
+        allowedTCPPorts = [
+          6443
+          # 2379 # etcd
+          # 2380 # etcd
+        ];
+        allowedUDPPorts = [
+          #8472 # Flannel VXLAN
+        ];
+        interfaces.tailscale0.allowedTCPPorts = [
+          6443
+          # 2379 # etcd
+          # 2380 # etcd
+        ];
+        trustedInterfaces = [
+          "tailscale0"
+        ];
+      };
     };
   };
 }

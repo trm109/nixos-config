@@ -36,5 +36,7 @@ in
   ];
   "homelab/k3s-token.age".publicKeys = [
     users.saik
+    hosts.plex-0
+    hosts.viceroy
   ];
 }
