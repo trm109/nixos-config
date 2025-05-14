@@ -21,6 +21,7 @@ in
   };
   config = lib.mkIf cfg.enable {
     hardware.enableRedistributableFirmware = true;
+    services.fwupd.enable = true;
     #modules.firmware = {
     #  cpu.enable = false;
     #  gpu.enable = false;
