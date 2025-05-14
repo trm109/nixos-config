@@ -29,6 +29,33 @@ in
       serverAddr = if cfg.isMaster then "" else "https://${cfg.masterHostname}:6443";
       tokenFile = config.age.secrets.k3s-token.path;
       clusterInit = cfg.isMaster; # Homelabs don't need multiple masters, usually.
+      manifests = {
+        #glance-pvc = {
+        #  enable = true;
+        #  target = "glance.yaml";
+        #  content = builtins.import ./manifests/glance-pvc.nix;
+        #};
+        #postgres-pvc = {
+        #  enable = true;
+        #  target = "postgres-pvc.yaml";
+        #  content = builtins.import ./manifests/postgres-pvc.nix;
+        #};
+        #postgres-deploy = {
+        #  enable = true;
+        #  target = "postgres-deploy.yaml";
+        #  content = builtins.import ./manifests/postgres-deploy.nix;
+        #};
+        #postgres-service = {
+        #  enable = true;
+        #  target = "postgres-service.yaml";
+        #  content = builtins.import ./manifests/postgres-service.nix;
+        #};
+        pg = {
+          enable = true;
+          target = "prometheus.yaml";
+          source = ./manifests/postgres.yaml;
+        };
+      };
     };
     networking = {
       firewall = {
