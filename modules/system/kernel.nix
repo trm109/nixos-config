@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  hostType,
   ...
 }:
 let
@@ -16,11 +17,11 @@ in
   };
   config = lib.mkIf cfg.enable {
     boot = {
-      kernelPackages = pkgs.linuxPackages_cachyos-lto;
+      kernelPackages = if hostType == "desktop" then pkgs.linuxPackages_cachyos-lto else pkgs.linuxKernel.packages.linux_6_14;
       # crashDump.enable = true;
     };
     services = {
-      scx.enable = true; # enables sched-ext
+      scx.enable = if hostType == "desktop" then true else false; # enables sched-ext
     };
     # These services don't do anything
     systemd.services = {
