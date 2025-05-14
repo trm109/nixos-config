@@ -223,6 +223,29 @@
             };
             inherit modules;
           };
+          plex-3 = nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              users = gamers;
+              hostname = "plex-3";
+              hostType = "server";
+              inherit inputs;
+              hw = {
+                formFactor = "desktop";
+                gpus = [
+                  {
+                    type = "integrated";
+                    vendor = "intel";
+                    model = "";
+                  }
+                ];
+                cpu = {
+                  vendor = "intel";
+                };
+              };
+            };
+            inherit modules;
+          };
+          #      optipleximus-prime = nixpkgs.lib.nixosSystem { # Optiplex
           #      optipleximus-prime = nixpkgs.lib.nixosSystem { # Optiplex
           #      optipleximus-prime = nixpkgs.lib.nixosSystem { # Optiplex
           #      optipleximus-prime = nixpkgs.lib.nixosSystem { # Optiplex
