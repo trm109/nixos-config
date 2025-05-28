@@ -14,36 +14,6 @@ in
 #allUsers = builtins.attrValues users;
 #allHosts = builtins.attrValues hosts;
 {
-  # Teslamate
-  "teslamate/encryption_key.age".publicKeys = [
-    users.saik
-    hosts.plex-0
-    hosts.plex-1
-    hosts.plex-2
-    hosts.plex-3
-  ];
-  "teslamate/refresh_token.age".publicKeys = [ users.saik ];
-  "homelab/teslamate-core-env.age".publicKeys = [
-    users.saik
-    hosts.plex-0
-    hosts.plex-1
-    hosts.plex-2
-    hosts.plex-3
-  ];
-  "homelab/teslamate-grafana-env.age".publicKeys = [
-    users.saik
-    hosts.plex-0
-    hosts.plex-1
-    hosts.plex-2
-    hosts.plex-3
-  ];
-  "homelab/teslamate-db-env.age".publicKeys = [
-    users.saik
-    hosts.plex-0
-    hosts.plex-1
-    hosts.plex-2
-    hosts.plex-3
-  ];
   "tailscale/auth_key.age".publicKeys = [
     users.saik
     hosts.plex-0

@@ -25,15 +25,18 @@ in
     ];
     # Network
     networking = {
+      enableIPv6 = false;
       domain = "bionix.fyi";
       hostName = "${hostname}";
       firewall = {
         enable = true;
         allowedTCPPorts = [
           42420
+          45513
         ];
         allowedUDPPorts = [
           42420
+          45513
         ];
       };
       networkmanager.enable = true;
@@ -64,7 +67,7 @@ in
         # TODO add AdGuardHome as DNS
         enable = true;
         useRoutingFeatures = "both";
-        authKeyFile = config.age.secrets.tailscale_auth_key.path;
+        authKeyFile = config.age.secrets.tailscale-auth-key.path;
       };
     };
     # Reduces startup time

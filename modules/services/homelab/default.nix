@@ -12,7 +12,6 @@ in
     ./home-assistant.nix
     ./grafana.nix
     ./glance.nix
-    ./teslamate.nix
     ./tailscale.nix
     ./kubernetes.nix
   ];
@@ -52,7 +51,6 @@ in
       grafana.enable = true;
       glance.enable = true;
       home-assistant.enable = true;
-      teslamate.enable = true;
       tailscale.enable = true;
     };
     services.nginx = {

@@ -28,7 +28,13 @@ in
       steam-run
       protonup-qt
       mangohud
-      vintagestory
+      (vintagestory.overrideAttrs rec {
+        version = "1.20.10";
+        src = pkgs.fetchurl {
+          url = "https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_${version}.tar.gz";
+          hash = "sha256-AMXnq6fy1AtwmdhuuEawlWIyS4kq10HkgxnqgArqWR4=";
+        };
+      })
       goverlay
       (prismlauncher.override {
         jdks = [

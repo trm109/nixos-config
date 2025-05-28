@@ -23,7 +23,7 @@ in
         #Vid: 0x3434
         #Pid: 0x02A0
         extraRules = ''
-          SUBSYSTEMS=="usb", ATTRSV{idVendor}=="3434", ATTRS{idProduct}=="02A0", TAG+="uaccess"
+          SUBSYSTEMS=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="02A0", TAG+="uaccess"
         '';
       };
     };
