@@ -3,6 +3,7 @@
   lib,
   config,
   users,
+  pkgs,
   ...
 }:
 let
@@ -18,25 +19,13 @@ in
       default = true;
       description = "Enable the nix module";
     };
+    autoUpdate = lib.mkOption {
+      default = true;
+      description = "Enable automatic updates from git repo";
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    #programs.ssh.knownHosts = lib.mkIf cfg.enableRemoteBuilds {
-    #  plex-0 = {
-    #    hostNames = [
-    #      "plex-0"
-    #      "plex-0.${config.networking.domain}"
-    #    ];
-    #    publicKey = pubKeys.hosts.plex-0;
-    #  };
-    #  viceroy = {
-    #    hostNames = [
-    #      "viceroy"
-    #      "viceroy.${config.networking.domain}"
-    #    ];
-    #    publicKey = pubKeys.hosts.viceroy;
-    #  };
-    #};
     environment.systemPackages = [
       inputs.agenix.packages."x86_64-linux".default # TODO make this dynamic based on arch
     ];
@@ -78,5 +67,56 @@ in
       };
     };
 
+    # Automatic update systemd timer
+    systemd.timers."nix-auto-update" = {
+      description = "Nix auto update timer";
+      wantedBy = [ "timers.target" ];
+      # run every 30 minutes, give or take 1 minute, accuracy is not important
+      timerConfig = {
+        OnBootSec = "1min";
+        OnUnitActiveSec = "30min";
+        RandomizedDelaySec = "1min";
+        AccuracySec = "15s";
+      };
+    };
+    systemd.services."nix-auto-update" = {
+      enable = true;
+      description = "Nix auto update service";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+      path = [
+        pkgs.git
+      ];
+      script = ''
+        set -euo pipefail
+
+        TARGET_DIR="/etc/nixos"
+
+        git -C "$TARGET_DIR" fetch
+
+        LOCAL="$(git -C "$TARGET_DIR" rev-parse @)"
+        REMOTE="$(git -C "$TARGET_DIR" rev-parse @{u})"
+        BASE="$(git -C "$TARGET_DIR" merge-base @ @{u})"
+
+        if [ "$LOCAL" = "$REMOTE" ]; then
+          echo "Repository is up to date."
+          exit 0
+        elif [ "$LOCAL" = "$BASE" ]; then
+          echo "Repository is behind. Pulling..."
+          git -C "$TARGET_DIR" pull
+          echo "Repository updated, running nixos-rebuild switch..."
+          nixos-rebuild switch --flake "$TARGET_DIR#$(cat /etc/hostname)"
+          echo "NixOS rebuild completed."
+          exit 0
+        elif [ "$REMOTE" = "$BASE" ]; then
+          echo "Repository is ahead of remote."
+          exit 1
+        else
+          echo "Repository has diverged."
+          exit 1
+        fi
+      '';
+    };
+    # Automatic update systemd service
   };
 }
