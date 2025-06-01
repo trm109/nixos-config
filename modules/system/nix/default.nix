@@ -4,6 +4,7 @@
   config,
   users,
   pkgs,
+  hostType,
   ...
 }:
 let
@@ -20,8 +21,12 @@ in
       description = "Enable the nix module";
     };
     autoUpdate = lib.mkOption {
-      default = true;
+      default = hostType == "server";
       description = "Enable automatic updates from git repo";
+    };
+    autoReboot = lib.mkOption {
+      default = hostType == "server";
+      description = "Enable periodic reboots";
     };
   };
 
@@ -67,61 +72,96 @@ in
       };
     };
 
-    # Automatic update systemd timer
-    systemd.timers."nix-auto-update" = {
-      description = "Nix auto update timer";
-      wantedBy = [ "timers.target" ];
-      # run every 30 minutes, give or take 1 minute, accuracy is not important
-      timerConfig = {
-        OnBootSec = "1min";
-        OnUnitActiveSec = "30min";
-        RandomizedDelaySec = "1min";
-        AccuracySec = "15s";
+    systemd = {
+      timers = {
+        # Automatic update systemd timer
+        "nix-auto-update" = {
+          enable = cfg.autoUpdate;
+          description = "Nix auto update timer";
+          wantedBy = [ "timers.target" ];
+          # run every 30 minutes, give or take 1 minute, accuracy is not important
+          timerConfig = {
+            OnBootSec = "1min";
+            OnUnitActiveSec = "30min";
+            RandomizedDelaySec = "1min";
+            AccuracySec = "15s";
+          };
+        };
+
+        # Automatic reboot systemd timer, everyday at 4 AM
+        "nix-auto-reboot" = {
+          enable = cfg.autoReboot;
+          description = "Nix auto reboot timer";
+          wantedBy = [ "timers.target" ];
+          timerConfig = {
+            OnCalendar = "04:30";
+          };
+        };
+      };
+      # Automatic update systemd service
+      services = {
+        "nix-auto-update" = {
+          enable = cfg.autoUpdate;
+          description = "Nix auto update service";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+          path = [
+            pkgs.git
+          ];
+          serviceConfig = {
+            Type = "oneshot";
+          };
+          script = ''
+            set -euo pipefail
+            echo "Starting Nix auto update service..."
+            TARGET_DIR="/etc/nixos"
+            export HOME="/tmp"
+            git config --global --add safe.directory "$TARGET_DIR"
+            echo "Fetching latest changes from git repository..."
+            git -C "$TARGET_DIR" fetch
+
+            LOCAL="$(git -C "$TARGET_DIR" rev-parse @)"
+            REMOTE="$(git -C "$TARGET_DIR" rev-parse @{u})"
+            BASE="$(git -C "$TARGET_DIR" merge-base @ @{u})"
+
+            if [ "$LOCAL" = "$REMOTE" ]; then
+              echo "Repository is up to date."
+              exit 0
+            elif [ "$LOCAL" = "$BASE" ]; then
+              echo "Repository is behind. Pulling..."
+              git -C "$TARGET_DIR" pull
+              echo "Repository updated, running nixos-rebuild switch..."
+              nixos-rebuild switch --flake "$TARGET_DIR#$(cat /etc/hostname)"
+              echo "NixOS rebuild completed."
+              exit 0
+            elif [ "$REMOTE" = "$BASE" ]; then
+              echo "Repository is ahead of remote."
+              exit 1
+            else
+              echo "Repository has diverged."
+              exit 1
+            fi
+          '';
+        };
+
+        # Automatic reboot systemd service
+        "nix-auto-reboot" = {
+          enable = cfg.autoReboot;
+          description = "Nix auto reboot service";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+          };
+          script = ''
+            set -euo pipefail
+            echo "Starting Nix auto reboot service..."
+            echo "Rebooting system..."
+            ${pkgs.systemd}/bin/systemctl reboot
+          '';
+        };
       };
     };
-    systemd.services."nix-auto-update" = {
-      enable = true;
-      description = "Nix auto update service";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
-      path = [
-        pkgs.git
-      ];
-      serviceConfig = {
-        Type = "oneshot";
-      };
-      script = ''
-        set -euo pipefail
-        echo "Starting Nix auto update service..."
-        TARGET_DIR="/etc/nixos"
-        export HOME="/tmp"
-        git config --global --add safe.directory "$TARGET_DIR"
-        echo "Fetching latest changes from git repository..."
-        git -C "$TARGET_DIR" fetch
-
-        LOCAL="$(git -C "$TARGET_DIR" rev-parse @)"
-        REMOTE="$(git -C "$TARGET_DIR" rev-parse @{u})"
-        BASE="$(git -C "$TARGET_DIR" merge-base @ @{u})"
-
-        if [ "$LOCAL" = "$REMOTE" ]; then
-          echo "Repository is up to date."
-          exit 0
-        elif [ "$LOCAL" = "$BASE" ]; then
-          echo "Repository is behind. Pulling..."
-          git -C "$TARGET_DIR" pull
-          echo "Repository updated, running nixos-rebuild switch..."
-          nixos-rebuild switch --flake "$TARGET_DIR#$(cat /etc/hostname)"
-          echo "NixOS rebuild completed."
-          exit 0
-        elif [ "$REMOTE" = "$BASE" ]; then
-          echo "Repository is ahead of remote."
-          exit 1
-        else
-          echo "Repository has diverged."
-          exit 1
-        fi
-      '';
-    };
-    # Automatic update systemd service
   };
 }
