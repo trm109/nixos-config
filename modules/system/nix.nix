@@ -112,20 +112,22 @@ in
     nix = {
     };
     # cfg.isHostBuilder
-    users.users.remotebuild = lib.mkIf cfg.isHostBuilder {
-      isNormalUser = true;
-      createHome = false;
-      group = "remotebuild";
-      description = "Remote build user";
-      shell = lib.mkForce pkgs.bash;
+    users = {
+      users.remotebuild = lib.mkIf cfg.isHostBuilder {
+        isNormalUser = true;
+        createHome = false;
+        group = "remotebuild";
+        description = "Remote build user";
+        shell = lib.mkForce pkgs.bash;
 
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICNNE769ehQ8NoDm/tcz/oafehsysGN0taoLfafuha0A" # plex-0
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEYob0+sv/2ZHTzNFZxLTVpTOnuHRpA+c/xyn2a/m01p" # plex-1
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO6+ijDF6zaCnlDzCL7wZC+V9mhL1RV5BBVxcuO0rqIU" # plex-2
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQrIk6JHcuxlQ4EWXr+DuvIuaBMF2VlcPoMLtXeY1Rb" # plex-3
-      ];
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICNNE769ehQ8NoDm/tcz/oafehsysGN0taoLfafuha0A" # plex-0
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEYob0+sv/2ZHTzNFZxLTVpTOnuHRpA+c/xyn2a/m01p" # plex-1
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO6+ijDF6zaCnlDzCL7wZC+V9mhL1RV5BBVxcuO0rqIU" # plex-2
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQrIk6JHcuxlQ4EWXr+DuvIuaBMF2VlcPoMLtXeY1Rb" # plex-3
+        ];
+      };
+      groups.remotebuild = lib.mkIf cfg.isHostBuilder { };
     };
-    users.groups.remotebuild = lib.mkIf cfg.isHostBuilder { };
   };
 }
