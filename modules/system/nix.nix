@@ -3,6 +3,7 @@
   lib,
   config,
   users,
+  pkgs,
   ...
 }:
 let
@@ -14,10 +15,14 @@ in
       default = true;
       description = "Enable the nix module";
     };
-    #enableRemoteBuilds = lib.mkOption {
-    #  default = true;
-    #  description = "Enable remote builds";
-    #};
+    enableRemoteBuilds = lib.mkOption {
+      default = !config.modules.system.nix.isHostBuilder;
+      description = "Enable remote builds";
+    };
+    isHostBuilder = lib.mkOption {
+      default = false;
+      description = "Is this host a remote build machine?";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -62,9 +67,14 @@ in
           "flakes"
         ];
         auto-optimise-store = true;
-        trusted-users = [
-          "root"
-        ] ++ users;
+        trusted-users =
+          [
+            "root"
+          ]
+          ++ users
+          ++ lib.optionals cfg.isHostBuilder [
+            "remotebuild"
+          ];
         substituters = [
           "https://nix-community.cachix.org"
           "https://hyprland.cachix.org"
@@ -75,31 +85,47 @@ in
           "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
           "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
         ];
+        builders-use-substitutes = lib.mkIf cfg.enableRemoteBuilds true;
       };
-      #extraOptions = ''
-      #  builders-use-substitutes = true
-      #'';
-      buildMachines = lib.mkForce [ ];
-      #buildMachines = [
-      #  {
-      #    hostName = "viceroy";
-      #    system = "x86_64-linux";
-      #    sshUser = "nixremote";
-      #    sshKey = pubKeys.hosts.${hostname};
-      #    # if the builder supports building for multiple architectures,
-      #    # replace the previous line by, e.g.
-      #    # systems = ["x86_64-linux" "aarch64-linux"];
-      #    maxJobs = 1;
-      #    speedFactor = 2;
-      #    supportedFeatures = [
-      #      "nixos-test"
-      #      "benchmark"
-      #      "big-parallel"
-      #    ];
-      #    mandatoryFeatures = [ ];
-      #  }
-      #];
-      #distributedBuilds = true;
+      distributedBuilds = lib.mkIf cfg.enableRemoteBuilds true;
+      buildMachines = lib.mkIf cfg.enableRemoteBuilds [
+        {
+          hostName = "viceroy"; # TODO parameterize this
+          sshUser = "remotebuild";
+          sshKey = "/etc/ssh/ssh_host_ed25519_key"; # TODO parameterize this
+          inherit (pkgs.stdenv.hostPlatform) system;
+          supportedFeatures = [
+            "nixos-test"
+            "big-parallel"
+            "kvm"
+          ];
+        }
+      ];
     };
+
+    #buildMachines = lib.mkForce [ ];
+    # cfg.enableRemoteBuilds
+    services.openssh.knownHosts = lib.mkIf cfg.enableRemoteBuilds {
+      # TODO parameterize this
+      viceroy.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICppn/DPe6WPH6JXAP+cIb8qsHVR6fgD6YpS11cuF4N2"; # viceroy
+    };
+    nix = {
+    };
+    # cfg.isHostBuilder
+    users.users.remotebuild = lib.mkIf cfg.isHostBuilder {
+      isNormalUser = true;
+      createHome = false;
+      group = "remotebuild";
+      description = "Remote build user";
+      shell = lib.mkForce pkgs.bash;
+
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICNNE769ehQ8NoDm/tcz/oafehsysGN0taoLfafuha0A" # plex-0
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEYob0+sv/2ZHTzNFZxLTVpTOnuHRpA+c/xyn2a/m01p" # plex-1
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO6+ijDF6zaCnlDzCL7wZC+V9mhL1RV5BBVxcuO0rqIU" # plex-2
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQrIk6JHcuxlQ4EWXr+DuvIuaBMF2VlcPoMLtXeY1Rb" # plex-3
+      ];
+    };
+    users.groups.remotebuild = lib.mkIf cfg.isHostBuilder { };
   };
 }
