@@ -31,7 +31,11 @@ in
             "nixos-test"
             "big-parallel"
             "kvm"
+            "benchmark"
           ];
+          maxJobs = 4;
+          protocol = "ssh-ng"; # improved SSH protocol??
+          speedFactor = 10;
         }
       ];
     };

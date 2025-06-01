@@ -8,6 +8,7 @@ let
   cfg = config.modules.system.nix.hostBuilder;
 in
 {
+  # based on https://nix.dev/tutorials/nixos/distributed-builds-setup.html#distributed-builds-config-nixos
   options.modules.system.nix.hostBuilder = {
     enable = lib.mkOption {
       type = lib.types.bool;
