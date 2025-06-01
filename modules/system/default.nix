@@ -10,7 +10,7 @@ in
   imports = [
     ./kernel.nix
     ./locale.nix
-    ./nix.nix
+    ./nix
   ];
   options.modules.system = {
     enable = lib.mkOption {

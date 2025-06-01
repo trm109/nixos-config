@@ -16,7 +16,7 @@
         gaming.enable = true;
       };
     };
-    system.nix.isHostBuilder = true;
+    system.nix.hostBuilder.enable = true;
   };
   hardware = {
     xpadneo.enable = false;
