@@ -87,11 +87,16 @@ in
       path = [
         pkgs.git
       ];
+      serviceConfig = {
+        Type = "oneshot";
+      };
       script = ''
         set -euo pipefail
-
+        echo "Starting Nix auto update service..."
         TARGET_DIR="/etc/nixos"
-
+        export HOME="/tmp"
+        git config --global --add safe.directory "$TARGET_DIR"
+        echo "Fetching latest changes from git repository..."
         git -C "$TARGET_DIR" fetch
 
         LOCAL="$(git -C "$TARGET_DIR" rev-parse @)"
