@@ -92,9 +92,9 @@ in
         "nix-auto-reboot" = {
           enable = cfg.autoReboot;
           description = "Nix auto reboot timer";
-          wantedBy = [ "timers.target" ];
+          wantedBy = [ "multi-user.target" ];
           timerConfig = {
-            OnCalendar = "04:30";
+            OnCalendar = "*-*-* 04:00";
           };
         };
       };
@@ -157,12 +157,9 @@ in
         # Automatic reboot systemd service
         "nix-auto-reboot" = {
           enable = cfg.autoReboot;
-          description = "Nix auto reboot service";
-          wantedBy = [ "multi-user.target" ];
-          after = [ "network.target" ];
+          description = "Auto reboot service";
           serviceConfig = {
             Type = "oneshot";
-            RemainAfterExit = true;
           };
           script = ''
             set -euo pipefail
