@@ -95,7 +95,9 @@
               };
             }
             {
-              system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
+              # Associate the git commit revision with the system configuration
+              # access with nixos-version --configuration-revision.
+              system.configurationRevision = self.rev or "dirty";
             }
           ];
         in

@@ -126,20 +126,30 @@ in
 
             if [ "$LOCAL" = "$REMOTE" ]; then
               echo "Repository is up to date."
-              exit 0
             elif [ "$LOCAL" = "$BASE" ]; then
               echo "Repository is behind. Pulling..."
               git -C "$TARGET_DIR" pull
-              echo "Repository updated, running nixos-rebuild switch..."
-              nixos-rebuild switch --flake "$TARGET_DIR#$(cat /etc/hostname)"
-              echo "NixOS rebuild completed."
-              exit 0
+              echo "Repository updated!"
             elif [ "$REMOTE" = "$BASE" ]; then
-              echo "Repository is ahead of remote."
+              echo "Repository is ahead of remote. Please correct this manually."
               exit 1
             else
-              echo "Repository has diverged."
+              echo "Repository has diverged. Please correct this manually."
               exit 1
+            fi
+
+            CONFIG_REV="$(nixos-version --configuration-revision)"
+
+            # If the current config rev is not same as the latest commit revision, rebuild the system
+            if [ "$CONFIG_REV" != "$(git -C "$TARGET_DIR" rev-parse HEAD)" ]; then
+              echo "Configuration has changed, applying changes..."
+              echo "Rebuilding system..."
+              ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake "$TARGET_DIR#$(hostname)"
+              echo "System rebuilt successfully!"
+              exit 0
+            else
+              echo "No changes to apply."
+              exit 0
             fi
           '';
         };
