@@ -37,7 +37,7 @@
   };
 
   outputs =
-    { nixpkgs, ... }@inputs:
+    { self, nixpkgs, ... }@inputs:
     {
       nixosConfigurations =
         let
@@ -93,6 +93,9 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
               };
+            }
+            {
+              system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
             }
           ];
         in
