@@ -107,6 +107,8 @@ in
           after = [ "network.target" ];
           path = [
             pkgs.git
+            pkgs.nixos-rebuild
+            pkgs.nix-janitor
           ];
           serviceConfig = {
             Type = "oneshot";
@@ -138,14 +140,18 @@ in
               exit 1
             fi
 
-            CONFIG_REV="$(nixos-version --configuration-revision)"
+            # Get the current configuration revision
+            CONFIG_REV="$(/run/current-system/sw/bin/nixos-version --configuration-revision)"
 
-            # If the current config rev is not same as the latest commit revision, rebuild the system
+            # Compare configuration revision against the current HEAD
             if [ "$CONFIG_REV" != "$(git -C "$TARGET_DIR" rev-parse HEAD)" ]; then
               echo "Configuration has changed, applying changes..."
               echo "Rebuilding system..."
-              ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake "$TARGET_DIR#$(hostname)"
+              nixos-rebuild switch --flake "$TARGET_DIR#$(hostname)"
               echo "System rebuilt successfully!"
+              echo "Cleaning up old generations..."
+              janitor
+              echo "Old generations cleaned up!"
               exit 0
             else
               echo "No changes to apply."
