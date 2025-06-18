@@ -37,6 +37,7 @@ in
       bitwarden # password manager
       insomnia # REST client
       github-desktop # GitHub client
+      super-productivity
     ];
     services = {
       gvfs = {
