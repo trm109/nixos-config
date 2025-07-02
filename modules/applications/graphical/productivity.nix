@@ -29,7 +29,7 @@ in
       stremio # Video Player + Torrent Streaming
       stable.libreoffice # office suite
       darktable # Photo editing
-      blender-hip # 3d modeling software
+      #blender-hip # 3d modeling software
       cheese # simple camera app, for testing mostly
       thunderbird # email client
       mpv # video player, supports hdr
