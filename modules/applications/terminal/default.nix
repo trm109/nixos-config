@@ -48,10 +48,10 @@ in
       #          src = pkgs.fetchFromGitHub {
       #            owner = "cachix";
       #            repo = "devenv";
-      #            rev = "v1.5.2";
-      #            hash = "sha256-rXtUUxfQ34ukTy2OyHwuypnSgK95FRPGwJf69QnWMrc=";
+      #            rev = "v1.6.1";
+      #            hash = "sha256-CEVWxRaln3sp0541QpMfcfmI2w+RN72UgNLV5Dy9sco=";
       #          };
-      #          cargoHash = "sha256-oiOh8m7MypViLbzy/13NpSiOwkfRwybUpDs91f+HbGA=";
+      #          cargoHash = "sha256-t4Cj7JlBVrMP02Dqibq2IgdKy6ejv+CeffmcPAkh7BE=";
       #        }
       #      );
       #  };
