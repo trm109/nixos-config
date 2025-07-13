@@ -1,6 +1,4 @@
 {
-  lib,
-  pkgs,
   ...
 }:
 {
@@ -34,7 +32,7 @@
       enable = true;
       reservedMemory = "512M";
     };
-    kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_14;
+    #kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_14;
     # Things to disable NVIDIA
     blacklistedKernelModules = [
       "nouveau"

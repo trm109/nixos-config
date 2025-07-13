@@ -30,14 +30,6 @@ in
       hostName = "${hostname}";
       firewall = {
         enable = true;
-        allowedTCPPorts = [
-          42420
-          45513
-        ];
-        allowedUDPPorts = [
-          42420
-          45513
-        ];
       };
       networkmanager.enable = true;
       nameservers = [

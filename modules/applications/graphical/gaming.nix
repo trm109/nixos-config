@@ -61,13 +61,59 @@ in
         }
       ))
     ];
-
+    networking.firewall =
+      let
+        # Taken from https://help.steampowered.com/en/faqs/view/2EA8-4D75-DA21-31EB
+        steam-tcp-ports = [
+          80 # HTTP
+          443 # HTTPS
+          27015 # RCON
+        ];
+        steam-tcp-port-ranges = [
+          {
+            # Basic
+            from = 27105;
+            to = 27050;
+          }
+        ];
+        steam-udp-ports = [
+          3478 # P2P & Voice
+          4379 # P2P & Voice
+          4380 # client & P2P & Voice
+          27015 # gameplay traffic
+        ];
+        steam-udp-port-ranges = [
+          {
+            # Basic
+            from = 27015;
+            to = 27050;
+          }
+          {
+            # Game Traffic
+            from = 27000;
+            to = 27100;
+          }
+          {
+            # Remote Play
+            from = 27031;
+            to = 27036;
+          }
+          {
+            # P2P & Voice
+            from = 27014;
+            to = 27030;
+          }
+        ];
+      in
+      {
+        allowedTCPPorts = steam-tcp-ports;
+        allowedTCPPortRanges = steam-tcp-port-ranges;
+        allowedUDPPorts = steam-udp-ports;
+        allowedUDPPortRanges = steam-udp-port-ranges;
+      };
     programs = {
       steam = {
         enable = true;
-        remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-        dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-        localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers.
         extest.enable = true; # Whether to enable Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
         # Extra packages to install for compatibility with Steam games
         extraCompatPackages = [

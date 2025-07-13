@@ -60,6 +60,7 @@ in
       direnv
       bat # cat clone
       rclone # file sync
+      jq
 
       # nix stuff
       nix-prefetch-git
