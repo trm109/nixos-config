@@ -65,7 +65,6 @@
             ./secrets
             inputs.agenix.nixosModules.default
             inputs.chaotic.nixosModules.default
-            inputs.nixvim.nixosModules.nixvim
             inputs.nix-minecraft.nixosModules.minecraft-servers
             {
               # Default nixpkgs configs for the different channels
@@ -86,13 +85,6 @@
                 })
                 inputs.hyprpanel.overlay
               ];
-            }
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-              };
             }
             {
               # Associate the git commit revision with the system configuration

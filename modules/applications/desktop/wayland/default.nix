@@ -1,7 +1,6 @@
 # Wayland specific settings, but not DE specific settings.
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -22,24 +21,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment = {
-      # TODO look over more options
-      sessionVariables = {
-        #MOZ_USE_XINPUT2 = "1";
-        MOZ_ENABLE_WAYLAND = "1";
-        XDG_SESSION_TYPE = "wayland";
-      };
-      systemPackages = with pkgs; [
-        wl-clipboard # Wayland clipboard manager
-        waypipe # Wayland remote desktop
-        weston # Wayland compositor
-      ];
-    };
     services = {
       libinput = {
         enable = true;
-        #touchpad = {};
-        #mouse = {};
       };
     };
   };

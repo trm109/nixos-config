@@ -24,43 +24,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      steam-run
-      protonup-qt
-      mangohud
-      (vintagestory.overrideAttrs rec {
-        version = "1.20.10";
-        src = pkgs.fetchurl {
-          url = "https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_${version}.tar.gz";
-          hash = "sha256-AMXnq6fy1AtwmdhuuEawlWIyS4kq10HkgxnqgArqWR4=";
-        };
-      })
-      goverlay
-      (prismlauncher.override {
-        jdks = [
-          jdk8
-          jdk17
-          jdk21
-        ];
-      })
-      (r2modman.overrideAttrs (
-        let
-          src = pkgs.fetchFromGitHub {
-            owner = "ebkr";
-            repo = "r2modmanPlus";
-            rev = "59c1fe5287593eb58b4ce6d5d8f2ca59ca64bfd4";
-            hash = "sha256-1b24tclqXGx85BGFYL9cbthLScVWau2OmRh9YElfCLs=";
-          };
-        in
-        {
-          inherit src;
-          offlineCache = pkgs.fetchYarnDeps {
-            yarnLock = "${src}/yarn.lock";
-            hash = "sha256-3SMvUx+TwUmOur/50HDLWt0EayY5tst4YANWIlXdiPQ=";
-          };
-        }
-      ))
-    ];
     networking.firewall =
       let
         # Taken from https://help.steampowered.com/en/faqs/view/2EA8-4D75-DA21-31EB
