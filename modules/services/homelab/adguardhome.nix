@@ -13,17 +13,15 @@ in
       type = lib.types.listOf lib.types.str;
       default = [
         "https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt" # AdGuard Base filter
-        "https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt" # AdAway blocklist
-        "https://adguardteam.github.io/HostlistsRegistry/assets/filter_7.txt" # Perflys and Dandelion Sprout's Smart-TV Blocklist
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt" # Adblock Pro filter
         "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt" # The Big List of Hacked Malware Web Sites
         "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt" # malicious url blocklist
         "https://adguardteam.github.io/HostlistsRegistry/assets/filter_18.txt" # Filter Phishing domains
         "https://adguardteam.github.io/HostlistsRegistry/assets/filter_12.txt" # Anti-mailware list
         "https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt" # Filter Phishing domains based on PhishTank and OpenPhish lists"
-        "https://adguardteam.github.io/HostlistsRegistry/assets/filter_57.txt" # Block dating sites
-        "https://adguardteam.github.io/HostlistsRegistry/assets/filter_47.txt" # Block gambling sites
         "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt" # AdGuard Mobile Ads filter
-        "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt" # Adblock Pro filter
+        "https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt" # AdAway blocklist
+        "https://adguardteam.github.io/HostlistsRegistry/assets/filter_7.txt" # Perflys and Dandelion Sprout's Smart-TV Blocklist
       ];
       description = "List of filter URLs to use.";
     };
@@ -47,9 +45,7 @@ in
         #};
         dns = {
           bind_hosts = [
-            "127.0.0.1" # localhost
-            "192.168.50.3" # Home network IP
-            "100.122.81.55" # Tailscale IP
+            "0.0.0.0"
           ];
           trusted_proxies = [
             "127.0.0.1"
@@ -65,17 +61,17 @@ in
         };
         filtering = {
           filtering_enabled = true;
-          rewrites = [
-            {
-              #TODO: make a single fqdn addressible for both networks.
-              domain = "*.local";
-              answer = "192.168.50.3"; # Home network IP
-            }
-            {
-              domain = "*.lan";
-              answer = "100.122.81.55"; # Tailscale IP
-            }
-          ];
+          #rewrites = [
+          #  {
+          #    #TODO: make a single fqdn addressible for both networks.
+          #    domain = "*.local";
+          #    answer = "192.168.50.3"; # Home network IP
+          #  }
+          #  {
+          #    domain = "*.lan";
+          #    answer = "100.122.81.55"; # Tailscale IP
+          #  }
+          #];
         };
         filters = map (url: {
           name = url;
