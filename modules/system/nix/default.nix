@@ -147,7 +147,7 @@ in
             if [ "$CONFIG_REV" != "$(git -C "$TARGET_DIR" rev-parse HEAD)" ]; then
               echo "Configuration has changed, applying changes..."
               echo "Rebuilding system..."
-              nixos-rebuild switch --flake "$TARGET_DIR#$(hostname)"
+              nixos-rebuild switch --flake "$TARGET_DIR#$(cat /etc/hostname)"
               echo "System rebuilt successfully!"
               echo "Cleaning up old generations..."
               janitor
