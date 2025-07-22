@@ -33,7 +33,10 @@ in
         "127.0.0.1"
       ];
       firewall = {
-        allowedUDPPorts = [ 53 ];
+        allowedUDPPorts = [
+          53
+          29222
+        ];
         allowedTCPPorts = [
           53
           29222
