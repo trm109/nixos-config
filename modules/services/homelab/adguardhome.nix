@@ -36,7 +36,7 @@ in
     };
     services.adguardhome = {
       enable = true;
-      port = 29222;
+      port = 29222; # Web UI port
       settings = {
         #http = { };
         #http.port = 29222;
@@ -48,7 +48,9 @@ in
             "0.0.0.0"
           ];
           trusted_proxies = [
-            "127.0.0.1"
+            "127.0.0.1" # localhost
+            "192.168.50.0/24" # local network
+            "100.64.0.0/10" # tailnet
           ];
           bootstrap_dns = [ "1.1.1.1" ];
           upstream_dns = [
@@ -61,17 +63,6 @@ in
         };
         filtering = {
           filtering_enabled = true;
-          #rewrites = [
-          #  {
-          #    #TODO: make a single fqdn addressible for both networks.
-          #    domain = "*.local";
-          #    answer = "192.168.50.3"; # Home network IP
-          #  }
-          #  {
-          #    domain = "*.lan";
-          #    answer = "100.122.81.55"; # Tailscale IP
-          #  }
-          #];
         };
         filters = map (url: {
           name = url;
