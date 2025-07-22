@@ -32,7 +32,13 @@ in
       nameservers = [
         "127.0.0.1"
       ];
-      firewall.allowedTCPPorts = [ 29222 ];
+      firewall = {
+        allowedUDPPorts = [ 53 ];
+        allowedTCPPorts = [
+          53
+          29222
+        ];
+      };
     };
     services.adguardhome = {
       enable = true;
