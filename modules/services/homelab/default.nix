@@ -14,6 +14,7 @@ in
     ./glance.nix
     ./tailscale.nix
     ./kubernetes.nix
+    ./focalboard.nix
   ];
   options.modules.services.homelab = {
     enable = lib.mkOption {
@@ -46,53 +47,53 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    modules.services.homelab = {
-      adguardhome.enable = true;
-      grafana.enable = true;
-      glance.enable = true;
-      home-assistant.enable = true;
-      tailscale.enable = true;
-    };
-    services.nginx = {
-      enable = true;
-      statusPage = true;
-      recommendedGzipSettings = true;
-      recommendedOptimisation = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
-      virtualHosts.${cfg.domain} = {
-        enableACME = cfg.useHttps;
-        addSSL = cfg.useHttps && !cfg.forceHttps;
-        onlySSL = cfg.forceHttps;
-        #addSSL = cfg.https;
-        #forceSSL = cfg.https;
-        # can be overridden
-        extraConfig = ''
-          proxy_buffering off;
-        '';
-        locations."/" = lib.mkDefault {
-          return = "200 '<html><body>It works</body></html>'";
-          extraConfig = ''
-            default_type text/html;
-          '';
-        };
-      };
-    };
-    security.acme = {
-      acceptTerms = true;
-      defaults = {
-        email = "theo@bionix.fyi";
-        #dnsResolver = "127.0.0.1:53"; #TODO this should be 100.x.x.x on tailscale, but 192.168.x.x on the local network
-        dnsProvider = "manual";
-        #TODO implement cfg.sslCertFile here
-      };
-    };
-    networking.firewall.allowedTCPPorts = [
-      # HTTP
-      80
-      # HTTPS
-      443
-    ];
-    users.users.nginx.extraGroups = [ "acme" ];
+    #modules.services.homelab = {
+    #  adguardhome.enable = true;
+    #  grafana.enable = true;
+    #  glance.enable = true;
+    #  home-assistant.enable = true;
+    #  tailscale.enable = true;
+    #};
+    #services.nginx = {
+    #  enable = true;
+    #  statusPage = true;
+    #  recommendedGzipSettings = true;
+    #  recommendedOptimisation = true;
+    #  recommendedProxySettings = true;
+    #  recommendedTlsSettings = true;
+    #  virtualHosts.${cfg.domain} = {
+    #    enableACME = cfg.useHttps;
+    #    addSSL = cfg.useHttps && !cfg.forceHttps;
+    #    onlySSL = cfg.forceHttps;
+    #    #addSSL = cfg.https;
+    #    #forceSSL = cfg.https;
+    #    # can be overridden
+    #    extraConfig = ''
+    #      proxy_buffering off;
+    #    '';
+    #    locations."/" = lib.mkDefault {
+    #      return = "200 '<html><body>It works</body></html>'";
+    #      extraConfig = ''
+    #        default_type text/html;
+    #      '';
+    #    };
+    #  };
+    #};
+    #security.acme = {
+    #  acceptTerms = true;
+    #  defaults = {
+    #    email = "theo@bionix.fyi";
+    #    #dnsResolver = "127.0.0.1:53"; #TODO this should be 100.x.x.x on tailscale, but 192.168.x.x on the local network
+    #    dnsProvider = "manual";
+    #    #TODO implement cfg.sslCertFile here
+    #  };
+    #};
+    #networking.firewall.allowedTCPPorts = [
+    #  # HTTP
+    #  80
+    #  # HTTPS
+    #  443
+    #];
+    #users.users.nginx.extraGroups = [ "acme" ];
   };
 }

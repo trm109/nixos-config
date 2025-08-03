@@ -11,6 +11,7 @@
       #enable = true;
       #teslamate.enable = lib.mkForce false;
       adguardhome.enable = true;
+      focalboard.enable = true;
       #kubernetes = {
       #  enable = true;
       #  isMaster = true;
