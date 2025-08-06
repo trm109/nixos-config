@@ -20,7 +20,7 @@ in
     # Focalboard is a self-hosted project management tool from Mattermost.
     virtualisation.oci-containers.containers.focalboard = {
       image = "mattermost/focalboard:latest";
-      ports = [ "127.0.0.1:${cfg.port}:8000" ];
+      ports = [ "127.0.0.1:${toString cfg.port}:8000" ];
       # fbdata:/opt/focalboard/data
       volumes = [
         "fbdata:/opt/focalboard/data"
