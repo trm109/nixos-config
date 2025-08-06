@@ -7,6 +7,12 @@ let
     viceroy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICppn/DPe6WPH6JXAP+cIb8qsHVR6fgD6YpS11cuF4N2";
     #TODO add asus-flow
   };
+  plexHosts = [
+    hosts.plex-0
+    hosts.plex-1
+    hosts.plex-2
+    hosts.plex-3
+  ];
   users = {
     saik = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEwHC0dPH+1iqtVZWVEJ+wLmJK17A/TzdcNGNRWrGK6";
   };
@@ -14,20 +20,36 @@ in
 #allUsers = builtins.attrValues users;
 #allHosts = builtins.attrValues hosts;
 {
+  "homelab/kubernetes/apitoken.age".publicKeys = plexHosts ++ [
+    users.saik
+    hosts.viceroy
+  ];
+  # "homelab/k8s-apitoken.age".publicKeys = [
+  #   users.saik
+  #   hosts.viceroy
+  #   hosts.plex-0
+  #   hosts.plex-1
+  #   hosts.plex-2
+  #   hosts.plex-3
+  # ];
+  #"homelab/k8s-ca-cert.age".publicKeys = [
+  #  users.saik
+  #  hosts.viceroy
+  #  hosts.plex-0
+  #  hosts.plex-1
+  #  hosts.plex-2
+  #  hosts.plex-3
+  #];
   "tailscale/auth_key.age".publicKeys = [
     users.saik
-    hosts.plex-0
-    hosts.plex-1
-    hosts.plex-2
-    hosts.plex-3
     hosts.viceroy
-  ];
-  "homelab/k3s-token.age".publicKeys = [
-    users.saik
-    hosts.viceroy
-    hosts.plex-0
-    hosts.plex-1
-    hosts.plex-2
-    hosts.plex-3
-  ];
+  ] ++ plexHosts;
+  #"homelab/k3s-token.age".publicKeys = [
+  #  users.saik
+  #  hosts.viceroy
+  #  hosts.plex-0
+  #  hosts.plex-1
+  #  hosts.plex-2
+  #  hosts.plex-3
+  #];
 }

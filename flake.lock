@@ -254,6 +254,22 @@
         "type": "github"
       }
     },
+    "homelab": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "path": "./flakes/homelab",
+        "type": "path"
+      },
+      "original": {
+        "path": "./flakes/homelab",
+        "type": "path"
+      },
+      "parent": []
+    },
     "hyprlang": {
       "inputs": {
         "nixpkgs": [
@@ -554,6 +570,7 @@
         "agenix": "agenix",
         "chaotic": "chaotic",
         "home-manager": "home-manager_3",
+        "homelab": "homelab",
         "hyprpanel": "hyprpanel",
         "nix-minecraft": "nix-minecraft",
         "nixpkgs": "nixpkgs_4",

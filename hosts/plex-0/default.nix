@@ -21,6 +21,14 @@
       #};
     };
   };
+  homelab = {
+    kubernetes = {
+      enable = true;
+      asMaster = true;
+      masterHostname = "plex-0";
+      masterIP = "192.168.50.3";
+    };
+  };
   #services.k3s.clusterInit = true;
 
   networking.firewall = {

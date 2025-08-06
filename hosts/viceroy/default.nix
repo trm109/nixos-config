@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
   ## Hardware
@@ -17,6 +17,12 @@
       };
     };
     system.nix.hostBuilder.enable = true;
+  };
+  homelab.kubernetes = {
+    enable = true;
+    masterIP = "192.168.50.3";
+    masterHostname = "plex-0";
+    apitokenPath = config.age.secrets.kubernetes-apitoken.path;
   };
   hardware = {
     xpadneo.enable = false;

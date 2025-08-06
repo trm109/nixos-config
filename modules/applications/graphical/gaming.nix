@@ -35,8 +35,8 @@ in
         steam-tcp-port-ranges = [
           {
             # Basic
-            from = 27105;
-            to = 27050;
+            from = 27050;
+            to = 27105;
           }
         ];
         steam-udp-ports = [
@@ -48,8 +48,8 @@ in
         steam-udp-port-ranges = [
           {
             # Basic
-            from = 27015;
-            to = 27050;
+            from = 27050;
+            to = 27105;
           }
           {
             # Game Traffic

@@ -34,6 +34,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # import ./flakes/homelab/flake.nix;
+    homelab = {
+      url = "path:./flakes/homelab";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -66,6 +71,8 @@
             inputs.agenix.nixosModules.default
             inputs.chaotic.nixosModules.default
             inputs.nix-minecraft.nixosModules.minecraft-servers
+            inputs.homelab.nixosModules.default
+            { }
             {
               # Default nixpkgs configs for the different channels
               nixpkgs.overlays = [
