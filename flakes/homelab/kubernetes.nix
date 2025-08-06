@@ -130,10 +130,13 @@ in
       ];
       wantedBy = [ "kubernetes.target" ];
     };
-    networking.firewall.allowedTCPPorts = lib.mkIf cfg.asMaster [
-      cfg.masterServerPort
-      8888 # for kubelet
-    ];
+    networking = {
+      extraHosts = "${cfg.masterHostname}:${cfg.masterIP}";
+      firewall.allowedTCPPorts = lib.mkIf cfg.asMaster [
+        cfg.masterServerPort
+        8888 # for kubelet
+      ];
+    };
     services.kubernetes =
       let
         api = "https://${cfg.masterHostname}:${toString cfg.masterServerPort}";
