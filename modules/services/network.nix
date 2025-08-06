@@ -26,7 +26,7 @@ in
     # Network
     networking = {
       enableIPv6 = false;
-      domain = "bionix.fyi";
+      #domain = "bionix.fyi";
       hostName = "${hostname}";
       firewall = {
         enable = true;
