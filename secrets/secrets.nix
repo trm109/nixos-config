@@ -21,7 +21,6 @@ in
 #allHosts = builtins.attrValues hosts;
 {
   "homelab/kubernetes/apitoken.age".publicKeys = plexHosts ++ [
-    users.saik
     hosts.viceroy
   ];
   # "homelab/k8s-apitoken.age".publicKeys = [
