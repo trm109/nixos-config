@@ -20,6 +20,7 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
+    programs.corectrl.enable = true;
     hardware.enableRedistributableFirmware = true;
     services.fwupd.enable = true;
     #modules.firmware = {

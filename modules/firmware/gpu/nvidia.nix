@@ -22,14 +22,15 @@ in
   config = lib.mkIf cfg.enable {
     hardware.nvidia = {
       modesetting.enable = true;
-      nvidiaSettings = true;
+      #nvidiaSettings = true;
       open = true;
       package = config.boot.kernelPackages.nvidiaPackages.production;
       # dynamicBoost.enable = true; #TODO figure out if this works on AMD systems.
     };
-    services.xserver.videoDrivers = lib.mkIf config.modules.applications.desktop.x11.enable [
+    services.xserver.videoDrivers = [
       "nvidia"
     ];
+    # https://wiki.nixos.org/wiki/CUDA
     nixpkgs.config.cudaSupport = cfg.enableAcceleration;
   };
 }
