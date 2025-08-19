@@ -31,7 +31,7 @@ in
 
     environment.systemPackages = with pkgs; [
       clinfo
-      lact
+      # lact
       nvtopPackages.full
     ];
 
@@ -43,25 +43,25 @@ in
         #});
       };
     };
-
-    systemd.services.lactd = {
-      enable = true;
-      description = " Linux GPU Configuration Daemon";
-      after = [
-        "syslog.target"
-        "systemd-modules-load.service"
-      ];
-
-      unitConfig = {
-        ConditionPathExists = "${pkgs.lact}/bin/lact";
-      };
-
-      serviceConfig = {
-        User = "root";
-        ExecStart = "${pkgs.lact}/bin/lact daemon";
-      };
-
-      wantedBy = [ "multi-user.target" ];
-    };
+    services.lact.enable = true;
+    # systemd.services.lactd = {
+    #   enable = true;
+    #   description = " Linux GPU Configuration Daemon";
+    #   after = [
+    #     "syslog.target"
+    #     "systemd-modules-load.service"
+    #   ];
+    #
+    #   unitConfig = {
+    #     ConditionPathExists = "${pkgs.lact}/bin/lact";
+    #   };
+    #
+    #   serviceConfig = {
+    #     User = "root";
+    #     ExecStart = "${pkgs.lact}/bin/lact daemon";
+    #   };
+    #
+    #   wantedBy = [ "multi-user.target" ];
+    # };
   };
 }

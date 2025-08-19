@@ -1,4 +1,5 @@
 {
+  pkgs,
   hw,
   lib,
   config,
@@ -16,9 +17,16 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      ryzenadj
+    ];
+    boot.kernelParams = [
+      "iomem=relaxed"
+    ];
     # TODO add more stuff
     hardware.cpu.amd = {
       updateMicrocode = true;
+      ryzen-smu.enable = true;
     };
   };
 }

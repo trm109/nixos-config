@@ -27,12 +27,41 @@ in
     };
 
   config = lib.mkIf cfg.enable {
-    hardware.amdgpu = {
-      initrd.enable = true;
-      opencl.enable = cfg.enableAcceleration;
+    # https://www.reddit.com/r/ROCm/comments/1g3lnuj/rocm_apu_680m_and_gtt_memory_on_arch/
+    #hardware.amdgpu = {
+    #  initrd.enable = true;
+    #  opencl.enable = cfg.enableAcceleration;
+    #};
+    boot.kernelParams = [
+      "iommu=pt"
+    ];
+    hardware = {
+      graphics = {
+        enable = true;
+        enable32Bit = true;
+        extraPackages = with pkgs; [
+          mesa
+          libva
+          libvdpau-va-gl
+          vulkan-loader
+          vulkan-validation-layers
+          amdvlk
+          #mesa.opencl
+        ];
+      };
+      amdgpu.overdrive = {
+        enable = true;
+        ppfeaturemask = "0xffffffff"; # Enable Overdrive
+      };
     };
-
-    services.xserver.videoDrivers = lib.mkIf config.modules.applications.desktop.x11.enable [
+    # Use RADV as the default Vulkan driver
+    environment.variables.AMD_VULKAN_ICD = "RADV";
+    #
+    boot.initrd.kernelModules = [
+      "amdgpu"
+    ];
+    #
+    services.xserver.videoDrivers = [
       "amdgpu"
     ];
 
