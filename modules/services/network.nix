@@ -62,6 +62,9 @@ in
         authKeyFile = config.age.secrets.tailscale-auth-key.path;
       };
     };
+    # Stops tailscaled-autoconnect from preventing network access on reboot or preventing nixos-rebuild.
+    # This occurs when the auth-key is invalid
+    systemd.services.tailscaled-autoconnect.serviceConfig.TimeoutStartSec = 10;
     # Reduces startup time
     systemd.services.NetworkManager-wait-online.enable = false;
   };
