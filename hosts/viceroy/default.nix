@@ -1,14 +1,7 @@
-{ config, ... }:
+{ pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
   ## Hardware
-  ### Radeon
-  #modules = {
-  #  hardware = {
-  #    radeon.enable = true;
-  #    razer.enable = false;
-  #  };
-  #};
   modules = {
     applications = {
       desktop.wayland.hyprland.enable = true;
@@ -17,13 +10,21 @@
       };
     };
     system.nix.hostBuilder.enable = true;
+    firmware = {
+      gpu.radeon.enable = true;
+      cpu.amd.enable = true;
+    };
+    services = {
+      keyd.enable = true;
+    };
   };
-  homelab.kubernetes = {
-    enable = true;
-    masterIP = "192.168.50.3";
-    masterHostname = "plex-0";
-    apitokenPath = config.age.secrets.kubernetes-apitoken.path;
-  };
+  services.udev.packages = [ pkgs.android-udev-rules ];
+  #homelab.kubernetes = {
+  #  enable = true;
+  #  masterIP = "192.168.50.3";
+  #  masterHostname = "plex-0";
+  #  apitokenPath = config.age.secrets.kubernetes-apitoken.path;
+  #};
   hardware = {
     xpadneo.enable = false;
     xone.enable = false;

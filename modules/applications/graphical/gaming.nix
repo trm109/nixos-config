@@ -111,12 +111,12 @@ in
       };
     };
 
-    services = {
-      input-remapper = {
-        enable = true;
-        enableUdevRules = true;
-      };
-    };
+    #services = {
+    #  input-remapper = {
+    #    enable = true;
+    #    enableUdevRules = true;
+    #  };
+    #};
     # Kernel tweaks based on SteamOS
     boot.kernel.sysctl = lib.mkIf cfg.enableKernelTweaks {
       # 20-shed.conf

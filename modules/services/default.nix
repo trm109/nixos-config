@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   ...
 }:
 let
@@ -17,6 +16,7 @@ in
     ./razer.nix
     ./ssh.nix
     ./keyring.nix
+    ./keyd.nix
     ./gameserver.nix
     ./homelab
   ];
