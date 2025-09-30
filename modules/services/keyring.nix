@@ -20,8 +20,10 @@ in
 
   config =
     let
-      normalUsers = lib.filterAttrs (_: value: value.isNormalUser) config.users.users;
-      normalUsernames = lib.attrNames normalUsers;
+      normalUsernames = [
+        "saik"
+        "sara"
+      ];
     in
     lib.mkIf cfg.enable {
       # enable kwallet for all users

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
   ## Hardware
@@ -36,6 +36,7 @@
   #    "grafana.${config.networking.hostName}.io".email = "theo@bionix.fyi";
   #  };
   #};
+  networking.firewall.enable = lib.mkForce false;
   #networking.firewall.allowedTCPPorts = [
   #  #80 # HTTP
   #  #443 # HTTPS

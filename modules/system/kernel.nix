@@ -19,7 +19,7 @@ in
     boot = {
       #kernelPackages = if hostType == "desktop" then pkgs.linuxPackages_cachyos-lto else pkgs.linuxKernel.packages.linux_6_14;
       #kernelPackages = pkgs.linuxPackages;
-      kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
+      kernelPackages = pkgs.linuxKernel.packages.linux_6_16;
       # crashDump.enable = true;
     };
     services = {

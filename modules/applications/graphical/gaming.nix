@@ -77,7 +77,7 @@ in
     programs = {
       steam = {
         enable = true;
-        extest.enable = true; # Whether to enable Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
+        #extest.enable = true; # Whether to enable Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
         # Extra packages to install for compatibility with Steam games
         extraCompatPackages = [
           pkgs.proton-ge-bin
@@ -85,26 +85,26 @@ in
         protontricks.enable = true; # Enable ProtonTricks
         gamescopeSession = {
           enable = true;
-          args = [
-            "--output-width"
-            "3840"
-            "--output-height"
-            "2160"
-            "--framerate-limit"
-            "60"
-            "--steam"
-            "--hdr-enabled"
-            "--hdr-itm-enable"
-            "--prefer-output"
-            "DP-1" # TODO make this dynamic
-            "--prefer-vk-device"
-            "1002:744c" # TODO make this dynamic
-          ];
         };
       };
       gamescope = {
         enable = true;
         capSysNice = true;
+        #args = [
+        #  "--output-width"
+        #  "2560"
+        #  "--output-height"
+        #  "1440"
+        #  "--framerate-limit"
+        #  "60"
+        #  "--steam"
+        #  "--hdr-enabled"
+        #  "--hdr-itm-enable"
+        #  "--prefer-output"
+        #  "DP-1" # TODO make this dynamic
+        #  "--prefer-vk-device"
+        #  "1002:744c" # TODO make this dynamic
+        #];
       };
       gamemode = {
         enable = true;
