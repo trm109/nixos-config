@@ -9,6 +9,7 @@
     openFirewall = true;
     enable = true;
     mediaLocation = "/storage/immich";
+    host = "0.0.0.0";
   };
   # Create the folder for Immich media.
   systemd.tmpfiles.rules = [
