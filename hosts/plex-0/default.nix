@@ -5,6 +5,15 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+  services.immich = {
+    openFirewall = true;
+    enable = true;
+    mediaLocation = "/storage/immich";
+  };
+  # Create the folder for Immich media.
+  systemd.tmpfiles.rules = [
+    "d /storage/immich 0755 immich immich -"
+  ];
   modules.services = {
     #gameserver.minecraft.enable = true;
     homelab = {
