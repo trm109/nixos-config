@@ -2,7 +2,7 @@
 # Eventually, would be nice to make these Daemon-less
 {
   lib,
-  pkgs,
+  #pkgs,
   config,
   hostType,
   hw,
@@ -23,18 +23,18 @@ in
 
   config = lib.mkIf cfg.enable {
     services = {
-      ollama = {
-        # Local LLM runner.
-        enable = true;
-        package =
-          if config.modules.firmware.gpu.radeon.enableAcceleration then
-            pkgs.ollama-rocm
-          else if config.modules.firmware.gpu.nvidia.enableAcceleration then
-            pkgs.ollama-cuda
-          else
-            pkgs.ollama;
-        openFirewall = config.modules.services.network.enable;
-      };
+      #ollama = {
+      #  # Local LLM runner.
+      #  enable = true;
+      #  package =
+      #    if config.modules.firmware.gpu.radeon.enableAcceleration then
+      #      pkgs.ollama-rocm
+      #    else if config.modules.firmware.gpu.nvidia.enableAcceleration then
+      #      pkgs.ollama-cuda
+      #    else
+      #      pkgs.ollama;
+      #  openFirewall = config.modules.services.network.enable;
+      #};
       #open-webui = {
       #  # browser-accessible chat interface for ollama
       #  enable = true;
@@ -43,14 +43,14 @@ in
       #  openFirewall = config.modules.services.network.enable;
       #};
     };
-    systemd.services = {
-      ollama = {
-        # TODO test this.
-        environment = lib.mkIf config.modules.firmware.gpu.radeon.enableAcceleration {
-          ROCR_VISIBLE_DEVICES = "0";
-          HSA_OVERRIDE_GFX_VERSION = "11.0.0";
-        };
-      };
-    };
+    #systemd.services = {
+    #  ollama = {
+    #    # TODO test this.
+    #    environment = lib.mkIf config.modules.firmware.gpu.radeon.enableAcceleration {
+    #      ROCR_VISIBLE_DEVICES = "0";
+    #      HSA_OVERRIDE_GFX_VERSION = "11.0.0";
+    #    };
+    #  };
+    #};
   };
 }

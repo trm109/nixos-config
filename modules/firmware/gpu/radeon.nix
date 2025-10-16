@@ -28,12 +28,12 @@ in
 
   config = lib.mkIf cfg.enable {
     hardware.amdgpu = {
-      amdvlk = {
-        enable = true;
-        support32Bit.enable = true;
-      };
+      #amdvlk = {
+      #  enable = true;
+      #  support32Bit.enable = true;
+      #};
       initrd.enable = true;
-      opencl.enable = cfg.enableAcceleration;
+      #opencl.enable = cfg.enableAcceleration;
     };
 
     services.xserver.videoDrivers = lib.mkIf config.modules.applications.desktop.x11.enable [
