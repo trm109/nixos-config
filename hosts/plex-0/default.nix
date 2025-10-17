@@ -9,7 +9,7 @@
     openFirewall = true;
     enable = true;
     mediaLocation = "/storage/immich";
-    host = "*";
+    host = "0.0.0.0"; # "*" doesnt seem to work.
     accelerationDevices = null; # my i5-7500T is not going to accelerate anything
   };
   # Create the folder for Immich media.
