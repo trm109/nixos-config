@@ -58,7 +58,8 @@ in
         auto-optimise-store = true;
         trusted-users = [
           "root"
-        ] ++ users;
+        ]
+        ++ users;
         substituters = [
           "https://nix-community.cachix.org"
           "https://hyprland.cachix.org"
@@ -103,7 +104,7 @@ in
         "nix-auto-update" = {
           enable = cfg.autoUpdate;
           description = "Nix auto update service";
-          wantedBy = [ "multi-user.target" ];
+          #wantedBy = [ "multi-user.target" ];
           after = [ "network.target" ];
           path = [
             pkgs.git
@@ -150,13 +151,14 @@ in
               nixos-rebuild switch --flake "$TARGET_DIR#$(cat /etc/hostname)"
               echo "System rebuilt successfully!"
               echo "Cleaning up old generations..."
-              janitor
+              ${pkgs.nix-janitor}/bin/janitor -l 3 --gc
               echo "Old generations cleaned up!"
-              exit 0
             else
               echo "No changes to apply."
-              exit 0
             fi
+
+            echo "Nix auto update service completed."
+            exit 0
           '';
         };
 
