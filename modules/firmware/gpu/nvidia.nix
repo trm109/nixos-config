@@ -23,11 +23,11 @@ in
     hardware.nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
-      open = true;
+      open = false;
       package = config.boot.kernelPackages.nvidiaPackages.production;
       # dynamicBoost.enable = true; #TODO figure out if this works on AMD systems.
     };
-    services.xserver.videoDrivers = lib.mkIf config.modules.applications.desktop.x11.enable [
+    services.xserver.videoDrivers = lib.mkIf cfg.enable [
       "nvidia"
     ];
     nixpkgs.config.cudaSupport = cfg.enableAcceleration;
