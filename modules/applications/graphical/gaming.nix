@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -77,19 +76,20 @@ in
     programs = {
       steam = {
         enable = true;
-        #extest.enable = true; # Whether to enable Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
+        extest.enable = true; # Whether to enable Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
         # Extra packages to install for compatibility with Steam games
-        extraCompatPackages = [
-          pkgs.proton-ge-bin
-        ];
+        #extraCompatPackages = [
+        #  pkgs.proton-ge-bin
+        #];
         protontricks.enable = true; # Enable ProtonTricks
-        gamescopeSession = {
-          enable = true;
-        };
+        #gamescopeSession = {
+        #  enable = true;
+        #};
       };
       gamescope = {
         enable = true;
-        capSysNice = true;
+        #package = pkgs.gamescope-wsi;
+        #capSysNice = true;
         #args = [
         #  "--output-width"
         #  "2560"

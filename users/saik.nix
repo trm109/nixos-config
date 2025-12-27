@@ -13,6 +13,7 @@
       "k3s"
       "gamemode"
       "lxd"
+      "keyd"
     ]; # Enable ‘sudo’ for the user.
   };
 }
