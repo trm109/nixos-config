@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
   ## Hardware
@@ -18,7 +18,7 @@
       keyd.enable = true;
     };
   };
-  services.udev.packages = [ pkgs.android-udev-rules ];
+  #services.udev.packages = [ pkgs.android-udev-rules ];
   #homelab.kubernetes = {
   #  enable = true;
   #  masterIP = "192.168.50.3";
