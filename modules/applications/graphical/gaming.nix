@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 let
@@ -73,14 +74,47 @@ in
         allowedUDPPorts = steam-udp-ports;
         allowedUDPPortRanges = steam-udp-port-ranges;
       };
+
+    # prevents steam from spamming logs by trying to start the upower service when it is disabled.
+    services.dbus.packages = lib.mkIf (!config.services.upower.enable) [
+      (pkgs.writeTextDir "etc/dbus-1/system.d/deny-upower.conf" ''
+        <!DOCTYPE busconfig PUBLIC
+           "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+           "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+
+        <busconfig>
+          <policy context="default">
+            <deny own="org.freedesktop.UPower"/>
+            <deny send_destination="org.freedesktop.UPower"/>
+          </policy>
+        </busconfig>
+      '')
+    ];
     programs = {
       steam = {
         enable = true;
-        extest.enable = true; # Whether to enable Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
+        # Add packages required for Steam to launch gamescope
+        package = pkgs.steam.override {
+          extraPkgs =
+            pkgs': with pkgs'; [
+              xorg.libXcursor
+              xorg.libXi
+              xorg.libXinerama
+              xorg.libXScrnSaver
+              libpng
+              libpulseaudio
+              libvorbis
+              stdenv.cc.cc.lib # Provides libstdc++.so.6
+              libkrb5
+              keyutils
+              # Add other libraries as needed
+            ];
+        };
+        #extest.enable = true; # Whether to enable Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
         # Extra packages to install for compatibility with Steam games
-        #extraCompatPackages = [
-        #  pkgs.proton-ge-bin
-        #];
+        extraCompatPackages = [
+          pkgs.steamtinkerlaunch
+        ];
         protontricks.enable = true; # Enable ProtonTricks
         #gamescopeSession = {
         #  enable = true;

@@ -12,6 +12,7 @@ in
     ./audio.nix
     ./battery.nix
     ./bluetooth.nix
+    ./dbus.nix
     ./network.nix
     ./printers.nix
     ./razer.nix
@@ -33,6 +34,7 @@ in
       audio.enable = false;
       battery.enable = false;
       bluetooth.enable = false;
+      dbus.enable = false;
       network.enable = false;
       printers.enable = false;
       razer.enable = false;
