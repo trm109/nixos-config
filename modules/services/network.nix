@@ -60,11 +60,23 @@ in
         enable = true;
         useRoutingFeatures = "both";
         authKeyFile = config.age.secrets.tailscale-auth-key.path;
+        extraSetFlags = [
+          "--netfilter-mode=nodivert"
+          "--operator=saik"
+        ];
+        extraUpFlags = [
+          "--reset"
+        ];
       };
     };
     # Stops tailscaled-autoconnect from preventing network access on reboot or preventing nixos-rebuild.
     # This occurs when the auth-key is invalid
-    systemd.services.tailscaled-autoconnect.serviceConfig.TimeoutStartSec = 10;
+    systemd.services.tailscaled-autoconnect = {
+      serviceConfig.TimeoutStartSec = 10;
+      environment = {
+        TS_AUTH_ONCE = "true"; # forces `tailscale set` instead of `tailscale up`. see https://github.com/tailscale/tailscale/issues/12307#issuecomment-2142876698
+      };
+    };
     # Reduces startup time
     systemd.services.NetworkManager-wait-online.enable = false;
   };
