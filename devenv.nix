@@ -64,14 +64,14 @@
   '';
 
   # https://devenv.sh/pre-commit-hooks/
-  pre-commit.hooks = {
+  git-hooks.hooks = {
     # Bash/sh scripts check
     shellcheck.enable = true;
     # Find dead nix snippets
     deadnix.enable = true;
     # Opinionated nix formatting
     #alejandra.enable = true;
-    nixfmt-rfc-style.enable = true;
+    nixfmt.enable = true;
     # Find nix anti-patterns
     statix.enable = true;
     # remove trailing whitespaces
