@@ -18,8 +18,9 @@ in
   config = {
     virtualisation.oci-containers.backend = "podman";
     users.users.vintagestory = lib.mkIf cfg.vintagestory.enable {
+      createHome = false;
       group = "gameserver";
-      isSystemUser = true;
+      isNormalUser = true;
     };
     users.groups.gameserver = lib.mkIf cfg.vintagestory.enable { };
     systemd.tmpfiles.rules = lib.mkIf cfg.vintagestory.enable [
@@ -28,7 +29,7 @@ in
 
     virtualisation.oci-containers.containers = {
       vintagestory-server = lib.mkIf cfg.vintagestory.enable {
-        user = config.users.users.vintagestory.username;
+        user = "vintagestory";
         image = "zsuatem/vintagestory:1.22.0-rc.5";
         ports = [
           "42420:42420"
