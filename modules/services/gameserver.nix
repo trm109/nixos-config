@@ -17,8 +17,19 @@ in
   };
   config = {
     virtualisation.oci-containers.backend = "podman";
+    users.users.vintagestory = lib.mkIf cfg.vintagestory.enable {
+      createHome = false;
+      group = "gameserver";
+      isSystemUser = true;
+    };
+    users.groups.gameserver = lib.mkIf cfg.vintagestory.enable { };
+    systemd.tmpfiles.rules = lib.mkIf cfg.vintagestory.enable [
+      "d /appdata/vintagestory 0750 vintagestory gameserver -"
+    ];
+
     virtualisation.oci-containers.containers = {
       vintagestory-server = lib.mkIf cfg.vintagestory.enable {
+        user = "vintagestory:gameserver";
         image = "zsuatem/vintagestory:1.22.0-rc.5";
         ports = [
           "42420:42420"
