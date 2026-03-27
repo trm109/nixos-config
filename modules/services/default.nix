@@ -8,7 +8,6 @@ let
 in
 {
   imports = [
-    ./ai.nix
     ./audio.nix
     ./battery.nix
     ./bluetooth.nix
@@ -20,6 +19,7 @@ in
     ./keyring.nix
     ./keyd.nix
     ./gameserver.nix
+    ./ollama.nix
     ./homelab
   ];
   options.modules.services = {
@@ -30,7 +30,6 @@ in
   };
   config = lib.mkIf (!cfg.enable) {
     modules.services = {
-      ai.enable = false;
       audio.enable = false;
       battery.enable = false;
       bluetooth.enable = false;
@@ -41,6 +40,7 @@ in
       keyring.enable = false;
       homelab.enable = false;
       ssh.enable = false;
+      ollama.enable = false;
     };
   };
 }

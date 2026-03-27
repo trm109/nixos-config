@@ -4,12 +4,13 @@
   inputs = {
     # Default Package Channel
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      # url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "github:nixos/nixpkgs/25a5b1510d7f9090f26f03c5ed8a16d40d3d295f";
     };
     # Unstable Package Channel
-    nixpkgs-unstable = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-    };
+    # nixpkgs-unstable = {
+    #   url = "github:nixos/nixpkgs/nixos-unstable";
+    # };
     # Stable Package Channel
     nixpkgs-stable = {
       url = "github:nixos/nixpkgs/nixos-24.11";
@@ -24,7 +25,7 @@
     # Bar for Hyprland
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     # Chaotic packages
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
@@ -52,7 +53,7 @@
             "saik"
             "sara"
           ]; # Me and my goth gamer gf
-          users = [ "saik" ]; # Default, just me
+          # users = [ "saik" ]; # Default, just me
           pubKeys = {
             hosts = {
               plex-0 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICNNE769ehQ8NoDm/tcz/oafehsysGN0taoLfafuha0A";
@@ -69,7 +70,7 @@
             ./users
             ./secrets
             inputs.agenix.nixosModules.default
-            inputs.chaotic.nixosModules.default
+            # inputs.chaotic.nixosModules.default
             inputs.nix-minecraft.nixosModules.minecraft-servers
             inputs.homelab.nixosModules.default
             { }
@@ -85,10 +86,10 @@
                     inherit system;
                   };
                   # unstable nixpkgs overlay
-                  unstable = import inputs.nixpkgs-unstable {
-                    # pkgs.unstable == nixpkgs-unstable channel
-                    inherit system;
-                  };
+                  # unstable = import inputs.nixpkgs-unstable {
+                  #   # pkgs.unstable == nixpkgs-unstable channel
+                  #   inherit system;
+                  # };
                 })
                 inputs.hyprpanel.overlay
               ];

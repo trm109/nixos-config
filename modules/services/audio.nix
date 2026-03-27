@@ -18,7 +18,6 @@ in
   };
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      helvum # TODO if a graphical session is present
       pavucontrol # TODO if a graphical session is present
     ];
     security.rtkit.enable = true;

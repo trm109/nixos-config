@@ -16,6 +16,7 @@
     };
     services = {
       keyd.enable = true;
+      ollama.enable = true;
     };
   };
   #services.udev.packages = [ pkgs.android-udev-rules ];

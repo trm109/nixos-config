@@ -113,6 +113,7 @@ in
           ];
           serviceConfig = {
             Type = "oneshot";
+            TimeoutSec = 3600;
           };
           script = ''
             set -euo pipefail
@@ -168,6 +169,7 @@ in
           description = "Auto reboot service";
           serviceConfig = {
             Type = "oneshot";
+            TimeoutSec = 900;
           };
           script = ''
             set -euo pipefail
