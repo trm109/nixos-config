@@ -11,10 +11,10 @@ let
   cfg = config.modules.system.nix;
 in
 {
-  imports = [
-    ./host-builder.nix
-    ./remote-build.nix
-  ];
+  # imports = [
+  #   ./host-builder.nix
+  #   ./remote-build.nix
+  # ];
   options.modules.system.nix = {
     enable = lib.mkOption {
       default = true;
