@@ -11,8 +11,23 @@ in
     minecraft = {
       enable = lib.mkEnableOption "Enable the Minecraft server";
     };
+    vintagestory = {
+      enable = lib.mkEnableOption "Enable the Vintage Story server";
+    };
   };
   config = {
+    virtualisation.oci-containers.backend = "podman";
+    virtualisation.oci-containers.containers = {
+      vintagestory-server = lib.mkIf cfg.vintagestory.enable {
+        image = "zsuatem/vintagestory:1.22.0-rc.5";
+        ports = [
+          "42420:42420"
+        ];
+        volumes = [
+          "/appdata/vintagestory:/vintagestory/data"
+        ];
+      };
+    };
     services.minecraft-servers = lib.mkIf cfg.minecraft.enable {
       enable = true;
       eula = true;

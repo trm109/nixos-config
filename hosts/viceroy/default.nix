@@ -9,7 +9,7 @@
         gaming.enable = true;
       };
     };
-    system.nix.hostBuilder.enable = true;
+    # system.nix.hostBuilder.enable = true;
     firmware = {
       gpu.radeon.enable = true;
       cpu.amd.enable = true;

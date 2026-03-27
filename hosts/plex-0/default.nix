@@ -18,6 +18,7 @@
   ];
   modules.services = {
     #gameserver.minecraft.enable = true;
+    gameserver.vintagestory.enable = true;
     homelab = {
       #enable = true;
       #teslamate.enable = lib.mkForce false;
