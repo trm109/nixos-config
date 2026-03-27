@@ -15,6 +15,7 @@
       cpu.amd.enable = true;
     };
     services = {
+      # gameserver.vintagestory.enable = true;
       keyd.enable = true;
       ollama.enable = true;
     };

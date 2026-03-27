@@ -17,19 +17,25 @@ in
   };
   config = {
     virtualisation.oci-containers.backend = "podman";
-    users.users.vintagestory = lib.mkIf cfg.vintagestory.enable {
-      createHome = false;
-      group = "gameserver";
-      isNormalUser = true;
+    users = lib.mkIf cfg.vintagestory.enable {
+      users.vintagestory = {
+        # createHome = false;
+        group = "gameserver";
+        linger = false;
+        isNormalUser = true;
+        uid = 3010;
+      };
+      groups.gameserver = {
+        gid = 3010;
+      };
     };
-    users.groups.gameserver = lib.mkIf cfg.vintagestory.enable { };
     systemd.tmpfiles.rules = lib.mkIf cfg.vintagestory.enable [
-      "d /appdata/vintagestory 0750 vintagestory gameserver -"
+      "d /appdata/vintagestory 0755 ${toString config.users.users.vintagestory.uid} ${toString config.users.groups.gameserver.gid} -"
     ];
 
     virtualisation.oci-containers.containers = {
       vintagestory-server = lib.mkIf cfg.vintagestory.enable {
-        user = "vintagestory";
+        # podman.user = "vintagestory";
         image = "zsuatem/vintagestory:1.22.0-rc.5";
         ports = [
           "42420:42420"
@@ -37,6 +43,10 @@ in
         volumes = [
           "/appdata/vintagestory:/vintagestory/data"
         ];
+        environment = {
+          PUID = toString config.users.users.vintagestory.uid;
+          PGID = toString config.users.groups.gameserver.gid;
+        };
       };
     };
     services.minecraft-servers = lib.mkIf cfg.minecraft.enable {
