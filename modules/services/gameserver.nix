@@ -36,7 +36,7 @@ in
     virtualisation.oci-containers.containers = {
       vintagestory-server = lib.mkIf cfg.vintagestory.enable {
         # podman.user = "vintagestory";
-        image = "zsuatem/vintagestory:1.22.0-rc.5";
+        image = "zsuatem/vintagestory:1.22.0-rc.6";
         ports = [
           "42420:42420"
         ];
