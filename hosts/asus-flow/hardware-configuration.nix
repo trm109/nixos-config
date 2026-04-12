@@ -23,7 +23,6 @@
         "sd_mod"
         "sdhci_pci"
       ];
-      kernelModules = [ ];
     };
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];

@@ -16,6 +16,8 @@ in
   config = lib.mkIf cfg.enable {
     # Enable supergfxd
     services.supergfxd.enable = true;
+    # boot.initrd.kernelModules = [
+    # ];
 
     # Enable asusd
     services = {
