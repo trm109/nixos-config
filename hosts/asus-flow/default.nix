@@ -4,10 +4,10 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  hardware.nvidia.prime = {
-    amdgpuBusId = "PCI:10:0:0";
-    nvidiaBusId = "PCI:1:0:0";
-  };
+  # hardware.nvidia.prime = {
+  #   amdgpuBusId = "PCI:10:0:0";
+  #   nvidiaBusId = "PCI:1:0:0";
+  # };
   modules = {
     applications = {
       desktop.wayland.hyprland.enable = true;
@@ -15,7 +15,8 @@
     };
     firmware = {
       asus.enable = true;
-      gpu.nvidia.enable = true;
+      gpu.radeon.enable = true;
+      gpu.nvidia.enable = false;
     };
     # Hardware
     # hardware = {
