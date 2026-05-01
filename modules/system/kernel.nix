@@ -17,8 +17,7 @@ in
   config = lib.mkIf cfg.enable {
     boot = {
       #kernelPackages = if hostType == "desktop" then pkgs.linuxPackages_cachyos-lto else pkgs.linuxKernel.packages.linux_6_14;
-      #kernelPackages = pkgs.linuxPackages;
-      kernelPackages = pkgs.linuxKernel.packages.linux_6_19;
+      kernelPackages = pkgs.linuxPackages_7_0;
       # crashDump.enable = true;
     };
     services = {

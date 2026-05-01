@@ -4,8 +4,8 @@
   inputs = {
     # Default Package Channel
     nixpkgs = {
-      # url = "github:nixos/nixpkgs/nixos-unstable";
-      url = "github:nixos/nixpkgs/25a5b1510d7f9090f26f03c5ed8a16d40d3d295f";
+      url = "github:nixos/nixpkgs/nixos-unstable";
+      # url = "github:nixos/nixpkgs/25a5b1510d7f9090f26f03c5ed8a16d40d3d295f";
     };
     # Unstable Package Channel
     # nixpkgs-unstable = {
@@ -27,10 +27,10 @@
     # Chaotic packages
     # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
-    nix-minecraft = {
-      url = "github:Infinidoge/nix-minecraft";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-minecraft = {
+    #   url = "github:Infinidoge/nix-minecraft";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -71,7 +71,7 @@
             ./secrets
             inputs.agenix.nixosModules.default
             # inputs.chaotic.nixosModules.default
-            inputs.nix-minecraft.nixosModules.minecraft-servers
+            # inputs.nix-minecraft.nixosModules.minecraft-servers
             inputs.homelab.nixosModules.default
             { }
             {
