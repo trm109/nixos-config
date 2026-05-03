@@ -1,10 +1,10 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [ ./hardware-configuration.nix ];
   ## Hardware
   modules = {
     applications = {
-      desktop.wayland.hyprland.enable = true;
+      #desktop.wayland.hyprland.enable = true;
       graphical = {
         gaming.enable = true;
       };
@@ -42,5 +42,5 @@
   #    "grafana.${config.networking.hostName}.io".email = "theo@bionix.fyi";
   #  };
   #};
-  networking.firewall.enable = lib.mkForce false;
+  # networking.firewall.enable = lib.mkForce false;
 }

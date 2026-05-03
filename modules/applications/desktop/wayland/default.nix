@@ -8,14 +8,14 @@ let
   cfg = config.modules.applications.desktop.wayland;
 in
 {
-  imports = [
-    ./hyprland.nix
-  ];
+  # imports = [
+  #   ./hyprland.nix
+  # ];
 
   options.modules.applications.desktop.wayland = {
     enable = lib.mkOption {
       # if hyprland (or other wayland DEs) are enabled, else false
-      default = cfg.hyprland.enable || false;
+      default = true; # TODO move to hm?
       description = "Enable the Wayland desktop module";
     };
   };

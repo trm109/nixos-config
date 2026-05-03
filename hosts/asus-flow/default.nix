@@ -10,7 +10,7 @@
   # };
   modules = {
     applications = {
-      desktop.wayland.hyprland.enable = true;
+      #desktop.wayland.hyprland.enable = true;
       graphical.gaming.enable = true;
     };
     firmware = {

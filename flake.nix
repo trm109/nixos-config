@@ -22,8 +22,6 @@
     };
     # Better Cursors for Hyprland
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
-    # Bar for Hyprland
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     # Chaotic packages
     # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
@@ -48,7 +46,7 @@
       nixosConfigurations =
         let
           # this is where shared configs are put
-          system = "x86_64-linux"; # I only have x86 systems, so this is fine but ugly
+          # system = "x86_64-linux"; # I only have x86 systems, so this is fine but ugly
           gamers = [
             "saik"
             "sara"
@@ -76,23 +74,22 @@
             { }
             {
               # Default nixpkgs configs for the different channels
-              nixpkgs.overlays = [
-                # overlays
-                # Adding pkgs.stable and pkgs.unstable to the nixpkgs overlays
-                (_final: _prev: {
-                  # stable nixpkgs overlay
-                  stable = import inputs.nixpkgs-stable {
-                    # pkgs.stable == nixpkgs-stable channel
-                    inherit system;
-                  };
-                  # unstable nixpkgs overlay
-                  # unstable = import inputs.nixpkgs-unstable {
-                  #   # pkgs.unstable == nixpkgs-unstable channel
-                  #   inherit system;
-                  # };
-                })
-                inputs.hyprpanel.overlay
-              ];
+              # nixpkgs.overlays = [
+              #   # overlays
+              #   # Adding pkgs.stable and pkgs.unstable to the nixpkgs overlays
+              #   (_final: _prev: {
+              #     # stable nixpkgs overlay
+              #     stable = import inputs.nixpkgs-stable {
+              #       # pkgs.stable == nixpkgs-stable channel
+              #       inherit system;
+              #     };
+              #     # unstable nixpkgs overlay
+              #     # unstable = import inputs.nixpkgs-unstable {
+              #     #   # pkgs.unstable == nixpkgs-unstable channel
+              #     #   inherit system;
+              #     # };
+              #   })
+              # ];
             }
             {
               # Associate the git commit revision with the system configuration
