@@ -30,11 +30,6 @@
       nix flake update
       nix flake check
     '';
-    # TODO make hostname variable
-    r-nixvim.exec = ''
-      nix build .#nixosConfigurations.viceroy.config.programs.nixvim.build.package && \
-      ./result/bin/nvim ./flake.nix
-    '';
     clean-gen.exec = ''
       if [ "$EUID" -ne 0 ]
         then echo "Please run as root"
@@ -60,9 +55,6 @@
   # NixOS Flake dry-run build
   # Run all bash scripts through shellcheck
   # Any other files should be run through their respective suites
-  enterTest = ''
-    nix flake check
-  '';
 
   # https://devenv.sh/pre-commit-hooks/
   git-hooks.hooks = {
@@ -79,6 +71,18 @@
     trim-trailing-whitespace.enable = true;
     # removes newlines at the end of the file
     end-of-file-fixer.enable = true;
+
+    # custom nix flake check
+    nix-flake-check = {
+      enable = true;
+      name = "Nix Flake Check";
+      pass_filenames = false;
+      entry = "nix flake check --no-build";
+      files = "\\.(nix)$|^flake\\.lock$"; # Files ending with .nix or flake.lock
+      excludes = [ "^devenv\\." ]; # Exclude devenv.* files
+      priority = 99;
+      #language = "system";
+    };
   };
   # See full reference at https://devenv.sh/reference/options/
 }

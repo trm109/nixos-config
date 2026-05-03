@@ -1,4 +1,4 @@
-# applications that depend on having a graphical session
+# applications that depend on having a terminal session.
 {
   lib,
   pkgs,

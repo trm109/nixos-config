@@ -34,6 +34,7 @@ in
 
     environment = {
       variables.AMD_VULKAN_ICD = "RADV";
+      # TODO remove after debugging hang.
       systemPackages = [
         pkgs.umr
       ];
