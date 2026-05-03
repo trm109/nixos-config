@@ -28,6 +28,7 @@
     '';
     update.exec = ''
       nix flake update
+      nix flake check
     '';
     # TODO make hostname variable
     r-nixvim.exec = ''
