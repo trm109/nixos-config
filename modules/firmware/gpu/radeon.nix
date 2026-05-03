@@ -32,6 +32,13 @@ in
       opencl.enable = cfg.enableAcceleration;
     };
 
+    environment = {
+      variables.AMD_VULKAN_ICD = "RADV";
+      systemPackages = [
+        pkgs.umr
+      ];
+    };
+
     services.xserver.videoDrivers = lib.mkIf config.modules.applications.desktop.x11.enable [
       "amdgpu"
     ];

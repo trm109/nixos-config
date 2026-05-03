@@ -27,6 +27,10 @@
   #  masterHostname = "plex-0";
   #  apitokenPath = config.age.secrets.kubernetes-apitoken.path;
   #};
+
+  # Unlock overclocking controls, to limit the clock speed to actual specs via LACT
+  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+
   hardware = {
     xpadneo.enable = false;
     xone.enable = false;

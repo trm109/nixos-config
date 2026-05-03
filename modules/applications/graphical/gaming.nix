@@ -116,9 +116,9 @@ in
           pkgs.steamtinkerlaunch
         ];
         protontricks.enable = true; # Enable ProtonTricks
-        #gamescopeSession = {
-        #  enable = true;
-        #};
+        # gamescopeSession = {
+        #   enable = true;
+        # };
       };
       gamescope = {
         enable = true;
