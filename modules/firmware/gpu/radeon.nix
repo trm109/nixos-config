@@ -34,10 +34,6 @@ in
 
     environment = {
       variables.AMD_VULKAN_ICD = "RADV";
-      # TODO remove after debugging hang.
-      systemPackages = [
-        pkgs.umr
-      ];
     };
 
     services.xserver.videoDrivers = lib.mkIf config.modules.applications.desktop.x11.enable [

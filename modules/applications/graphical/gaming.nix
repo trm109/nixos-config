@@ -93,28 +93,6 @@ in
     programs = {
       steam = {
         enable = true;
-        # Add packages required for Steam to launch gamescope
-        package = pkgs.steam.override {
-          extraPkgs =
-            pkgs': with pkgs'; [
-              libxcursor
-              libxi
-              libxinerama
-              libxscrnsaver
-              libpng
-              libpulseaudio
-              libvorbis
-              stdenv.cc.cc.lib # Provides libstdc++.so.6
-              libkrb5
-              keyutils
-              # Add other libraries as needed
-            ];
-        };
-        #extest.enable = true; # Whether to enable Load the extest library into Steam, to translate X11 input events to uinput events (e.g. for using Steam Input on Wayland)
-        # Extra packages to install for compatibility with Steam games
-        extraCompatPackages = [
-          pkgs.steamtinkerlaunch
-        ];
         protontricks.enable = true; # Enable ProtonTricks
         # gamescopeSession = {
         #   enable = true;

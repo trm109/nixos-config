@@ -20,6 +20,9 @@
       ollama.enable = true;
     };
   };
+  #TODO debugging steam failing to launch
+  programs.hyprland.enable = true;
+
   #services.udev.packages = [ pkgs.android-udev-rules ];
   #homelab.kubernetes = {
   #  enable = true;
