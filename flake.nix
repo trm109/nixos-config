@@ -29,10 +29,10 @@
     #   url = "github:Infinidoge/nix-minecraft";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # home-manager = {
+    #   url = "github:nix-community/home-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # import ./flakes/homelab/flake.nix;
     homelab = {
       url = "path:./flakes/homelab";

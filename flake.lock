@@ -64,26 +64,6 @@
         "type": "github"
       }
     },
-    "home-manager_2": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1777815398,
-        "narHash": "sha256-MrIhEoqXc4YsHEUfH4rDU/K09XnWcKntNhCjs7n7zi8=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "b5e86c1b19f178a8ee10f7cb747325e02e3d3991",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "homelab": {
       "inputs": {
         "nixpkgs": [
@@ -135,7 +115,6 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "home-manager": "home-manager_2",
         "homelab": "homelab",
         "nixpkgs": "nixpkgs_2"
       }
