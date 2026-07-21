@@ -12,16 +12,16 @@
     #   url = "github:nixos/nixpkgs/nixos-unstable";
     # };
     # Stable Package Channel
-    nixpkgs-stable = {
-      url = "github:nixos/nixpkgs/nixos-24.11";
-    };
+    # nixpkgs-stable = {
+    #   url = "github:nixos/nixpkgs/nixos-24.11";
+    # };
     # nixified vim setup
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixvim = {
+    #   url = "github:nix-community/nixvim";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # Better Cursors for Hyprland
-    rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
+    # rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
     # Chaotic packages
     # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
@@ -29,10 +29,10 @@
     #   url = "github:Infinidoge/nix-minecraft";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # home-manager = {
+    #   url = "github:nix-community/home-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # import ./flakes/homelab/flake.nix;
     homelab = {
       url = "path:./flakes/homelab";
